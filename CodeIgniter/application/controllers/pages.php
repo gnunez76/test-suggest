@@ -5,6 +5,8 @@ class Pages extends CI_Controller {
 	public function view($page = 'home')
 	{
 
+$this->load->spark('example-spark/1.0.0');
+$this->example_spark->printHello(); 
 $this->output->enable_profiler(TRUE);
 $this->benchmark->mark('view_controller_start');
 

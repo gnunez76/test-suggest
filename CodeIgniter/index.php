@@ -199,7 +199,9 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+	
 require_once BASEPATH.'core/CodeIgniter.php';
+//$this->output->set_header("Content-type: text/html; charset=utf-8");
 
 /* End of file index.php */
 /* Location: ./index.php */
