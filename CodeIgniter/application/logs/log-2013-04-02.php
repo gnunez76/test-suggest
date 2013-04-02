@@ -1108,3 +1108,687 @@ DEBUG - 2013-04-02 00:56:12 --> Controller Class Initialized
 DEBUG - 2013-04-02 00:56:18 --> Language file loaded: language/english/profiler_lang.php
 DEBUG - 2013-04-02 00:56:18 --> Final output sent to browser
 DEBUG - 2013-04-02 00:56:18 --> Total execution time: 8.6295
+DEBUG - 2013-04-02 21:01:58 --> Config Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:01:58 --> URI Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Router Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Output Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Security Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Input Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:01:58 --> Language Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Model Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:01:58 --> Helper loaded: file_helper
+ERROR - 2013-04-02 21:02:04 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:04 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic159509_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:20 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:20 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic159509.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:20 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:20 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic184174_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:28 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:28 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic184174.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:29 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:29 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic1352240_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic1352240.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic285299_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:32 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic285299.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:33 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:33 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/1f7d5c3265fb0dd455a6bf0e95b7698b/pic342163_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:34 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:34 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/1f7d5c3265fb0dd455a6bf0e95b7698b/pic342163.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:34 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:34 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic28424_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:35 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:35 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic28424.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:35 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:35 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic181642_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:38 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:38 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic181642.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:38 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:38 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/1f7d5c3265fb0dd455a6bf0e95b7698b/pic374320_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:50 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:50 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/1f7d5c3265fb0dd455a6bf0e95b7698b/pic374320.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:51 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:51 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic288615_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:02:59 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:02:59 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic288615.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:01 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:01 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic168036_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:03 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:03 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic168036.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:04 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:04 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/b98399d968482b3b0530240d059f2c71/pic69366_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:05 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:05 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/b98399d968482b3b0530240d059f2c71/pic69366.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:06 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:06 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic1603278_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:07 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:07 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/3b9050f1dc255c49f6fc73da8cdbd61f/pic1603278.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:08 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:08 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic268839_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:10 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:10 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic268839.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:11 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:11 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic48605_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:11 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:11 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic48605.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:12 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:12 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic428608_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:12 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:12 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic428608.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:13 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:13 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/065978f6be94b9d24fd08e8bcd0d9b49/pic573942_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:14 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:14 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/065978f6be94b9d24fd08e8bcd0d9b49/pic573942.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:14 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:14 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/065978f6be94b9d24fd08e8bcd0d9b49/pic59279_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:15 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:15 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/065978f6be94b9d24fd08e8bcd0d9b49/pic59279.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:15 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:15 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic249264_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:18 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:18 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/2b993227b7c83044b6a4d6d578a12dd1/pic249264.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:18 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:18 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/73b276f8a57bb5d97e03b031f0b0959f/pic786075_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:19 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:19 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/73b276f8a57bb5d97e03b031f0b0959f/pic786075.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:20 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:20 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic451783_t.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+ERROR - 2013-04-02 21:03:34 --> Severity: Warning  --> mkdir() [<a href='function.mkdir'>function.mkdir</a>]: Permission denied /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 270
+ERROR - 2013-04-02 21:03:34 --> Severity: Warning  --> fopen(/Users/gnunez/Sites/test-suggest/CodeIgniter/assets/images/games/a9f1ca3b60c5760fd4de798a548e82cd/pic451783.jpg) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory /Users/gnunez/Sites/test-suggest/CodeIgniter/system/helpers/file_helper.php 90
+DEBUG - 2013-04-02 21:03:34 --> DB Transaction Failure
+ERROR - 2013-04-02 21:03:34 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO sg_gamecategory (gamecategory_id, category_name)
+							VALUES (1021' at line 2
+DEBUG - 2013-04-02 21:03:34 --> Language file loaded: language/english/db_lang.php
+ERROR - 2013-04-02 21:03:34 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Users/gnunez/Sites/test-suggest/CodeIgniter/system/core/Exceptions.php:185) /Users/gnunez/Sites/test-suggest/CodeIgniter/system/core/Common.php 442
+DEBUG - 2013-04-02 21:03:35 --> Config Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:03:35 --> URI Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Router Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Output Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Security Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Input Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:03:35 --> Language Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:03:35 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Config Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:05:42 --> URI Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Router Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Output Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Security Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Input Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:05:42 --> Language Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Model Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:05:42 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:07:19 --> DB Transaction Failure
+ERROR - 2013-04-02 21:07:19 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO sg_gamecategory (gamecategory_id, category_name)
+							VALUES (1021' at line 2
+DEBUG - 2013-04-02 21:07:19 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:07:19 --> Config Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:07:19 --> URI Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Router Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Output Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Security Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Input Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:07:19 --> Language Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:07:19 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Config Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:15:30 --> URI Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Router Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Output Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Security Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Input Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:15:30 --> Language Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Model Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:15:30 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:17:10 --> DB Transaction Failure
+ERROR - 2013-04-02 21:17:10 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO sg_gamename (game_id, game_name, name_primary)
+						VALUES (2, 'Dra' at line 2
+DEBUG - 2013-04-02 21:17:10 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:17:10 --> Config Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:17:10 --> URI Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Router Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Output Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Security Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Input Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:17:10 --> Language Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:17:10 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Config Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:20:00 --> URI Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Router Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Output Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Security Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Input Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:20:00 --> Language Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Model Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:20:00 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:21:53 --> DB Transaction Failure
+ERROR - 2013-04-02 21:21:53 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\nINSERT INTO sg_gamename (game_id, game_name, name_primary)
+						VALUES (2, 'D' at line 2
+DEBUG - 2013-04-02 21:21:53 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:21:53 --> Config Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:21:53 --> URI Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Router Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Output Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Security Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Input Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:21:53 --> Language Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:21:53 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Config Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:25:44 --> URI Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Router Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Output Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Security Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Input Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:25:44 --> Language Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Model Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:25:44 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:27:44 --> DB Transaction Failure
+ERROR - 2013-04-02 21:27:44 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO sg_gamename (game_id, game_name, name_primary)
+						VALUES (2, 'Dra' at line 2
+DEBUG - 2013-04-02 21:27:44 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:27:45 --> Config Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:27:45 --> URI Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Router Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Output Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Security Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Input Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:27:45 --> Language Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:27:45 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Config Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:33:34 --> URI Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Router Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Output Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Security Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Input Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:33:34 --> Language Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Model Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:33:34 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:33:40 --> DB Transaction Failure
+ERROR - 2013-04-02 21:33:40 --> Query error: Unknown column 'gameartist_id' in 'field list'
+DEBUG - 2013-04-02 21:33:40 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:33:40 --> Config Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:33:40 --> URI Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Router Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Output Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Security Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Input Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:33:40 --> Language Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:33:40 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Config Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:35:42 --> URI Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Router Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Output Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Security Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Input Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:35:42 --> Language Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Model Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:35:42 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:36:46 --> DB Transaction Failure
+ERROR - 2013-04-02 21:36:46 --> Query error: Table 'suggest.sg_gamesexpansion' doesn't exist
+DEBUG - 2013-04-02 21:36:46 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:36:46 --> Config Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:36:46 --> URI Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Router Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Output Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Security Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Input Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:36:46 --> Language Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:36:46 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Config Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:37:46 --> URI Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Router Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Output Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Security Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Input Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:37:46 --> Language Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Model Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:37:46 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:37:51 --> DB Transaction Failure
+ERROR - 2013-04-02 21:37:51 --> Query error: Duplicate entry '1' for key 'PRIMARY'
+DEBUG - 2013-04-02 21:37:51 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:37:51 --> Config Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:37:51 --> URI Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Router Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Output Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Security Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Input Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:37:51 --> Language Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:37:51 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Config Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:54:06 --> URI Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Router Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Output Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Security Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Input Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:54:06 --> Language Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Model Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:54:06 --> Helper loaded: file_helper
+ERROR - 2013-04-02 21:55:09 --> Severity: Notice  --> Use of undefined constant id2 - assumed 'id2' /Users/gnunez/Sites/test-suggest/CodeIgniter/application/models/bgg_connect_model.php 302
+DEBUG - 2013-04-02 21:55:09 --> DB Transaction Failure
+ERROR - 2013-04-02 21:55:09 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gameexpansion_id='158'' at line 1
+DEBUG - 2013-04-02 21:55:09 --> Language file loaded: language/english/db_lang.php
+ERROR - 2013-04-02 21:55:09 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Users/gnunez/Sites/test-suggest/CodeIgniter/system/core/Exceptions.php:185) /Users/gnunez/Sites/test-suggest/CodeIgniter/system/core/Common.php 442
+DEBUG - 2013-04-02 21:55:09 --> Config Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:55:09 --> URI Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Router Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Output Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Security Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Input Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:55:09 --> Language Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:55:09 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Config Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:55:31 --> URI Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Router Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Output Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Security Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Input Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:55:31 --> Language Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Controller Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Model Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> cURL Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 21:55:31 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 21:56:28 --> DB Transaction Failure
+ERROR - 2013-04-02 21:56:28 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gameexpansion_id='158'' at line 1
+DEBUG - 2013-04-02 21:56:28 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 21:56:29 --> Config Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Hooks Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 21:56:29 --> URI Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Router Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Output Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Security Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Input Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 21:56:29 --> Language Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Loader Class Initialized
+DEBUG - 2013-04-02 21:56:29 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Config Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:23:19 --> URI Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Router Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Output Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Security Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Input Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:23:19 --> Language Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Model Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> cURL Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 22:23:19 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 22:24:35 --> DB Transaction Failure
+ERROR - 2013-04-02 22:24:35 --> Query error: Unknown column 'gameexpansion_id' in 'where clause'
+DEBUG - 2013-04-02 22:24:35 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 22:24:35 --> Config Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:24:35 --> URI Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Router Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Output Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Security Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Input Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:24:35 --> Language Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:24:35 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Config Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:28:03 --> URI Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Router Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Output Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Security Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Input Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:28:03 --> Language Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Model Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> cURL Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 22:28:03 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 22:29:04 --> DB Transaction Failure
+ERROR - 2013-04-02 22:29:04 --> Query error: Table 'suggest.sg_gameexpansion' doesn't exist
+DEBUG - 2013-04-02 22:29:04 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 22:29:05 --> Config Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:29:05 --> URI Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Router Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Output Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Security Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Input Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:29:05 --> Language Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:29:05 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Config Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:30:30 --> URI Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Router Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Output Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Security Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Input Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:30:30 --> Language Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Model Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> cURL Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 22:30:30 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 22:31:35 --> DB Transaction Failure
+ERROR - 2013-04-02 22:31:35 --> Query error: Table 'suggest.sg_gameexpansion' doesn't exist
+DEBUG - 2013-04-02 22:31:35 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 22:31:35 --> Config Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:31:35 --> URI Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Router Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Output Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Security Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Input Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:31:35 --> Language Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:31:35 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Config Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:32:18 --> URI Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Router Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Output Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Security Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Input Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:32:18 --> Language Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Model Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> cURL Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 22:32:18 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 22:34:04 --> Language file loaded: language/english/profiler_lang.php
+DEBUG - 2013-04-02 22:34:04 --> Helper loaded: text_helper
+DEBUG - 2013-04-02 22:34:04 --> Final output sent to browser
+DEBUG - 2013-04-02 22:34:04 --> Total execution time: 106.1360
+DEBUG - 2013-04-02 22:34:04 --> Config Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:34:04 --> URI Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Router Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Output Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Security Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Input Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:34:04 --> Language Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:34:04 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Config Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:59:06 --> URI Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Router Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Output Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Security Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Input Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:59:06 --> Language Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Controller Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Model Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> cURL Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 22:59:06 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 22:59:11 --> DB Transaction Failure
+ERROR - 2013-04-02 22:59:11 --> Query error: Unknown column 'game_gameexpansion_id' in 'field list'
+DEBUG - 2013-04-02 22:59:11 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 22:59:11 --> Config Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Hooks Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 22:59:11 --> URI Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Router Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Output Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Security Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Input Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 22:59:11 --> Language Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Loader Class Initialized
+DEBUG - 2013-04-02 22:59:11 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Config Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:00:42 --> URI Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Router Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Output Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Security Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Input Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:00:42 --> Language Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Model Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> cURL Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 23:00:42 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 23:02:32 --> Language file loaded: language/english/profiler_lang.php
+DEBUG - 2013-04-02 23:02:32 --> Helper loaded: text_helper
+DEBUG - 2013-04-02 23:02:32 --> Final output sent to browser
+DEBUG - 2013-04-02 23:02:32 --> Total execution time: 110.0207
+DEBUG - 2013-04-02 23:02:33 --> Config Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:02:33 --> URI Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Router Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Output Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Security Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Input Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:02:33 --> Language Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:02:33 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Config Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:35:52 --> URI Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Router Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Output Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Security Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Input Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:35:52 --> Language Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Model Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> cURL Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 23:35:52 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 23:35:58 --> DB Transaction Failure
+ERROR - 2013-04-02 23:35:58 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`suggest`.`sg_gamename`, CONSTRAINT `game_id_sggn` FOREIGN KEY (`game_id`) REFERENCES `sg_games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+DEBUG - 2013-04-02 23:35:58 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 23:35:58 --> Config Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:35:58 --> URI Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Router Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Output Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Security Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Input Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:35:58 --> Language Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:35:58 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Config Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:38:06 --> URI Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Router Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Output Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Security Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Input Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:38:06 --> Language Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Controller Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Model Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> cURL Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Database Driver Class Initialized
+DEBUG - 2013-04-02 23:38:06 --> Helper loaded: file_helper
+DEBUG - 2013-04-02 23:39:19 --> DB Transaction Failure
+ERROR - 2013-04-02 23:39:19 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`suggest`.`sg_games_gameexpansion`, CONSTRAINT `game_id_sggge2` FOREIGN KEY (`gameexpansion_id`) REFERENCES `sg_games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+DEBUG - 2013-04-02 23:39:19 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2013-04-02 23:39:19 --> Config Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Hooks Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Utf8 Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> UTF-8 Support Enabled
+DEBUG - 2013-04-02 23:39:19 --> URI Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Router Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Output Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Security Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Input Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2013-04-02 23:39:19 --> Language Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Loader Class Initialized
+DEBUG - 2013-04-02 23:39:19 --> Controller Class Initialized
