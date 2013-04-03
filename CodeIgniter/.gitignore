@@ -7,5 +7,5 @@
 \.buildpath
 Servers/
 target/
-assets/
+assets/images/
 application/logs/

@@ -39,7 +39,9 @@
 */
 
 
+$route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
 $route['bgg_connect'] = 'bgg_connect';
+$route['demogrocery/(:any)'] = 'demogrocery/$1';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';
 

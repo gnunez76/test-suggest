@@ -210,6 +210,3 @@ require_once BASEPATH.'core/CodeIgniter.php';
 
 $files = get_included_files ();
 
-echo "<pre>";
-var_dump ($files);
-echo "</pre>";
