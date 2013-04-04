@@ -45,6 +45,7 @@ $route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
 $route['bgg_connect'] = 'bgg_connect';
 $route['hauth/(:any)/(:any)/(:any)'] = 'hauth/$1/$2/$3';
 $route['hauth/(:any)/(:any)'] = 'hauth/$1/$2';
+$route['hauth/(:any)'] = 'hauth/$1';
 $route['hauth'] = 'hauth';
 $route['demogrocery/(:any)'] = 'demogrocery/$1';
 $route['(:any)'] = 'pages/view/$1';
