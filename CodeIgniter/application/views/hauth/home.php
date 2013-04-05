@@ -244,14 +244,14 @@
 
 	</div>
 	<p class="footer">
-	<?
+	<?php
 	// Output the profiles of each logged in service
 	foreach ($providers as $provider => $d) :
 		if (!empty($d['user_profile'])) :
 			$profile[$provider] = (array)$d['user_profile'];
 			?>
 			<fieldset>
-	        <legend><strong><?=$provider?></strong> Profile</legend>
+	        <legend><strong><?php $provider?></strong> Profile</legend>
 	        <table width="100%">
 	          <tr>
 	            <td width="150" valign="top" align="center">
@@ -270,23 +270,23 @@
 				</td>
 	            <td align="left"><table width="100%" cellspacing="0" cellpadding="3" border="0">
 	                <tbody>
-					<?
+					<?php
 					foreach ($d['user_profile'] as $key=>$value) :
 						if ($value =="") {
 							continue;
 						}
 					?>
 	                  <tr>
-	                  	<td class="pItem"><strong><?=ucfirst($key)?>:</strong> <?=(filter_var($value, FILTER_VALIDATE_URL) !== false) ?  '<a href="'.$value.'" target="_blank">'.$value.'</a>' : $value;?></td>
+	                  	<td class="pItem"><strong><?php echo ucfirst($key)?>:</strong> <?php echo (filter_var($value, FILTER_VALIDATE_URL) !== false) ?  '<a href="'.$value.'" target="_blank">'.$value.'</a>' : $value;?></td>
 	                  </tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 	                </tbody>
 	              </table>
 				  </td>
 	          </tr>
 	        </table>
 	      </fieldset>
-		<?
+		<?php
 		endif;
 	endforeach;
 	?>
