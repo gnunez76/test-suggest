@@ -2,7 +2,7 @@ nav{
 
     float:left;
 
-    width: 150px;
+    width: 250px;
 
 }
 
@@ -10,7 +10,7 @@ section{
 
     float:right;
 
-    width:570px;
+    width:650px;
 
 }
 
@@ -22,7 +22,9 @@ body {
 
     margin: 36px auto;
 
-    width: 720px;
+    width: 920px;
+	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+	font-size: 1.1em;
 
 }
 
@@ -62,6 +64,7 @@ article{
 
     border-color:#ffffff;
 
+	font-size: 0.8em;
 }
 
 nav ul li {
