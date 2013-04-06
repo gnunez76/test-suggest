@@ -21,22 +21,22 @@ $config =
 			),
 
 			"Yahoo" => array (
-				"enabled" => true,
+				"enabled" => false,
 				"keys"    => array ( "id" => "", "secret" => "" ),
 			),
 
 			"AOL"  => array (
-				"enabled" => true
+				"enabled" => false
 			),
 
 			"Google" => array (
 				"enabled" => true,
-				"keys"    => array ( "id" => "", "secret" => "" ),
+                                "keys"    => array ( "id" => "913219593608.apps.googleusercontent.com", "secret" => "6PHpU_CixUgd5gRmc5HUjbIi" )
 			),
 
 			"Facebook" => array (
 				"enabled" => true,
-				"keys"    => array ( "id" => "", "secret" => "" ),
+                                "keys"    => array ( "id" => "539672289418085", "secret" => "e679c2a756607bcb79a84138fe16f6ff" )
 			),
 
 			"Twitter" => array (
@@ -46,22 +46,22 @@ $config =
 
 			// windows live
 			"Live" => array (
-				"enabled" => true,
+				"enabled" => false,
 				"keys"    => array ( "id" => "", "secret" => "" )
 			),
 
 			"MySpace" => array (
-				"enabled" => true,
+				"enabled" => false,
 				"keys"    => array ( "key" => "", "secret" => "" )
 			),
 
 			"LinkedIn" => array (
-				"enabled" => true,
+				"enabled" => false,
 				"keys"    => array ( "key" => "", "secret" => "" )
 			),
 
 			"Foursquare" => array (
-				"enabled" => true,
+				"enabled" => false,
 				"keys"    => array ( "id" => "", "secret" => "" )
 			),
 		),
