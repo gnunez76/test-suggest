@@ -132,15 +132,17 @@ class Item extends CI_Controller {
 								
 				log_message('debug', 'controllers.Item.getUserRating: Item con '.$data['rateGame'].
 				' puntos del usuario '.$data['user_profile']->identifier);
-				$this->load->view('items/user_data_item', $data);
+				
 				echo "<!-- el juego est‡ puntuado -->";
 			}
 			else {
-		
+				
+				$data ['rateGame'] = 0;
 		
 				echo '<!-- el juego NO ha sido puntuado aun -->';
 			}
-						
+			
+			$this->load->view('items/user_data_item', $data);
 		}
 		else {
 				

@@ -32,8 +32,12 @@ $(document).ready(function() {
         	 <header>
         	 	<span><h3><?php echo $game_name; ?></h3></span>
         	 	<span style="padding-left: 5px;">
-					<?php  
-						$ratio = $game_totalRating/$game_totalVotes;
+					<?php 
+						$ratio = 0; 
+						if ($game_totalRating) {
+							$ratio = $game_totalRating/$game_totalVotes;
+						}
+						
 						for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
 
 							if ($i == round($ratio)) {
