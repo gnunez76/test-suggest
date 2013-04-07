@@ -47,7 +47,7 @@ class User_Suggest_Model extends CI_Model {
 	public function userExists ($userId) {
 
 		try {
-			$sql = "SELECT usr_id FROM usr_users
+			$sql = "SELECT usr_identifier FROM usr_users
 					WHERE usr_identifier='".$userId."'";
 
 			$query = $this->db->query($sql);
@@ -68,101 +68,138 @@ class User_Suggest_Model extends CI_Model {
 		}
 	}
 
-	public function getItem ($itemId) {
+	public function getRateUserItem ($game_id, $usrIdentifier) {
 
-
-		$sql = "SELECT sg_games.game_id, sg_gamename.game_name, sg_games.game_description, sg_games.game_thumbnail, sg_games.game_yearpub
-			FROM sg_games
-			INNER JOIN sg_games_gamename ON sg_games_gamename.game_id = sg_games.game_id and gamename_priority='1'
-			INNER JOIN sg_gamename ON sg_gamename.gamename_id = sg_games_gamename.gamename_id
-			WHERE sg_games.game_id = '".$itemId."'";
-
-
-		if ($query = $this->db->query($sql)) {	
-			$row = $query->row_array();
-			return $row;
-		}
-
-		return false;
-
-	}
-
-	public function getItemCreator ($itemId) {
-
-		$sql = "SELECT designer_name 
-			FROM sg_gamedesigner a, sg_games_gamedesigner b
-			WHERE a.gamedesigner_id=b.gamedesigner_id AND b.game_id='".$itemId."'";
-		$resultado = array();
-		if ($query = $this->db->query($sql)) {	
-
-			foreach ($query->result_array() as $item) {
-
-				$resultado [] = $item["designer_name"];
+		try {
+			$sql="SELECT g.game_id, g.game_rating FROM 
+				usr_users_games g 
+				WHERE g.game_id=".$this->db->escape($game_id)."
+					AND g.usr_identifier=".$this->db->escape($usrIdentifier).";";
+	
+			log_message('debug', 'models.User_Suggest_Model.getRateUserGame query: '.$sql);
+			
+			$query = $this->db->query($sql);
+			
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->row_array()) {
+					return $row['game_rating'];
+				}
+				else {
+					return false;
+				}
 			}
+			
+			return false;
 		}
-
-		return $resultado;
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
 	}
 
-	public function getItemEditorial ($itemId) {
+	public function setRateUserItem ($game_id, $usrIdentifier, $ratingValue) {
+	
+		try {
+			$sql="INSERT INTO usr_users_games (usr_identifier, game_id, game_rating)
+				VALUES (".$this->db->escape($usrIdentifier).","
+					.$this->db->escape($game_id).","
+					.$this->db->escape($ratingValue).")";
+				
+			log_message('debug', 'models.User_Suggest_Model.setRateUserGame query: '.$sql);
+				
+			$query = $this->db->query($sql);
+				
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
 
-		$sql = "SELECT editorial_name 
-			FROM sg_gameeditorial a, sg_games_gameeditorial b
-			WHERE a.gameeditorial_id=b.gameeditorial_id AND b.game_id='".$itemId."'";
+	/*
+	 * Actualiza la valoracion del usuario de un item
+	 */
+	public function updateRateUserItem ($game_id, $usrIdentifier, $ratingValue) {
+	
+		try {
+			$sql="UPDATE usr_users_games SET game_rating=".$this->db->escape($ratingValue).
+					"WHERE usr_identifier=".$this->db->escape($usrIdentifier).
+					" AND game_id=".$this->db->escape($game_id).";";
+	
+			log_message('debug', 'models.User_Suggest_Model.updateRateUserItem query: '.$sql);
+	
+			$query = $this->db->query($sql);
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	/*  
+	 * Modifica el numero de votos totales de un item cuando un usuario
+	 * modifica la valoraci—n que habia realizado del mismo.
+	 * NO MODIFICA el total de votos. 
+	 */
+	public function modifyItemTotalRating ($game_id, $ratingValue) {
+	
+		try {
 
-		$resultado = array();
-		if ($query = $this->db->query($sql)) {	
-
-			foreach ($query->result_array() as $item) {
-
-				$resultado [] = $item["editorial_name"];
+			if ($ratingValue > 0) {
+				$sql="UPDATE sg_games SET game_totalRating=game_totalRating+".$ratingValue.
+					" WHERE game_id=".$this->db->escape($game_id).";";
 			}
-
-		}
-
-		return $resultado;
-	}
-
-	public function getItemArtist ($itemId) {
-
-		$sql = "SELECT artist_name 
-			FROM sg_gameartist a, sg_games_gameartist b
-			WHERE a.gameartist_id=b.gameartist_id AND b.game_id='".$itemId."'";
-
-		$resultado = array();
-		if ($query = $this->db->query($sql)) {	
-
-			foreach ($query->result_array() as $item) {
-
-				$resultado [] = $item["artist_name"];
+			else {
+				$sql="UPDATE sg_games SET game_totalRating=game_totalRating".$ratingValue.
+				" WHERE game_id=".$this->db->escape($game_id).";";
 			}
-
+				
+				
+			log_message('debug', 'models.User_Suggest_Model.modifyTotalRating query: '.$sql);
+	
+			$query = $this->db->query($sql);
+	
+			return true;
 		}
-
-		return $resultado;
-	}
-
-	public function predictiveSearchResult ($search) {
-
-		$this->load->helper('url');
-		$sql = "SELECT sg_games_gamename.game_id, sg_gamename.game_name 
-			FROM sg_gamename
-			INNER JOIN sg_games_gamename ON sg_games_gamename.gamename_id = sg_gamename.gamename_id and gamename_priority='1'
-			WHERE UPPER(sg_gamename.game_name) LIKE '%".strtoupper($search)."%'";
-
-
-		$resultado = array();
-		if ($query = $this->db->query($sql)) {	
-
-			foreach ($query->result_array() as $item) {
-
-				$resultado [] = base_url().'juego/'.url_title(strtolower($item['game_name'])).'/'.$item["game_id"].'|'.$item['game_name'];
-			}
-
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
-
-		return $resultado;
+	
 	}
+	
+	/**
+	 * Valora el item inicialmente. A–ade el valor de la puntucion e incremente en uno
+	 * el numero de votos realizados
+	 */
+	public function updateItemTotalRating ($game_id, $ratingValue) {
+
+		try {
+			
+			$sql="UPDATE sg_games SET game_totalRating=game_totalRating+".$ratingValue.", game_totalVotes=game_totalVotes+1
+					WHERE game_id=".$this->db->escape($game_id).";";
+					
+					
+			log_message('debug', 'models.User_Suggest_Model.updateGameTotalRating query: '.$sql);
+		
+			$query = $this->db->query($sql);
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+		
+	}
+	
+	
+	
+	
 
 }
 /* End of file item_model.php */

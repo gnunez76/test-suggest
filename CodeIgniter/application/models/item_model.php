@@ -12,7 +12,8 @@ class Item_Model extends CI_Model {
 	public function getItem ($itemId) {
 
 
-		$sql = "SELECT sg_games.game_id, sg_gamename.game_name, sg_games.game_description, sg_games.game_thumbnail, sg_games.game_yearpub
+		$sql = "SELECT sg_games.game_id, sg_gamename.game_name, sg_games.game_description, 
+				sg_games.game_thumbnail, sg_games.game_yearpub, sg_games.game_totalRating, sg_games.game_totalVotes
 			FROM sg_games
 			INNER JOIN sg_games_gamename ON sg_games_gamename.game_id = sg_games.game_id and gamename_priority='1'
 			INNER JOIN sg_gamename ON sg_gamename.gamename_id = sg_games_gamename.gamename_id
@@ -28,6 +29,30 @@ class Item_Model extends CI_Model {
 
 	}
 
+	public function getItemRating ($itemId) {
+	
+		try {
+		
+			$sql = "SELECT game_totalRating, game_totalVotes
+				FROM sg_games
+				WHERE game_id = ".$this->db->escape($itemId).";";
+		
+		
+			if ($query = $this->db->query($sql)) {
+				$row = $query->row_array();
+				return $row;
+			}
+		}
+		catch (Exception $e) {
+			
+			log_message('error', 'model.Item_Model.getItemRating: Error la puntuacion del item '.$itemId);
+			log_message('error', $e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage());
+			trigger_error($e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage(), E_USER_ERROR);
+		}
+		
+	}
+	
+	
 	public function getItemCreator ($itemId) {
 
 		$sql = "SELECT designer_name 

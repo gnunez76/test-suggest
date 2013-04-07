@@ -2,16 +2,16 @@
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <title>TITULO</title>
+        <title><?php echo $game_name; ?></title>
 	<link rel="stylesheet" href="/assets/css/item.css"/>
 
         <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
-        <script src="/assets/js/jquery-1.9.0.js"></script>
-        <script src="/assets/js/jquery-ui-1.10.0.custom.js"></script>
+		<script src="/assets/js/jquery-1.9.1.min.js"></script>
+        <script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 	
-        <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">
+        <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">     
         <script src="/assets/js/rating-stars/jquery.rating.pack.js"></script>
-
+        <script src="/assets/js/rating-stars/register_rating.js"></script>
         <script>
 
 

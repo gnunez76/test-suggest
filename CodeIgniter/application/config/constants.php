@@ -36,6 +36,18 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+ |--------------------------------------------------------------------------
+| Constantes definidas para el desarrollo
+|--------------------------------------------------------------------------
+|
+| 
+|
+*/
+// Numero de votos posibles de 1 a 5
+define ('SI_ITEM_RATING_AVAILABE', 5);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
+
