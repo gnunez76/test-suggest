@@ -11,6 +11,15 @@ class HAuth extends CI_Controller {
 
 	public function index()
 	{
+
+
+		$data['providers'] = $this->hybridauthlib->getProviders();
+		foreach($data['providers'] as $provider=>$d) {
+			if ($d['connected'] == 1) {
+				$data['providers'][$provider]['user_profile'] = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+			}
+		}
+
 		// Send to the view all permitted services as a user profile if authenticated
 		$data['providers'] = $this->hybridauthlib->getProviders();
 		foreach($data['providers'] as $provider=>$d) {
@@ -39,7 +48,29 @@ class HAuth extends CI_Controller {
 				{
 					log_message('debug', 'controller.HAuth.login: user authenticated.');
 					// Redirect back to the index to show the profile
-					redirect('hauth/', 'refresh');
+					// redirect('hauth/', 'refresh');
+
+					$this->load->helper('cookie');
+					$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+
+					if ($provider == 'Twitter') {
+						set_cookie('UserName', '@'.utf8_decode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+					}
+					else {
+						set_cookie('UserName', utf8_decode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+					}
+
+					set_cookie('Provider', $provider, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+
+					$this->load->model('user_suggest_model');
+					if (!$this->user_suggest_model->userExists($user_profile->identifier)) {
+						$this->user_suggest_model->setUser ($user_profile, $provider);
+					}
+					
+					if (isset ($_GET['backURL'])) {
+						$bURL = explode ('#', $_GET['backURL']);
+						header ('Location: ' . $bURL[0]);
+					}	
 				}
 				else // Cannot authenticate user
 					{
@@ -94,11 +125,14 @@ class HAuth extends CI_Controller {
 
 		try
 		{
+			$this->load->helper('cookie');
+
 			if ($provider == "") {
 
 				log_message('debug', "controllers.HAuth.logout() called, no provider specified. Logging out of all services.");
 				$data['service'] = "all";
 				$this->hybridauthlib->logoutAllProviders();
+					
 			} else {
 				if ($this->hybridauthlib->providerEnabled($provider)) {
 					log_message('debug', "controllers.HAuth.logout: service $provider enabled, trying to check if user is authenticated.");
@@ -108,6 +142,7 @@ class HAuth extends CI_Controller {
 						log_message('debug', 'controller.HAuth.logout: user is authenticated, logging out.');
 						$service->logout();
 						$data['service'] = $provider;
+
 					} else { // Cannot authenticate user
 						show_error('User not authenticated, success.');
 						$data['service'] = $provider;
@@ -120,8 +155,13 @@ class HAuth extends CI_Controller {
 				}
 			}
 			// Redirect back to the main page. We're done with logout
-			redirect('hauth/', 'refresh');
-
+//			set_cookie('UserName', utf8_encode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+			delete_cookie('UserName', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_');
+			delete_cookie('Provider', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_');
+			if (isset ($_GET['backURL'])) {
+				$bURL = explode ('#', $_GET['backURL']);
+				header ('Location: ' . $bURL[0]);
+			}
 		}
 		catch(Exception $e)
 		{

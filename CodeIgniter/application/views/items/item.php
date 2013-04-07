@@ -1,47 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <title><?php echo $game_name;  ?></title>
-	<link rel="stylesheet" href="/assets/css/item.css"/>
-
-        <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
-        <script src="/assets/js/jquery-1.9.0.js"></script>
-        <script src="/assets/js/jquery-ui-1.10.0.custom.js"></script>
-
-        <script>
-
-
-        $(function() {
-
-                $( "#autocomplete" ).autocomplete({
-                        source: "/juego/buscador/",
-//                        search: function (event, ui) {
-//                                $("#autocomplete").html("cargando... ");
-//                        },
-                        response: function ( event, ui ) {
-				for (j=0; j<ui.content.length; j++) {
-
-					$resultAux = ui.content[j].value.split('|');
-					ui.content[j].value=$resultAux[0];
-					ui.content[j].label=$resultAux[1];
-						
-				}
-                                $("#autocomplete").html("");
-                        },
-			select: function( event, ui ) { 
-				document.location.href=ui.item.value; 
-                                $("#autocomplete").value('');
-			}
-                        //close: function( event, ui ) { searchSelection();  }
-                });
-
-        });
-        </script>
-
-
-    </head>
-    <body>
 		<header>
 <h3>Buscador y Ficha PROTO</h3>
 		</header>
@@ -66,7 +22,16 @@
         	 <header><h3><?php echo $game_name; ?></h3></header>
 
 			<div style="float:left;">
-			<img src="<?php echo 'http://cf.geekdo-images.com/images/'.$game_thumbnail;    ?>" />
+
+				<div><img src="<?php echo 'http://cf.geekdo-images.com/images/'.$game_thumbnail;    ?>" /></div>
+				
+				<div>
+<input name="star1" type="radio" class="star"/>
+<input name="star1" type="radio" class="star"/>
+<input name="star1" type="radio" class="star"/>
+<input name="star1" type="radio" class="star"/>
+<input name="star1" type="radio" class="star"/>
+				</div>
 			</div>
 			<div style="float:left; padding-left: 25px;">
 				<p><div style="float:left;"><strong>Autor: </strong></div><div style="float:left; padding-left: 5px;"><?php echo implode ('<br/>', $autor); ?></div></p>
@@ -81,9 +46,3 @@
     	  </article>              
 
 	 </section>
-        <footer>
-            <small>
-            </small>        
-        </footer>
-    </body>
-</html>

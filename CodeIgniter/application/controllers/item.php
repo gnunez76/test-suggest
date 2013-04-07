@@ -39,7 +39,9 @@ class Item extends CI_Controller {
   				header ('Location: '.$realUrl);
 			}
 
+			$this->load->view('templates/header');
 			$this->load->view('items/item', $data);
+			$this->load->view('templates/footer');
 		}
 		else {
 			log_message ('debug', 'No hay datos');

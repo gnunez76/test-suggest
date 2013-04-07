@@ -44,21 +44,19 @@ $route['bgg_user_interface/(:any)/(:any)'] = 'bgg_user_interface/index/$1/$2';
 $route['bgg_user_interface'] = 'bgg_user_interface';
 $route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
 $route['bgg_connect'] = 'bgg_connect';
+$route['demogrocery/(:any)'] = 'demogrocery/$1';
 $route['hauth/(:any)/(:any)/(:any)'] = 'hauth/$1/$2/$3';
 $route['hauth/(:any)/(:any)'] = 'hauth/$1/$2';
 $route['hauth/(:any)'] = 'hauth/$1';
 $route['hauth'] = 'hauth';
-$route['demogrocery/(:any)'] = 'demogrocery/$1';
 */
+
+
 $route['juego/buscador'] = 'item/buscador';
 $route['juego/(:any)/(:any)'] = 'item/index/$2';
-$route['default_controller'] = 'item/index/1';
 
-/*
-$route['juego'] = 'item';
-$route['(:any)'] = 'suggestit/index/$1';
-$route['default_controller'] = 'suggest/index';
-*/
+$route['default_controller'] = 'suggestit';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
