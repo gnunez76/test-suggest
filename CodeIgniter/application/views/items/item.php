@@ -4,8 +4,17 @@ $(document).ready(function() {
 		$.get('/juego/getuserrating/'+itemId, function(data) {
 			$('#userRated').html(data);
 		});
+
+
+		itemId =<?php echo "'".$game_id."'"; ?>;
+		$.get('/comments/getitemcomments/'+itemId, function(data) {
+			$('#comments').html(data);
+		});
 		
 });
+
+
+		
 </script>
 
 <header>
@@ -54,13 +63,12 @@ $(document).ready(function() {
 
 			<div style="float:left;">
 
-				<div><img src="<?php echo 'http://cf.geekdo-images.com/images/'.$game_thumbnail;    ?>" /></div>
+				<div><img src="<?php echo $game_thumbnail;    ?>" /></div>
 
 
 				
 <div id="userRated">
 </div>	
-				
 				
 			</div>
 			<div style="float:left; padding-left: 25px;">
@@ -76,3 +84,8 @@ $(document).ready(function() {
     	  </article>              
 
 	 </section>
+
+<!--
+<div id="comments">
+</div>
+-->

@@ -56,6 +56,11 @@ $route['juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$1/$2';
 $route['juego/buscador'] = 'item/buscador';
 $route['juego/(:any)/(:any)'] = 'item/index/$2';
 
+$route['comments/(:any)'] = 'comments/getitemcomments/$1';
+
+$route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
+$route['bgg_connect'] = 'bgg_connect';
+
 $route['default_controller'] = 'suggestit';
 
 

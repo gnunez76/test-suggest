@@ -196,37 +196,36 @@ class BGG_Connect_Model extends CI_Model {
 					
 					$maxVotes = 0;
 					$gameLanguageDepId = 0;
-					foreach ($poll->results->result as $result) {
+					if (isset ($poll->results->result)) {
+
+						foreach ($poll->results->result as $result) {
 
 
-						if (!$this->comprobarDuplicados ($this->db->escape((int)$result['level']), 'gamelanguagedep_id', 'sg_gamelanguagedep')) {
-							$queryCategory = 'INSERT INTO sg_gamelanguagedep (gamelanguagedep_id, language_name)
-									VALUES ('.$this->db->escape((int)$result['level']).', '.
-										$this->db->escape(mysql_real_escape_string((string)$result['value'])).');';
-							$this->insertToDB ($queryCategory);
+							if (!$this->comprobarDuplicados ($this->db->escape((int)$result['level']), 'gamelanguagedep_id', 'sg_gamelanguagedep')) {
+								$queryCategory = 'INSERT INTO sg_gamelanguagedep (gamelanguagedep_id, language_name)
+										VALUES ('.$this->db->escape((int)$result['level']).', '.
+											$this->db->escape(mysql_real_escape_string((string)$result['value'])).');';
+								$this->insertToDB ($queryCategory);
+							}
+
+							if ($result['numvotes'] > $maxVotes) {
+
+								$maxVotes = (int)$result['numvotes'];
+								$gameLanguageDepId =  (int)$result['level'];
+							}
+
 						}
 
-						if ($result['numvotes'] > $maxVotes) {
-							$maxVotes = (int)$result['numvotes'];
-							$gameLanguageDepId =  (int)$result['level'];
-						}
+						if (!$this->comprobarDuplicados ($this->db->escape($gameLanguageDepId), 'gamelanguagedep_id', 'sg_games_gamelanguagedep', 
+							'game_id', (int)$game['objectid'])) {
 
-/*						
-						echo $result["value"] . "<br/>";
-	echo "<pre>";
-	var_dump ($result);
-	echo "</pre>";
-
-*/
-					}
-
-					if (!$this->comprobarDuplicados ($this->db->escape($gameLanguageDepId), 'gamelanguagedep_id', 'sg_games_gamelanguagedep', 
-					'game_id', (int)$game['objectid'])) {
-
-						$queryCategory = 'INSERT INTO sg_games_gamelanguagedep (game_id, gamelanguagedep_id)
+							$queryCategory = 'INSERT INTO sg_games_gamelanguagedep (game_id, gamelanguagedep_id)
 									VALUES ('.$this->db->escape((int)$game['objectid']).', '.
 											$this->db->escape($gameLanguageDepId).');';
-						$this->insertToDB ($queryCategory);
+							if ($gameLanguageDepId) {
+								$this->insertToDB ($queryCategory);
+							}
+						}
 					}
 						
 				}
