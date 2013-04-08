@@ -151,16 +151,19 @@ class BGG_Connect_Model extends CI_Model {
 							game_yearpub,
 							game_thumbnail,
 							game_image)
-						VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-									$this->db->escape($game->minplayers).'", "'.
-									$this->db->escape($game->maxplayers).'", "'.
-									$this->db->escape($game->playingtime).'", "'.
-									$this->db->escape($game->age).'", "'.
-									$this->db->escape(mysql_real_escape_string($game->description)).'", "'.
-									$this->db->escape($game->yearpublished).'", "'.
-									$this->db->escape(basename($game->thumbnail)).'", "'.
-									$this->db->escape(basename($game->image)).'");';
+						VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+									$this->db->escape((string)$game->minplayers).', '.
+									$this->db->escape((string)$game->maxplayers).', '.
+									$this->db->escape((string)$game->playingtime).', '.
+									$this->db->escape((string)$game->age).', '.
+									$this->db->escape(mysql_real_escape_string((string)$game->description)).', '.
+									$this->db->escape((string)$game->yearpublished).', '.
+									$this->db->escape((string)$game->thumbnail).', '.
+									$this->db->escape((string)$game->image).');';
 				
+
+
+
 			if (!$this->comprobarDuplicados ($this->db->escape((int)$game['objectid']), 'game_id', 'sg_games')) {
 				$this->insertToDB ($query);
 			
@@ -171,107 +174,155 @@ class BGG_Connect_Model extends CI_Model {
 					else  {
 						$namePrimary = 0;
 					}
-//						echo "<h3>$namepart PRIMARY</h3>";
-//					$name .= $namepart . " ";
 
 
 					$queryName = 'INSERT INTO sg_gamename (game_name)
-							VALUES ("'.$this->db->escape(mysql_real_escape_string($namepart)).'"); ';
+							VALUES ('.$this->db->escape(mysql_real_escape_string((string)$namepart)).'); ';
 					$this->insertToDB ($queryName);
 					$idGameName  = $this->db->insert_id();
 				
 					$queryName = 'INSERT INTO sg_games_gamename (game_id, gamename_id, gamename_priority)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape($idGameName).'", "'.
-								$this->db->escape($namePrimary).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape($idGameName).', '.
+								$this->db->escape($namePrimary).');';
 					$this->insertToDB ($queryName);
 
 				}
 			}			
 
+			foreach ($game->poll as $poll) {
+
+				if ($poll['name'] == 'language_dependence') {
+					
+					$maxVotes = 0;
+					$gameLanguageDepId = 0;
+					foreach ($poll->results->result as $result) {
+
+
+						if (!$this->comprobarDuplicados ($this->db->escape((int)$result['level']), 'gamelanguagedep_id', 'sg_gamelanguagedep')) {
+							$queryCategory = 'INSERT INTO sg_gamelanguagedep (gamelanguagedep_id, language_name)
+									VALUES ('.$this->db->escape((int)$result['level']).', '.
+										$this->db->escape(mysql_real_escape_string((string)$result['value'])).');';
+							$this->insertToDB ($queryCategory);
+						}
+
+						if ($result['numvotes'] > $maxVotes) {
+							$maxVotes = (int)$result['numvotes'];
+							$gameLanguageDepId =  (int)$result['level'];
+						}
+
+/*						
+						echo $result["value"] . "<br/>";
+	echo "<pre>";
+	var_dump ($result);
+	echo "</pre>";
+
+*/
+					}
+
+					if (!$this->comprobarDuplicados ($this->db->escape($gameLanguageDepId), 'gamelanguagedep_id', 'sg_games_gamelanguagedep', 
+					'game_id', (int)$game['objectid'])) {
+
+						$queryCategory = 'INSERT INTO sg_games_gamelanguagedep (game_id, gamelanguagedep_id)
+									VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+											$this->db->escape($gameLanguageDepId).');';
+						$this->insertToDB ($queryCategory);
+					}
+						
+				}
+			}
+
 			foreach ($game->boardgamepublisher as $gamepublisher) {
 
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamepublisher['objectid']), 'gameeditorial_id', 'sg_gameeditorial')) {
-//echo "No está duplicado<br>";
 					$queryCategory = 'INSERT INTO sg_gameeditorial (gameeditorial_id, editorial_name)
-							VALUES ("'.$this->db->escape((int)$gamepublisher['objectid']).'", "'.
-								$this->db->escape(mysql_real_escape_string($gamepublisher)).'");';
+							VALUES ('.$this->db->escape((int)$gamepublisher['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gamepublisher)).');';
 					$this->insertToDB ($queryCategory);
+				}
 					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamepublisher['objectid']), 'gameeditorial_id', 'sg_games_gameeditorial', 
+					'game_id', (int)$game['objectid'])) {
 					$queryCategory = 'INSERT INTO sg_games_gameeditorial (game_id, gameeditorial_id)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape((int)$gamepublisher['objectid']).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gamepublisher['objectid']).');';
 					$this->insertToDB ($queryCategory);
 				}
 			}
 			
 
 			foreach ($game->boardgamecategory as $gamecategory) {
-				//echo "<h3> $gamecategory - ".$gamecategory ["objectid"]."</h3>";
-				//$category .= $gamecategory . ", ";
 
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamecategory['objectid']), 'gamecategory_id', 'sg_gamecategory')) {
-//echo "No está duplicado<br>";
 					$queryCategory = 'INSERT INTO sg_gamecategory (gamecategory_id, category_name)
-							VALUES ("'.$this->db->escape((int)$gamecategory['objectid']).'", "'.
-								$this->db->escape(mysql_real_escape_string($gamecategory)).'");';
+							VALUES ('.$this->db->escape((int)$gamecategory['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gamecategory)).');';
 					$this->insertToDB ($queryCategory);
+				}
+					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamecategory['objectid']), 'gamecategory_id', 'sg_games_gamecategory', 
+					'game_id', (int)$game['objectid'])) {
 					
 					$queryCategory = 'INSERT INTO sg_games_gamecategory (game_id, gamecategory_id)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape((int)$gamecategory['objectid']).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gamecategory['objectid']).');';
 					$this->insertToDB ($queryCategory);
 				}
 			}
 
 			foreach ($game->boardgamefamily as $gamefamily) {
-//				echo "<h3> $gamefamily - ".$gamefamily ["objectid"]."</h3>";
-//				$family .= $gamefamily . ", ";
 
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamefamily['objectid']), 'gamefamily_id', 'sg_gamefamily')) {
 					$queryFamily = 'INSERT INTO sg_gamefamily (gamefamily_id, family_name)
-							VALUES ("'.$this->db->escape((int)$gamefamily['objectid']).'", "'.
-								$this->db->escape(mysql_real_escape_string($gamefamily)).'");';
+							VALUES ('.$this->db->escape((int)$gamefamily['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gamefamily)).');';
 					$this->insertToDB ($queryFamily);
+				}
+					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamefamily['objectid']), 'gamefamily_id', 'sg_games_gamefamily', 
+					'game_id', (int)$game['objectid'])) {
 
 					$queryFamily = 'INSERT INTO sg_games_gamefamily (game_id, gamefamily_id)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape((int)$gamefamily['objectid']).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gamefamily['objectid']).');';
 					$this->insertToDB ($queryFamily);
 				}
 			}
 
 			foreach ($game->boardgamedesigner as $gamedesigner) {
 
-//				echo "<h3> $gamedesigner - ".$gamedesigner ["objectid"]."</h3>";
-//				$designer .= $gamedesigner . ", ";
-
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamedesigner['objectid']), 'gamedesigner_id', 'sg_gamedesigner')) {
 					$queryDesigner = 'INSERT INTO sg_gamedesigner (gamedesigner_id, designer_name)
-							VALUES ("'.$this->db->escape((int)$gamedesigner['objectid']).'", "'.
-								$this->db->escape(mysql_real_escape_string($gamedesigner)).'");';
+							VALUES ('.$this->db->escape((int)$gamedesigner['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gamedesigner)).');';
 					$this->insertToDB ($queryDesigner);
+				}
+					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamedesigner['objectid']), 'gamedesigner_id', 'sg_games_gamedesigner', 
+					'game_id', (int)$game['objectid'])) {
 
 					$queryDesigner = 'INSERT INTO sg_games_gamedesigner (game_id, gamedesigner_id)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape((int)$gamedesigner['objectid']).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gamedesigner['objectid']).');';
 					$this->insertToDB ($queryDesigner);
 				}
 			}
 
 			foreach ($game->boardgameartist as $gameartist) {
 
-//				echo "<h3> $gameartist - ".$gameartist ["objectid"]."</h3>";
-//				$artist .= $gameartist . ", ";
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$gameartist['objectid']), 'gameartist_id', 'sg_gameartist')) {
 					$queryArtist = 'INSERT INTO sg_gameartist (gameartist_id, artist_name)
-							VALUES ("'.$this->db->escape((int)$gameartist['objectid']).'", "'.
-								$this->db->escape(mysql_real_escape_string($gameartist)).'");';
+							VALUES ('.$this->db->escape((int)$gameartist['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gameartist)).');';
 					$this->insertToDB ($queryArtist);
+				}
+					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gameartist['objectid']), 'gameartist_id', 'sg_games_gameartist', 
+					'game_id', (int)$game['objectid'])) {
 					
 					$queryArtist = 'INSERT INTO sg_games_gameartist (game_id, gameartist_id)
-							VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-								$this->db->escape((int)$gameartist['objectid']).'");';
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gameartist['objectid']).');';
 					$this->insertToDB ($queryArtist);
 				}
 				
@@ -279,34 +330,45 @@ class BGG_Connect_Model extends CI_Model {
 
 			foreach ($game->boardgameexpansion as $gameexpansion) {
 
-//				echo "<h3> $gameexpansion - ".$gameexpansion ["objectid"]."</h3>";
-//				$expansion .= $gameexpansion . ", ";
 
 				if (!$this->comprobarDuplicados ($this->db->escape((int)$game['objectid']), 
 						'game_id', 'sg_games_gameexpansion', 'gameexpansion_id', 
 						$this->db->escape((int)$gameexpansion['objectid']))) {
 				
 					$queryExpansion = 'INSERT INTO sg_games_gameexpansion (game_id, gameexpansion_id)
-						VALUES ("'.$this->db->escape((int)$game['objectid']).'", "'.
-							$this->db->escape((int)$gameexpansion['objectid']).'");';
+						VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+							$this->db->escape((int)$gameexpansion['objectid']).');';
 					$this->insertToDB ($queryExpansion);
 				}
 			}
 
-			$thumbnail = (string)$game->thumbnail;
-			$image = (string)$game->image;
 
-			if ($thumnail =! "")	{
-				$this->saveImageFileFromURL ($game->thumbnail);
+
+
+			foreach ($game->boardgamemechanic as $gamemechanic) {
+
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamemechanic['objectid']), 'gamemechanic_id', 'sg_gamemechanic')) {
+					$queryArtist = 'INSERT INTO sg_gamemechanic (gamemechanic_id, mechanic_name)
+							VALUES ('.$this->db->escape((int)$gamemechanic['objectid']).', '.
+								$this->db->escape(mysql_real_escape_string((string)$gamemechanic)).');';
+					$this->insertToDB ($queryArtist);
+				}
+					
+				if (!$this->comprobarDuplicados ($this->db->escape((int)$gamemechanic['objectid']), 'gamemechanic_id', 'sg_games_gamemechanic', 
+					'game_id', (int)$game['objectid'])) {
+					
+					$queryArtist = 'INSERT INTO sg_games_gamemechanic (game_id, gamemechanic_id)
+							VALUES ('.$this->db->escape((int)$game['objectid']).', '.
+								$this->db->escape((int)$gamemechanic['objectid']).');';
+					$this->insertToDB ($queryArtist);
+				}
+				
 			}
 
-			if ($image =! "") {
-				$this->saveImageFileFromURL ($game->image);
-			}
 
 		}
 		
-		return "Proces terminado";
+		return "Proceso terminado";
 	}
 
 
@@ -333,20 +395,12 @@ class BGG_Connect_Model extends CI_Model {
 		if (!is_null($campo2) && !is_null($id2)) {
 			$query .= " AND ".$campo2."='".$id2."'";
 		}
-//echo $query . "<br/>";
-//		$query = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
-
 		$result = $this->db->query($query); 
-//		echo $result->num_rows() . " - $tabla - ";
 
-//$row = $result->row ();
-//echo $row->$campo. "<br>";die;
 		if ($result->num_rows() > 0) {
-//			echo "$id - Duplicado <br>";
 			return true;
 		}
 		else {
-//			echo "$id - No duplicado <br>";
 			return false;
 		}
 		
