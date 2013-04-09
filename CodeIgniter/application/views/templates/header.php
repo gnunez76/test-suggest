@@ -42,26 +42,6 @@
         });
         </script>
 
-		<script>
-			function getCookie(nombre)
-			{	
- 				if (document.cookie.length>0)
- 				{
-  					c_start=document.cookie.indexOf(nombre + "=");
-  					if (c_start!=-1)
-  					{
-   						c_start=c_start + nombre.length+1;
-   						c_end=document.cookie.indexOf(";",c_start);
-   						if (c_end==-1)
-    						c_end=document.cookie.length;
-   						return unescape(document.cookie.substring(c_start,c_end));
-  					}
- 				}
- 				return "";
-			}
-
-			
-		</script>
 
 	<style type="text/css">
 		::selection {
@@ -292,6 +272,43 @@
 
 <script>
 
+function utf8_decode ( str_data ) {  
+    // Converts a UTF-8 encoded string to ISO-8859-1    
+    //   
+    // version: 810.1317  
+    // discuss at: http://phpjs.org/functions/utf8_decode  
+    // +   original by: Webtoolkit.info (http://www.webtoolkit.info/)  
+    // +      input by: Aman Gupta  
+    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+    // +   improved by: Norman "zEh" Fuchs  
+    // +   bugfixed by: hitwork  
+    // +   bugfixed by: Onno Marsman  
+    // *     example 1: utf8_decode('Kevin van Zonneveld');  
+    // *     returns 1: 'Kevin van Zonneveld'  
+    var tmp_arr = [], i = ac = c1 = c2 = c3 = 0;  
+  
+    str_data += '';  
+  
+    while ( i < str_data.length ) {  
+        c1 = str_data.charCodeAt(i);  
+        if (c1 < 128) {  
+            tmp_arr[ac++] = String.fromCharCode(c1);  
+            i++;  
+        } else if ((c1 > 191) && (c1 < 224)) {  
+            c2 = str_data.charCodeAt(i+1);  
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));  
+            i += 2;  
+        } else {  
+            c2 = str_data.charCodeAt(i+1);  
+            c3 = str_data.charCodeAt(i+2);  
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
+            i += 3;  
+        }  
+    }  
+  
+    return tmp_arr.join('');  
+}  
+
 var ckArr = document.cookie.split("; "); 
 var userInfo = null; 
 for (var nBucle=0; nBucle<ckArr.length; nBucle++) 
@@ -301,7 +318,7 @@ for (var nBucle=0; nBucle<ckArr.length; nBucle++)
 	if (aCookie[0] == "SI_UserName") 
 	{
 		var parametrosCookie = unescape(aCookie[1]); 
-		userInfo = parametrosCookie.split("|")[0].replace('+',' ');
+		userInfo = utf8_decode(parametrosCookie.split("|")[0].replace('+',' '));
 	}
 }
 

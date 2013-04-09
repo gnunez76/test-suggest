@@ -51,12 +51,16 @@ $route['hauth/(:any)'] = 'hauth/$1';
 $route['hauth'] = 'hauth';
 */
 
+
 $route['juego/getuserrating/(:any)'] = 'item/getuserrating/$1';
 $route['juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$1/$2';
 $route['juego/buscador'] = 'item/buscador';
 $route['juego/(:any)/(:any)'] = 'item/index/$2';
 
-$route['comments/(:any)'] = 'comments/getitemcomments/$1';
+/* No parece necesario 
+$route['comments/getItemComments/(:any)'] = 'comments/getitemcomments/$1';
+$route['comments/insertItemComment'] = 'comments/insertItemComment';
+*/
 
 $route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
 $route['bgg_connect'] = 'bgg_connect';

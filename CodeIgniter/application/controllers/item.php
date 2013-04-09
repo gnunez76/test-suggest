@@ -133,7 +133,7 @@ class Item extends CI_Controller {
 				log_message('debug', 'controllers.Item.getUserRating: Item con '.$data['rateGame'].
 				' puntos del usuario '.$data['user_profile']->identifier);
 				
-				echo "<!-- el juego est‡ puntuado -->";
+				echo "<!-- el juego esta puntuado -->";
 			}
 			else {
 				

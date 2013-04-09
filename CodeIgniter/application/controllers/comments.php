@@ -10,15 +10,21 @@ class Comments extends CI_Controller {
 //		$this->load->helper('url');
 	}
 
-	public function getItemComments ($itemId) {
+	public function getItemComments ($itemId = null) {
 
 		$this->load->view('comments/comment');
 //		echo "Obtener Comentarios";
 	}
 
 
+	public function loadComments ($itemId = null) {
 
-	public function insertItemComment ($itemId) {
+		$this->load->view('comments/comment');
+	}
+
+	public function insertItemComment ($itemId = null) {
+	
+		var_dump ($_POST);
 
 		echo "-- Insertar comentario";
 	}

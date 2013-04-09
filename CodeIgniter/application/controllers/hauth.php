@@ -54,10 +54,10 @@ class HAuth extends CI_Controller {
 					$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
 
 					if ($provider == 'Twitter') {
-						set_cookie('UserName', '@'.utf8_decode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+						set_cookie('UserName', '@'.$user_profile->displayName, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 					}
 					else {
-						set_cookie('UserName', utf8_decode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
+						set_cookie('UserName', $user_profile->displayName, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 					}
 
 					set_cookie('Provider', $provider, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);

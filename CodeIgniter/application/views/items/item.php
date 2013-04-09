@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 			<div style="float:left;">
 
-				<div><img src="<?php echo $game_thumbnail;    ?>" /></div>
+				<div><img src="<?php #echo $game_thumbnail;    ?>" /></div>
 
 
 				
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 	 </section>
 
-<!--
+<section>
 <div id="comments">
 </div>
--->
+</section>
