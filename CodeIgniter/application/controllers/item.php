@@ -7,7 +7,7 @@ class Item extends CI_Controller {
 	{
 
 		parent::__construct();
-		$this->load->model('item_model');
+		
 		$this->load->helper('url');
 	}
 
@@ -18,16 +18,15 @@ class Item extends CI_Controller {
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
 		$this->benchmark->mark('Get_Item_start');
-
+		$this->load->model('item_model');
 		$data = $this->item_model->getItem ($itemId);
-
-		$designer = $this->item_model->getItemCreator ($itemId);
-		$editorial = $this->item_model->getItemEditorial ($itemId);
-		$artist = $this->item_model->getItemArtist ($itemId);
-
-		$data ["autor"] = $designer; 
-		$data ["editorial"] = $editorial; 
-		$data ["artist"] = $artist; 
+		
+		$data ["autor"] = $this->item_model->getItemCreator ($itemId); 
+		$data ["editorial"] = $this->item_model->getItemEditorial ($itemId); 
+		$data ["artist"] = $this->item_model->getItemArtist ($itemId);
+		
+		$this->load->model ('user_suggest_model');
+		$data ["reviews"] = $this->user_suggest_model->getAllReviewsItem ($itemId);
 
 		if (isset($data['game_name'])) {
 			log_message ('debug', 'Hay datos');
@@ -53,6 +52,7 @@ class Item extends CI_Controller {
 
 	public function buscador () {
 	
+		$this->load->model('item_model');
 		$data = $this->item_model->predictiveSearchResult($_GET['term']);	
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 		

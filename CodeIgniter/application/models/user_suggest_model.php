@@ -197,9 +197,127 @@ class User_Suggest_Model extends CI_Model {
 		
 	}
 	
+	/*
+	 * Devuelve el review de un Item
+	 */
+	public function getReviewUserItem ($itemId, $usrIdentifier) {
 	
+		try {
+			
+			$sql="SELECT comment_id, comment_title, comment_text, comment_votes, comment_date FROM
+				si_comments sic
+				WHERE sic.game_id=".$this->db->escape($itemId)."
+					AND sic.usr_identifier=".$this->db->escape($usrIdentifier).";";
 	
+			log_message('debug', 'models.User_Suggest_Model.getReviewUserGame query: '.$sql);
+				
+//			$query = $this->db->query($sql);
+				
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->row_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+				
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}	
 	
+	/*
+	 * Inserta la revision de un usuario
+	 */
+	public function setReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
+	
+		try {
+			$sql="INSERT INTO si_comments (usr_identifier, game_id, comment_title, comment_text, comment_date)
+				VALUES (".$this->db->escape($usrIdentifier).","
+						.$this->db->escape($itemId).","
+						.$this->db->escape($titulo).","
+						.$this->db->escape($texto).","
+						."NOW())";
+	
+			log_message('debug', 'models.User_Suggest_Model.setReviewUserGame query: '.$sql);
+	
+			$query = $this->db->query($sql);
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*
+	 * Actualiza la review del usuario de un item
+	*/
+	public function updateReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
+	
+		try {
+			$sql="UPDATE si_comments SET comment_title=".$this->db->escape($titulo).
+				", comment_text=".$this->db->escape ($texto).
+				", comment_date=NOW() ".
+				"WHERE usr_identifier=".$this->db->escape($usrIdentifier).
+				" AND game_id=".$this->db->escape($itemId).";";
+	
+			log_message('debug', 'models.User_Suggest_Model.updateReviewUserItem query: '.$sql);
+	
+			$query = $this->db->query($sql);
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	
+	/*
+	 * Obtener todas las reviews de un Item
+	*/
+	public function getAllReviewsItem ($itemId, $orderBy = "comment_votes DESC, comment_date DESC") {
+	
+		try {
+			
+			$sql="SELECT usr_name, usr_photoURL, comment_title, comment_text, comment_votes, DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha FROM si_comments s
+					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
+					WHERE s.game_id=".$this->db->escape($itemId);
+			
+			if (!is_null ($orderBy)) {
+				
+				$sql .= " ORDER BY ".$orderBy;
+			}
+					
+						
+			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->result_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+			else{
+				
+				return false;
+			}
+					
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}	
 
 }
 /* End of file item_model.php */

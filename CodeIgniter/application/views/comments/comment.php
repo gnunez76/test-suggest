@@ -84,8 +84,10 @@ textarea {
     	    
 -->
 
+<!-- 
 <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>  
-<script type="text/javascript" src="/assets/js/jquery.form.js"></script>  
+-->
+ 
   
 <script type="text/javascript">  
 
@@ -127,8 +129,8 @@ $(document).ready(function() {
 
         <form method="post" action="/comments/insertitemcomment/" id="reviewForm">
         
-            <label>Título*</label>
-            <input name="title" placeholder="Título de tu review" required="true" autofocus />
+            <label>T&iacute;tulo*</label>
+            <input name="titulo" placeholder="Título de tu review" required="true" />
             
             <label>Texto*</label>
             <textarea name="texto" placeholder="Danos tu opinión" required="true"></textarea>

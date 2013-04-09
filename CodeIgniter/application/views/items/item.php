@@ -6,16 +6,77 @@ $(document).ready(function() {
 		});
 
 
+	/*	
 		itemId =<?php echo "'".$game_id."'"; ?>;
 		$.get('/comments/getitemcomments/'+itemId, function(data) {
 			$('#comments').html(data);
 		});
+	*/	
 		
 });
 
 
 		
 </script>
+<style>
+
+@charset "utf-8";
+
+
+form {
+	width:600px;
+/*	margin:0 auto; */
+}
+
+
+label {
+	display:block;
+	margin-top:20px;
+	letter-spacing:2px;
+}
+
+
+input, textarea {
+	width:439px;
+/*
+	height:27px;
+	background:#efefef;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+*/
+	border:1px solid #dedede;
+	padding:10px;
+	margin-top:3px;
+	font-size:0.9em;
+	color:#3a3a3a;
+}
+
+input:focus, textarea:focus {
+	border:1px solid #97d6eb;
+}
+
+textarea {
+	height:213px;
+	width:600px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#submit {
+	width:127px;
+	height:38px;
+	border:none;
+	margin-top:20px;
+	cursor:pointer;
+}
+
+#submit:hover {
+	opacity:0.9;
+}
+
+
+</style>
+
 
 <header>
 <h3>Buscador y Ficha PROTO</h3>
@@ -63,7 +124,7 @@ $(document).ready(function() {
 
 			<div style="float:left;">
 
-				<div><img src="<?php #echo $game_thumbnail;    ?>" /></div>
+				<div><img src="<?php echo $game_thumbnail;    ?>" /></div>
 
 
 				
@@ -87,5 +148,34 @@ $(document).ready(function() {
 
 <section>
 <div id="comments">
+        <form method="post" action="/comments/insertitemcomment/<?php echo $game_id?>" id="reviewForm">
+        
+            <label>T&iacute;tulo*</label>
+            <input name="titulo" placeholder="Título de tu review" required="true" />
+            
+            <label>Texto*</label>
+            <textarea name="texto" placeholder="Danos tu opinión" required="true"></textarea>
+            
+            
+            <input id="submit" name="submit" type="submit" value="Submit">
+        
+			<div id="ajax_loader"></div>
+        </form>
 </div>
+
+<div class="allComments">
+
+	<?php if ($reviews): ?>
+	<?php foreach ($reviews as $review): ?>
+	<div>
+		<div><img src="<?php echo $review['usr_photoURL']; ?>" /> - <?php echo $review['usr_name']; ?></div>
+		<h3><?php echo $review['comment_title']; ?></h3><span><?php echo $review['fecha']; ?></span>
+		<p><?php echo $review['comment_text']; ?></p>
+	</div>
+	<?php endforeach; ?>
+	<?php endif; ?>
+</div>
+
+
 </section>
+

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title><?php echo $game_name; ?></title>
-	<link rel="stylesheet" href="/assets/css/item.css"/>
+		<link rel="stylesheet" href="/assets/css/item.css"/>
 
         <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 		<script src="/assets/js/jquery-1.9.1.min.js"></script>
@@ -12,6 +12,48 @@
         <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">     
         <script src="/assets/js/rating-stars/jquery.rating.pack.js"></script>
         <script src="/assets/js/rating-stars/register_rating.js"></script>
+        
+        
+        <script type="text/javascript" src="/assets/js/jquery.form.js"></script> 
+        
+<script type="text/javascript">  
+
+
+
+
+// esperamos que el DOM cargue
+$(document).ready(function() { 
+	// definimos las opciones del plugin AJAX FORM
+/*	var opciones= {
+//		beforeSubmit: mostrarLoader, //funcion que se ejecuta antes de enviar el form
+		success: mostrarRespuesta //funcion que se ejecuta una vez enviado el formulario
+	};
+*/
+	//asignamos el plugin ajaxForm al formulario myForm y le pasamos las opciones
+	$('#reviewForm').ajaxForm() ; 
+//	$('#reviewForm').ajaxForm(opciones) ; 
+
+	//lugar donde defino las funciones que utilizo dentro de "opciones"
+/*	function mostrarLoader(){
+		$(#loader_gif).fadeIn("slow"); //muestro el loader de ajax
+	};
+*/
+/*
+	function mostrarRespuesta (responseText){
+		alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
+//		$("#loader_gif").fadeOut("slow"); // Hago desaparecer el loader de ajax
+//		$("#ajax_loader").append("<br>Mensaje: "+responseText); // Aca utilizo la función append de JQuery para añadir el responseText  dentro del div "ajax_loader"
+	};
+*/
+}); 
+ 
+
+
+
+
+</script>  
+        
+        
         <script>
 
 
