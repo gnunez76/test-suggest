@@ -1,0 +1,420 @@
+/* general */
+body, ol, ul, td, th {
+	color: #4F5155;
+    margin: 0;
+}
+body {
+    color: #4F5155;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 12px;
+}
+body, p, ol, ul, td, th {
+    line-height: 18px;
+    padding: 0;
+}
+body {
+    background-color: #FFFFFF;
+}
+
+/*Cabecera*/
+
+.siteheader {
+    
+    background: none repeat-x scroll 0 0 transparent;
+    border-bottom: 1px solid #E3DFC9;
+    color: #4F5155;
+    height: 45px;
+    padding-top: 5px;
+}
+
+.navtop {
+
+	margin-left: auto;
+  	margin-right: auto;
+   	text-align: left;
+   	width: 965px;
+}
+
+
+.userlogin {
+    display: table-cell;
+    float: right;
+    height: 33px;
+    vertical-align: middle;
+}
+
+
+.userlogin li {
+
+    margin-right: 0;
+    margin-top: 10px;
+    padding-right: 4px;
+
+    height: 18px;
+    max-width: 180px;
+    text-align: right;
+
+
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+/*
+    margin-right: 4px;
+    margin-top: 10px;
+    padding: 2px 5px;
+*/
+    
+    
+    position: relative;
+    z-index: 100;
+}
+
+
+.userlogin img {
+	height: 30px;
+	margin-top: -6px;
+	vertical-align: middle;
+}
+
+.sitenav {
+    display: inline-block;
+    vertical-align: middle;
+    
+}
+
+.sitenav li {
+	 list-style: none outside none;
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    margin-right: 4px;
+    margin-top: 10px;
+    padding: 2px 5px;
+    position: relative;
+    z-index: 100;
+    text-transform: uppercase;
+}
+
+a {
+	text-decoration: none;
+	color: #4F5155;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #4F5155;
+}
+
+/* PaginaGeneral */
+
+.page {
+ display: block;
+ margin: 3.5em auto;
+ position: relative;
+ width: 965px;
+ height: 100px;
+/* background-color: #ababab; */
+}
+
+/* Item */
+.item, .userdata {
+	display: block;
+ border-radius: 5px 5px 5px 5px;
+ box-shadow: 1px 1px 10px #CCCCCC;
+ background-color: white !important;
+ padding: 15px;
+ margin-bottom: 5px;
+}
+
+.imagecol {
+ text-align: center;
+ width: 210px;
+ float: left;
+}
+
+.imagecol img {
+	display: block;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.userdata h2 {
+	color: #508B88;
+	font-size: 14px;
+	text-transform: none;
+
+	font-weight: 400;
+	border-bottom: 1px solid;	
+}
+
+.datoscol {
+	float: left;
+	width: 700px;
+	margin-left:10px;
+}
+
+.datoscol h1 {
+
+	font-size: 35px;
+	font-weight: 300;
+	color: #508B88;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.datoscol h3 {    
+	color: #333333;
+	font-size: 13px;
+	text-transform: none;
+	display: inline;
+	font-weight: 300;
+}
+
+.labelitemleft {
+	padding-top: 5px;
+	clear: left;
+}
+
+.labelitem, .labelitemleft {
+	font-weight: 600;
+	float:left;
+}
+
+
+
+.textitemleft {
+	padding-top: 5px;
+}
+
+.textitem, .textitemleft {
+	float:left;
+	padding-left: 5px;	
+}
+
+.itemrates {
+	margin-bottom: 10px;
+}
+
+.puntos {
+	margin-left: 10px;
+}
+
+#userRated {
+	padding-top: 10px;
+}
+
+.label10 {
+	margin-top:10px;
+	display:block;
+}
+
+.botonreview {
+  background: #006699;
+  border: none;
+  color: #ffffff;
+  font: 13px Tahoma, Arial, sans-serif;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #333;
+  letter-spacing: 1px;
+  width: 150px;
+  margin: 0 auto;
+ 
+  /**** Sombra de texto ****/
+  text-shadow: 0px -1px 0px #333333;
+ 
+  /**** Bordes redondeados ****/
+  /* W3C */
+  border-radius: 5px;
+  /* Firefox */
+  -moz-border-radius: 5px;
+ 
+  /**** Degradados ****/
+  /*  Chrome 1-9 and Safari 4-5.0  */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #8b8b8b), color-stop(0.5, #707070), color-stop(0.5, #5e5e5e), color-stop(1, #777777));
+  /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
+  background-image: -webkit-linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+  /*  Firefox 3.6+  */
+  background-image: -moz-linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+  /*  IE 10+  */
+  background-image: -ms-linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+  /*  Opera 11.10+  */
+  background-image: -o-linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+  /*  W3C  */
+  background-image: linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+}
+
+.botonreview a {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+
+.botonreview:hover {
+  /*  Chrome 1-9 and Safari 4-5.0  */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5d5d), color-stop(0.5, #424242), color-stop(0.5, #383838), color-stop(1, #535353));
+  /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
+  background-image: -webkit-linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+  /*  Firefox 3.6+  */
+  background-image: -moz-linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+  /*  IE 10+  */
+  background-image: -ms-linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+  /*  Opera 11.10+  */
+  background-image: -o-linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+  /*  W3C  */
+  background-image: linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+}
+.botonreview:active {
+  /*  Chrome 1-9 and Safari 4-5.0  */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(0.05, #2b2b2b), color-stop(0.5, #434343), color-stop(1, #3e3e3e));
+  /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
+  background-image: -webkit-linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+  /*  Firefox 3.6+  */
+  background-image: -moz-linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+  /*  IE 10+  */
+  background-image: -ms-linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+  /*  Opera 11.10+  */
+  background-image: -o-linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+  /*  W3C  */
+  background-image: linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+}
+
+
+.userrated {
+	width: 170px;
+	margin: 0 auto;
+}
+
+/*Review modal*/
+.reviewmodal {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.reviewmodal:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.reviewmodal > div {
+	width: 800px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
+/*Formulario y comentarios */
+
+form {
+	width:600px;
+/*	margin:0 auto; */
+}
+
+
+label {
+	display:block;
+	margin-top:20px;
+	letter-spacing:2px;
+}
+
+
+input, textarea {
+	width:439px;
+/*
+	height:27px;
+	background:#efefef;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+*/
+	border:1px solid #dedede;
+	padding:10px;
+	margin-top:3px;
+	font-size:0.9em;
+	color:#3a3a3a;
+}
+
+input:focus, textarea:focus {
+	border:1px solid #97d6eb;
+}
+
+textarea {
+	height:213px;
+	width:770px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#submit {
+	width:127px;
+	height:38px;
+	border:none;
+	margin-top:20px;
+	cursor:pointer;
+}
+
+#submit:hover {
+	opacity:0.9;
+}
+
+.allComments {
+	margin-top: 10px;
+	width: 600px;
+	border: 1px solid #dedede;
+}
+
+
+
+/*
+p {
+
+ font-size: 14px;
+ line-height: 1.5;
+}
+*/
+
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+}

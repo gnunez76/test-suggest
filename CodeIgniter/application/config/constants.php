@@ -44,8 +44,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 | 
 |
 */
-// Numero de votos posibles de 1 a 5
-define ('SI_ITEM_RATING_AVAILABE', 5);
+// Numero de votos posibles de 1 a 10
+define ('SI_ITEM_RATING_AVAILABE', 10);
 
 
 /* End of file constants.php */

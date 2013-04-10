@@ -1,8 +1,7 @@
-        <footer style="clear:both;">
-            <small>
-
-<strong>&copy; 2011</strong>	
-            </small>        
-        </footer>
-    </body>
+		</div>
+		
+		<footer>
+		</footer>
+		
+	</body>
 </html>

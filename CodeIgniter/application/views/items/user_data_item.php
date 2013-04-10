@@ -11,8 +11,9 @@ $(document).ready(function() {
 	});
 });
 </script>
-<span>Tus datos</span>
-<div style='margin-top: 10px; border: 1px dashed #CBC8BE; height: 100px; border-radius: 4px 4px 4px 4px; padding: 5px 5px 5px 5px;'>
+<div class="botonreview"><a href="#addreviewmodal">A&Ntilde;ADE TU REVIEW</a></div>
+<span class="label10">Tu puntuaci&oacute;n</span>
+<div class="userrated">
 	<?php  
 	
 		for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
