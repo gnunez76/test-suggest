@@ -74,6 +74,12 @@ textarea {
 	opacity:0.9;
 }
 
+.allComments {
+	margin-top: 10px;
+	width: 600px;
+	border: 1px solid #dedede;
+}
+
 
 </style>
 
@@ -168,7 +174,7 @@ textarea {
 	<?php if ($reviews): ?>
 	<?php foreach ($reviews as $review): ?>
 	<div>
-		<div><img src="<?php echo $review['usr_photoURL']; ?>" /> - <?php echo $review['usr_name']; ?></div>
+		<div><img src="<?php echo $review['usr_photoURL']; ?>" width="40" height="40" /> - <?php echo $review['usr_name']; ?></div>
 		<h3><?php echo $review['comment_title']; ?></h3><span><?php echo $review['fecha']; ?></span>
 		<p><?php echo $review['comment_text']; ?></p>
 	</div>
