@@ -14,7 +14,7 @@ class Item extends CI_Controller {
 	public function index ($itemId, $titleItem = null)
 	{
 
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(FALSE);
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
 		$this->benchmark->mark('Get_Item_start');
@@ -27,6 +27,8 @@ class Item extends CI_Controller {
 		
 		$this->load->model ('user_suggest_model');
 		$data ["reviews"] = $this->user_suggest_model->getAllReviewsItem ($itemId);
+
+//		var_dump ($data);die;
 
 		if (isset($data['game_name'])) {
 			log_message ('debug', 'Hay datos');
@@ -82,7 +84,7 @@ class Item extends CI_Controller {
 				$this->user_suggest_model->modifyItemTotalRating ($game_id, $modTotalRating);
 				
 				
-				echo "el juego est‡ puntuado ";
+				echo "el juego estï¿½ puntuado ";
 			}
 			else {
 				
@@ -123,13 +125,7 @@ class Item extends CI_Controller {
 			$data ['rateGame'] = $this->user_suggest_model->getRateUserItem ($itemId, $data['user_profile']->identifier);
 				
 			if ($data ['rateGame']) {
-		
-/*				
-				echo "<pre>";
-				var_dump ($data);
-				echo "</pre>";
-*/
-								
+										
 				log_message('debug', 'controllers.Item.getUserRating: Item con '.$data['rateGame'].
 				' puntos del usuario '.$data['user_profile']->identifier);
 				

@@ -142,7 +142,7 @@ class User_Suggest_Model extends CI_Model {
 	
 	/*  
 	 * Modifica el numero de votos totales de un item cuando un usuario
-	 * modifica la valoraci—n que habia realizado del mismo.
+	 * modifica la valoraciï¿½n que habia realizado del mismo.
 	 * NO MODIFICA el total de votos. 
 	 */
 	public function modifyItemTotalRating ($game_id, $ratingValue) {
@@ -173,7 +173,7 @@ class User_Suggest_Model extends CI_Model {
 	}
 	
 	/**
-	 * Valora el item inicialmente. A–ade el valor de la puntucion e incremente en uno
+	 * Valora el item inicialmente. Aï¿½ade el valor de la puntucion e incremente en uno
 	 * el numero de votos realizados
 	 */
 	public function updateItemTotalRating ($game_id, $ratingValue) {
@@ -207,7 +207,7 @@ class User_Suggest_Model extends CI_Model {
 			$sql="SELECT comment_id, comment_title, comment_text, comment_votes, comment_date FROM
 				si_comments sic
 				WHERE sic.game_id=".$this->db->escape($itemId)."
-					AND sic.usr_identifier=".$this->db->escape($usrIdentifier).";";
+					AND sic.comment_parent_id=0 AND sic.usr_identifier=".$this->db->escape($usrIdentifier).";";
 	
 			log_message('debug', 'models.User_Suggest_Model.getReviewUserGame query: '.$sql);
 				
@@ -236,11 +236,14 @@ class User_Suggest_Model extends CI_Model {
 	public function setReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
 	
 		try {
-			$sql="INSERT INTO si_comments (usr_identifier, game_id, comment_title, comment_text, comment_date)
+			$sql="INSERT INTO si_comments (usr_identifier, game_id, comment_type_id, comment_title, 
+					comment_text, comment_parent_id, comment_date)
 				VALUES (".$this->db->escape($usrIdentifier).","
 						.$this->db->escape($itemId).","
+						.SI_REVIEW_COMMENT.","
 						.$this->db->escape($titulo).","
 						.$this->db->escape($texto).","
+						."0,"
 						."NOW())";
 	
 			log_message('debug', 'models.User_Suggest_Model.setReviewUserGame query: '.$sql);
@@ -256,6 +259,36 @@ class User_Suggest_Model extends CI_Model {
 	}
 	
 	/*
+	 * Inserta la revision de un usuario
+	*/
+	public function setCommentUserReview ($itemId, $usrIdentifier, $texto, $parentId) {
+	
+		try {
+			$sql="INSERT INTO si_comments (usr_identifier, game_id, comment_type_id, comment_title,
+					comment_text, comment_parent_id, comment_date)
+				VALUES (".$this->db->escape($usrIdentifier).","
+					.$this->db->escape($itemId).","
+					.SI_COMMENT_COMMENT.","
+					.$this->db->escape('').","
+					.$this->db->escape($texto).","
+					.$this->db->escape($parentId).","
+					."NOW())";
+	
+			log_message('debug', 'models.User_Suggest_Model.setCommentUserReview query: '.$sql);
+	
+			$query = $this->db->query($sql);
+			
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	/*
 	 * Actualiza la review del usuario de un item
 	*/
 	public function updateReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
@@ -264,7 +297,7 @@ class User_Suggest_Model extends CI_Model {
 			$sql="UPDATE si_comments SET comment_title=".$this->db->escape($titulo).
 				", comment_text=".$this->db->escape ($texto).
 				", comment_date=NOW() ".
-				"WHERE usr_identifier=".$this->db->escape($usrIdentifier).
+				"WHERE comment_parent_id=0 AND usr_identifier=".$this->db->escape($usrIdentifier).
 				" AND game_id=".$this->db->escape($itemId).";";
 	
 			log_message('debug', 'models.User_Suggest_Model.updateReviewUserItem query: '.$sql);
@@ -279,17 +312,70 @@ class User_Suggest_Model extends CI_Model {
 		}
 	}
 
+
+
+	
+	/*
+	 * Obtener todos los comentarios de una review
+	*/
+	public function getAllCommentsReviews ($itemId, $orderBy = "comment_votes DESC, comment_date DESC", $commentParentId) {
+	
+		try {
+				
+			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, comment_text, comment_votes,
+					DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha, game_rating, game_timeplayed
+					FROM si_comments s
+					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
+					LEFT JOIN usr_users_games ug ON ug.usr_identifier=s.usr_identifier
+					WHERE s.game_id=".$this->db->escape($itemId)." AND s.comment_parent_id=".$commentParentId;
+
+				
+			if (!is_null ($orderBy)) {
+	
+				$sql .= " ORDER BY ".$orderBy;
+			}
+				
+	
+			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+	
+	
+				if ($row = $query->result_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+	
+			}
+			else{
+	
+				return false;
+			}
+				
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
 	
 	/*
 	 * Obtener todas las reviews de un Item
 	*/
 	public function getAllReviewsItem ($itemId, $orderBy = "comment_votes DESC, comment_date DESC") {
 	
+		$data = array ();
 		try {
 			
-			$sql="SELECT usr_name, usr_photoURL, comment_title, comment_text, comment_votes, DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha FROM si_comments s
+			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, comment_text, comment_votes, 
+					DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha, game_rating, game_timeplayed 
+					FROM si_comments s
 					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
-					WHERE s.game_id=".$this->db->escape($itemId);
+					LEFT JOIN usr_users_games ug ON ug.usr_identifier=s.usr_identifier
+					WHERE s.game_id=".$this->db->escape($itemId)." AND s.comment_parent_id=0";
 			
 			if (!is_null ($orderBy)) {
 				
@@ -300,12 +386,14 @@ class User_Suggest_Model extends CI_Model {
 			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
 	
 			if ($query = $this->db->query($sql)) {
-				if ($row = $query->result_array()) {
-					return $row;
+
+				foreach ($query->result_array() as $row) {
+					
+					$row ['hijos'] = $this->getAllCommentsReviews ($itemId, $orderBy, $row['comment_id']);
+					$data [] = $row;
 				}
-				else {
-					return false;
-				}
+				
+				return $data;						
 			}
 			else{
 				

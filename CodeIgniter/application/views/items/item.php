@@ -18,19 +18,19 @@ $(document).ready(function() {
 </script>
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <a rel="nofollow" itemprop="image" href="/book/photo/13496.A_Game_of_Thrones"><img src="<?php echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>"></a>
+				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
 				 <div id="userRated"></div>	
 				</div>
 				
 				<div class="datoscol">
 					
 					<section class="infoItem">
-						<h1><?php echo $game_name; ?></h1>
+						<h1><?php #echo $game_name; ?></h1>
 						<div class="itemrates">
 							<?php 
 								$ratio = 0; 
 								if ($game_totalRating) {
-									$ratio = $game_totalRating/$game_totalVotes;
+									$ratio = round($game_totalRating/$game_totalVotes);
 								}
 								
 								for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
 										echo $ratio."/".SI_ITEM_RATING_AVAILABE;
 									}
 									else {
-										echo "0/".SI_ITEM_RATING_AVAILABE;	
+										echo "-/".SI_ITEM_RATING_AVAILABE;	
 									}
 								?>
 							</span>
@@ -102,11 +102,105 @@ $(document).ready(function() {
 	
 					<?php if ($reviews): ?>
 					<?php foreach ($reviews as $review): ?>
-					<div>
-						<div><img src="<?php echo $review['usr_photoURL']; ?>" width="40" height="40" /> - <?php echo $review['usr_name']; ?></div>
-						<h3><?php echo $review['comment_title']; ?></h3><span><?php echo $review['fecha']; ?></span>
-						<p><?php echo $review['comment_text']; ?></p>
+					<div class="review">
+						<div class="commentimg"><img src="<?php echo $review['usr_photoURL']; ?>" width="30" height="30" /></div>
+						<div class="reviewbody">
+						<h3 class="tituloreview">REVIEW: <?php echo $review['comment_title']; ?></h3>
+						<div class="fechareview"><?php echo $review['fecha']; ?></div>
+						<div class="username"><a href=""><?php echo $review['usr_name']; ?></a> puntu&oacute; </div>
+						<div class="itemratesreview">
+							<?php 
+								$ratio = 0; 
+								if ($review['game_rating']) {
+									$ratio = $review['game_rating'];
+								}
+								
+								for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
+		
+									if ($i == round($ratio)) {
+										echo '<input name="rating-item'.$review['comment_id'].'" type="radio" class="auto-submit-star" value="'.$ratio.'" checked="checked" disabled="disabled" />';
+									}
+									else {
+										echo '<input name="rating-item'.$review['comment_id'].'" type="radio" class="auto-submit-star" value="'.$i.'" disabled="disabled" />';
+									}
+								}
+							?>
+							<span class="puntos">
+								<?php 
+									if ($ratio) {
+										echo $ratio."/".SI_ITEM_RATING_AVAILABE;
+									}
+									else {
+										echo "-/".SI_ITEM_RATING_AVAILABE;	
+									}
+								?>
+							</span>
+						</div>						
+							
+						<div class="cuerporeview">	
+							<p><?php echo $review['comment_text']; ?></p>
+						</div>
+						</div>
 					</div>
+					
+					<!-- comentarios a la review -->
+					<script type="text/javascript">  
+
+						// esperamos que el DOM cargue
+						$(document).ready(function() { 
+							// definimos las opciones del plugin AJAX FORM
+						/*	var opciones= {
+						//		beforeSubmit: mostrarLoader, //funcion que se ejecuta antes de enviar el form
+								success: mostrarRespuesta //funcion que se ejecuta una vez enviado el formulario
+							};
+						*/
+							//asignamos el plugin ajaxForm al formulario myForm y le pasamos las opciones
+							$('#commentForm_<?php echo $review["comment_id"]?>').ajaxForm() ; 
+						//	$('#reviewForm').ajaxForm(opciones) ; 
+						
+							//lugar donde defino las funciones que utilizo dentro de "opciones"
+						/*	function mostrarLoader(){
+								$(#loader_gif).fadeIn("slow"); //muestro el loader de ajax
+							};
+						*/
+						/*
+							function mostrarRespuesta (responseText){
+								alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
+						//		$("#loader_gif").fadeOut("slow"); // Hago desaparecer el loader de ajax
+						//		$("#ajax_loader").append("<br>Mensaje: "+responseText); // Aca utilizo la función append de JQuery para añadir el responseText  dentro del div "ajax_loader"
+							};
+						*/
+						}); 
+					 
+					</script>  
+					
+					<div class="commenttoreview">
+						<?php if ($review["hijos"]): ?>
+						<?php foreach ($review["hijos"] as $hijo): ?>
+						<div id="ctr_comments">
+							<div class="crt_commentimg"><img src="<?php echo $hijo['usr_photoURL']; ?>"></div>
+							<div class="crt_reviewbody">
+								<div class="crt_username"><a href=""><?php echo $hijo['usr_name']; ?></a></div>
+								<div class="crt_cuerporeview">	
+									<p><?php echo $hijo['comment_text']; ?></p>
+								</div>
+							</div>
+						</div>
+						<?php endforeach; ?>
+						<?php endif; ?>
+						
+						<form method="post" action="/comments/insertreviewcomment/<?php echo $game_id?>" id="commentForm_<?php echo $review['comment_id']; ?>">
+                    
+            				<textarea name="texto" placeholder="Comenta la review" required="true"></textarea>
+            				<input type="hidden" name="parentid" value="<?php echo $review['comment_id']; ?>">
+                
+            				<input id="submit" name="submit" type="submit" value="Submit">
+        
+							<div id="ajax_loader"></div>
+        				</form>
+					</div>
+					
+					
 					<?php endforeach; ?>
 					<?php endif; ?>
 				</div>

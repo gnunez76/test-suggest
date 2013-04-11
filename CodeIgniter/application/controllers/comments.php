@@ -45,7 +45,6 @@ class Comments extends CI_Controller {
 				
 				$this->user_suggest_model->updateReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto);
 				
-				echo "el juego est‡ puntuado ";
 			}
 			else {
 		
@@ -53,8 +52,6 @@ class Comments extends CI_Controller {
 		
 				$this->user_suggest_model->setReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto);
 		
-		
-				echo 'el juego NO ha sido puntuado aun';
 			}
 				
 			echo $user_profile->identifier . ' - ' . $provider . ' - ' . $itemId . " - ";
@@ -65,9 +62,37 @@ class Comments extends CI_Controller {
 			echo "Es necesario estar logado para poder votar";
 		}
 		
-
-		echo "-- Insertar comentario";
 	}
 
-
+	
+	public function insertReviewComment ($itemId = null) {
+	
+		$parentid = $_POST['parentid'];
+		$texto = $_POST['texto'];
+	
+		$this->load->helper('cookie');
+	
+		$userName = get_cookie ('SI_UserName');
+		$provider = get_cookie ('SI_Provider');
+	
+		if (!empty($userName) && !empty($provider)) {
+			$this->load->library('HybridAuthLib');
+			$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+	
+			$this->load->model ('user_suggest_model');	
+			log_message('debug', 'controllers.Item.ReviewItem: El usuario '.$user_profile->identifier.' crea una review sobre el juego');
+			$this->user_suggest_model->setCommentUserReview ($itemId, $user_profile->identifier, $texto, $parentid);
+	
+			echo $user_profile->identifier . ' - ' . $provider . ' - ' . $itemId . " - ";
+	
+		}
+		else {
+	
+			echo "Es necesario estar logado para poder votar";
+		}
+	
+	}
+	
+	
+	
 }

@@ -47,6 +47,12 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 // Numero de votos posibles de 1 a 10
 define ('SI_ITEM_RATING_AVAILABE', 10);
 
+// Comentario tipo REVIEW
+define ('SI_REVIEW_COMMENT', 1);
+// Comentario tipo REVIEW
+define ('SI_COMMENT_COMMENT', 2);
+
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

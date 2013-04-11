@@ -83,7 +83,7 @@ body {
 }
 
 .sitenav li {
-	 list-style: none outside none;
+	list-style: none outside none;
     display: inline-block;
     float: left;
     font-size: 13px;
@@ -118,7 +118,7 @@ a:hover {
 
 /* Item */
 .item, .userdata {
-	display: block;
+ display: block;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 1px 1px 10px #CCCCCC;
  background-color: white !important;
@@ -191,7 +191,13 @@ a:hover {
 	padding-left: 5px;	
 }
 
-.itemrates {
+.itemratesreview {
+	float: left;
+	display: inline;
+	margin-left: 10px;
+}
+
+.itemrates, .itemratesreview {
 	margin-bottom: 10px;
 }
 
@@ -396,10 +402,108 @@ textarea {
 .allComments {
 	margin-top: 10px;
 	width: 600px;
-	border: 1px solid #dedede;
+}
+
+.review {
+	width: 580px;
+	margin: 0 auto;
+}
+
+.commentimg {
+	width: 40px;
+	float: left;
+}
+
+.commentimg img{
+	width: 30px;
+	margin: 0 auto;
+}
+
+.crt_commentimg {
+	width: 30px;
+	float: left;
+}
+
+.crt_commentimg img{
+	width: 20px;
+	margin: 0 auto;
 }
 
 
+.reviewbody {
+	width: 520px;
+	float: left;
+	margin-left: 10px;
+}
+
+.crt_reviewbody {
+	width: 280px;
+	float: left;
+	margin-left: 10px;
+}
+
+.username {
+	float:left;
+	display: inline;
+	font-size: 10px;
+}
+
+.username a {
+	font-weight: 600;
+}
+
+.crt_username {
+	float:left;
+	display: inline;
+	font-size: 10px;
+}
+
+.crt_username a {
+	font-weight: 600;
+}
+
+.tituloreview {
+	clear:left;
+	margin-bottom: 5px;	
+}
+
+.fechareview {
+	color: #555555;
+	font-size: 10px;
+}
+
+.cuerporeview {
+	display: block;
+	clear: left;
+	margin-bottom: 10px;
+	border-bottom: 1px dotted #DDDDDD;
+}
+
+.crt_cuerporeview {
+	display: block;
+	clear: left;
+	margin-bottom: 5px;
+	border-bottom: 1px dotted #DDDDDD;
+}
+
+.crt_cuerporeview p {
+	font-size: 10px;
+}
+
+/*Comentario review*/
+.commenttoreview {
+	width: 350px;
+	margin-left: 100px;
+}
+
+.commenttoreview textarea {
+	width:300px;
+	height: 40px;
+}
+
+.commenttoreview form {
+	width: 350px;
+}
 
 /*
 p {
