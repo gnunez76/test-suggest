@@ -117,13 +117,23 @@ a:hover {
 }
 
 /* Item */
-.item, .userdata {
+.item, .userdata, .colder {
+ float:left;
  display: block;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 1px 1px 10px #CCCCCC;
  background-color: white !important;
  padding: 15px;
- margin-bottom: 5px;
+ margin-bottom: 10px;
+}
+
+.colder {
+	width: 280px;
+	margin-left: 10px;
+}
+
+.userdata {
+	width: 600px;
 }
 
 .imagecol {
@@ -138,7 +148,7 @@ a:hover {
     margin: 0 auto;
 }
 
-.userdata h2 {
+.userdata h2, .colder h2 {
 	color: #508B88;
 	font-size: 14px;
 	text-transform: none;

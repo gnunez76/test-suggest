@@ -18,7 +18,7 @@ $(document).ready(function() {
 </script>
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
+				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
 				 <div id="userRated"></div>	
 				</div>
 				
@@ -88,6 +88,7 @@ $(document).ready(function() {
 				</div>
 			
 			</article>
+<!-- 
 			<section class="userdata clearfix">
 			<h2>My Review</h2>
 			</section>
@@ -95,7 +96,8 @@ $(document).ready(function() {
 			<section class="userdata clearfix">
 			<h2>Friends Review</h2>			
 			</section>
-
+ -->
+ 
 			<section class="userdata clearfix">
 			<h2>Comunity Review</h2>
 				<div class="allComments">
@@ -186,6 +188,7 @@ $(document).ready(function() {
 								</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<?php endforeach; ?>
 						<?php endif; ?>
 						
@@ -204,5 +207,13 @@ $(document).ready(function() {
 					<?php endforeach; ?>
 					<?php endif; ?>
 				</div>
+				
+
 						
 			</section>
+			
+			
+			<section class="colder clearfix">
+			<h2>Otros datos</h2>			
+			</section>
+			
