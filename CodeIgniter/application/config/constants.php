@@ -52,6 +52,10 @@ define ('SI_REVIEW_COMMENT', 1);
 // Comentario tipo REVIEW
 define ('SI_COMMENT_COMMENT', 2);
 
+// Numero de letras para el sumary
+define ('SI_REVIEW_SUMMARY', 300);
+define ('SI_COMMENT_SUMMARY', 300);
+
 
 
 /* End of file constants.php */

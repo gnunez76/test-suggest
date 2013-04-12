@@ -20,7 +20,31 @@
         <script type="text/javascript" src="/assets/js/jquery.form.js"></script> 
 		<title><?php echo $game_name; ?></title>
 		
-		
+<!-- LeerMas -->
+<script type="text/javascript">
+
+function leerMas (tagVisible, tagOculto, tagMore) {
+
+	
+	if($("#"+tagMore).text() == 'Leer mas...') {
+		$("#"+tagVisible).hide();
+		$("#"+tagOculto).show();
+		$("#"+tagMore).text('Leer menos...');
+	} else {
+		$("#"+tagVisible).show();
+		$("#"+tagOculto).hide();
+		$("#"+tagMore).text('Leer mas...');
+	}
+
+	
+
+	
+
+//	return true;
+	
+}
+</script>
+				
 <script type="text/javascript">  
 
 	// esperamos que el DOM cargue

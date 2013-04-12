@@ -322,7 +322,7 @@ class User_Suggest_Model extends CI_Model {
 	
 		try {
 				
-			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, comment_text, comment_votes,
+			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, substr(comment_text, 1, ".SI_REVIEW_SUMMARY.") as summary, comment_text, comment_votes,
 					DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha, game_rating, game_timeplayed
 					FROM si_comments s
 					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
@@ -370,7 +370,7 @@ class User_Suggest_Model extends CI_Model {
 		$data = array ();
 		try {
 			
-			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, comment_text, comment_votes, 
+			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, substr(comment_text, 1, ".SI_REVIEW_SUMMARY.") as summary,comment_text, comment_votes, 
 					DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha, game_rating, game_timeplayed 
 					FROM si_comments s
 					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
