@@ -224,7 +224,7 @@ a:hover {
 	display:block;
 }
 
-.botonreview {
+.botonreview, .botonmegusta {
   background: #006699;
   border: none;
   color: #ffffff;
@@ -261,12 +261,32 @@ a:hover {
   background-image: linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
 }
 
-.botonreview a {
+.botonmegusta {
+  font: 10px Tahoma, Arial, sans-serif;
+  padding: 5px 5px;
+  width: 60px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  display: inline;
+}
+
+.socialcomments {
+	margin: 5px 5px 10px 5px;
+}
+
+.nummegusta {
+	margin-left: 5px;
+	display: inline;
+}
+
+
+.botonreview a, .botonmegusta a {
 	color: #FFFFFF;
 	text-decoration:none;
 }
 
-.botonreview:hover {
+.botonreview:hover, .botonmegusta:hover {
   /*  Chrome 1-9 and Safari 4-5.0  */
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5d5d), color-stop(0.5, #424242), color-stop(0.5, #383838), color-stop(1, #535353));
   /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
@@ -280,7 +300,7 @@ a:hover {
   /*  W3C  */
   background-image: linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
 }
-.botonreview:active {
+.botonreview:active, .botonmegusta:active {
   /*  Chrome 1-9 and Safari 4-5.0  */
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(0.05, #2b2b2b), color-stop(0.5, #434343), color-stop(1, #3e3e3e));
   /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
@@ -515,13 +535,21 @@ textarea {
 	width: 350px;
 }
 
+.summary p{
+	display: inline;
+}
 
 .complete {
 	display: none;
 }
 
+.complete p {
+	display: inline;
+}
+
 .more {
 	display: inline;
+	font-weight: 600;	
 }
 
 /*

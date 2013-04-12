@@ -1,6 +1,7 @@
 <script>
 $(document).ready(function() {
-		itemId =<?php echo "'".$game_id."'"; ?>;
+		var itemId =<?php echo "'".$game_id."'"; ?>;
+		$("#userRated").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
 		$.get('/juego/getuserrating/'+itemId, function(data) {
 			$('#userRated').html(data);
 		});
@@ -18,7 +19,7 @@ $(document).ready(function() {
 </script>
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php #ssecho $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
+				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
 				 <div id="userRated"></div>	
 				</div>
 				
@@ -141,7 +142,7 @@ $(document).ready(function() {
 								
 							<div class="cuerporeview">
 								<span class="summary" id="summary_<?php echo $review['comment_id']?>">
-									<p><?php echo $review['summary']; ?></p>
+									<p><?php echo $review['summary']."... "; ?></p>
 								</span>
 								<span class="complete" id="complete_<?php echo $review['comment_id']?>">	
 									<p><?php echo nl2br($review['comment_text']); ?></p>
@@ -149,6 +150,22 @@ $(document).ready(function() {
 								<span class="more" >
 									<a href="#" id="more_<?php echo $review['comment_id']?>" onclick="javascript:leerMas('summary_<?php echo $review['comment_id'] ?>', 'complete_<?php echo $review['comment_id']?>', 'more_<?php echo $review['comment_id']?>'); return false;">Leer mas...</a>
 								</span>
+								<script>
+								
+									$(document).ready(function() {
+											var commentId=<?php echo "'".$review['comment_id']."'"; ?>;
+											$("#blike"+commentId).html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
+											$.get('/comments/getlikebutton/'+commentId, function(data) {
+												$("#blike"+commentId).html(data);
+											});		
+									});
+									
+								</script>
+								<div class="socialcomments">
+									<span id="blike<?php echo $review['comment_id']; ?>"></span>
+									<div class="nummegusta"><?php echo $review['comment_votes']; ?> me gusta</div>
+									<div class="mun"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -159,27 +176,28 @@ $(document).ready(function() {
 						// esperamos que el DOM cargue
 						$(document).ready(function() { 
 							// definimos las opciones del plugin AJAX FORM
-						/*	var opciones= {
-						//		beforeSubmit: mostrarLoader, //funcion que se ejecuta antes de enviar el form
+							var opciones= {
+								beforeSubmit: mostrarLoader, //funcion que se ejecuta antes de enviar el form
 								success: mostrarRespuesta //funcion que se ejecuta una vez enviado el formulario
 							};
-						*/
+						
 							//asignamos el plugin ajaxForm al formulario myForm y le pasamos las opciones
-							$('#commentForm_<?php echo $review["comment_id"]?>').ajaxForm() ; 
+							$('#commentForm_<?php echo $review["comment_id"]?>').ajaxForm(opciones) ; 
 						//	$('#reviewForm').ajaxForm(opciones) ; 
 						
 							//lugar donde defino las funciones que utilizo dentro de "opciones"
-						/*	function mostrarLoader(){
-								$(#loader_gif).fadeIn("slow"); //muestro el loader de ajax
+							function mostrarLoader(){
+								
+								$("#ajax_loader_<?php echo $review['comment_id']?>").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>"); //muestro el loader de ajax
 							};
-						*/
-						/*
+						
+						
 							function mostrarRespuesta (responseText){
-								alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
-						//		$("#loader_gif").fadeOut("slow"); // Hago desaparecer el loader de ajax
+						//		alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
+								$("#ajax_loader_<?php echo $review['comment_id']?>").html("Gracias por participar"); // Hago desaparecer el loader de ajax
 						//		$("#ajax_loader").append("<br>Mensaje: "+responseText); // Aca utilizo la función append de JQuery para añadir el responseText  dentro del div "ajax_loader"
 							};
-						*/
+						
 						}); 
 					 
 					</script>  
@@ -207,16 +225,17 @@ $(document).ready(function() {
 						<div class="clearfix"></div>
 						<?php endforeach; ?>
 						<?php endif; ?>
-						
-						<form method="post" action="/comments/insertreviewcomment/<?php echo $game_id?>" id="commentForm_<?php echo $review['comment_id']; ?>">
-                    
-            				<textarea name="texto" placeholder="Comenta la review" required="true"></textarea>
-            				<input type="hidden" name="parentid" value="<?php echo $review['comment_id']; ?>">
-                
-            				<input id="submit" name="submit" type="submit" value="Submit">
-        
-							<div id="ajax_loader"></div>
-        				</form>
+						<div id="ajax_loader_<?php echo $review['comment_id']?>">
+							<form method="post" action="/comments/insertreviewcomment/<?php echo $game_id?>" id="commentForm_<?php echo $review['comment_id']; ?>">
+	                    
+	            				<textarea name="texto" placeholder="Comenta la review" required="true"></textarea>
+	            				<input type="hidden" name="parentid" value="<?php echo $review['comment_id']; ?>">
+	                
+	            				<input id="submit" name="submit" type="submit" value="Submit">
+	        
+								
+	        				</form>
+        				</div>
 					</div>
 					
 					

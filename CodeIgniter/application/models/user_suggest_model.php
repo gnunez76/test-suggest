@@ -78,8 +78,6 @@ class User_Suggest_Model extends CI_Model {
 	
 			log_message('debug', 'models.User_Suggest_Model.getRateUserGame query: '.$sql);
 			
-			$query = $this->db->query($sql);
-			
 			if ($query = $this->db->query($sql)) {
 				if ($row = $query->row_array()) {
 					return $row['game_rating'];
@@ -407,6 +405,84 @@ class User_Suggest_Model extends CI_Model {
 		}
 	}	
 
+	/* Obtener si ha votado una review */
+	
+	public function getLikeUserReview ($usrId, $commentID) {
+	
+		try {
+			$sql="SELECT usr_identifier, comment_id FROM
+				ucv_users_comments_votes
+				WHERE usr_identifier=".$this->db->escape($usrId)."
+					AND comment_id=".$this->db->escape($commentID).";";
+	
+			log_message('debug', 'models.User_Suggest_Model.getLikeUserReview query: '.$sql);
+				
+			if ($query = $this->db->query($sql)) {
+				if ($query->num_rows() > 0) {
+					//El usuario existe
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+				
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	
+	/*Añadir 1 megusta a una review*/
+	public function setLikeReview ($usrId, $commentID) {
+	
+		try {
+			$sql="UPDATE si_comments SET comment_votes=comment_votes+1
+				WHERE comment_id=".$this->db->escape($commentID).";";
+	
+			log_message('debug', 'models.User_Suggest_Model.getLikeUserReview query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->row_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+	
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	public function setControlLikeReview ($userId, $commentId) {
+		
+		try {
+			$sql="INSERT INTO ucv_users_comments_votes (usr_identifier, comment_id)
+				VALUES (".$this->db->escape($userId).",". $this->db->escape($commentId).");";
+		
+			log_message('debug', 'models.User_Suggest_Model.getLikeUserReview query: '.$sql);
+		
+			if ($query = $this->db->query($sql)) {
+				return true;
+			}
+		
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+
+	}
+	
 }
 /* End of file item_model.php */
 /* Location: ./application/model/item_model.php */

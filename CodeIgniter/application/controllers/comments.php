@@ -94,5 +94,60 @@ class Comments extends CI_Controller {
 	}
 	
 	
+	function getLikeButton ($commentId) {
+		
+		$data ['commentId'] = $commentId;
+		$this->load->helper('cookie');
+		
+		$userName = get_cookie ('SI_UserName');
+		$provider = get_cookie ('SI_Provider');
+		
+		if (!empty($userName) && !empty($provider)) {
+			$this->load->library('HybridAuthLib');
+			$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+		
+			$this->load->model ('user_suggest_model');
+			log_message('debug', 'controllers.Item.ReviewItem: El usuario '.$user_profile->identifier.' crea una review sobre el juego');
+			$this->user_suggest_model->getLikeUserReview ($user_profile->identifier, $commentId);
+			
+			$data["literal"] = 'ME GUSTA';
+		
+		}
+		else {
+		
+			$data["literal"] = 'TE GUSTA';
+		}		
+		
+		
+		
+		$this->load->view('comments/likebutton', $data);
+	}
+	
+	function likeThisReview ($commentId) {
+		
+		
+		$this->load->helper('cookie');
+		
+		$userName = get_cookie ('SI_UserName');
+		$provider = get_cookie ('SI_Provider');
+		
+		if (!empty($userName) && !empty($provider)) {
+			$this->load->library('HybridAuthLib');
+			$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+		
+			$this->load->model ('user_suggest_model');
+			log_message('debug', 'controllers.Item.ReviewItem: El usuario '.$user_profile->identifier.' crea una review sobre el juego');
+			$this->user_suggest_model->setControlLikeReview ($user_profile->identifier, $commentId);
+			$this->user_suggest_model->setLikeReview ($user_profile->identifier, $commentId);
+			
+				
+		}
+		else {
+		
+			echo "Es necesario estar logado para poder votar";
+		}
+		
+	}
+	
 	
 }
