@@ -58,6 +58,13 @@ $(document).ready(function() {
         
 <script>
 
+	function borrar (field, label) {
+
+		$("#"+field).remove();
+		$("#"+label).remove();
+		return false;
+	}
+
        $(function() {
 
                 $( "#autocompletegame" ).autocomplete({
@@ -66,20 +73,25 @@ $(document).ready(function() {
 //                                $("#autocomplete").html("cargando... ");
 //                        },
                         response: function ( event, ui ) {
-				for (j=0; j<ui.content.length; j++) {
+							for (j=0; j<ui.content.length; j++) {
 
-					$resultAux = ui.content[j].value.split('|');
-					ui.content[j].value=$resultAux[0];
-					ui.content[j].label=$resultAux[1];
+							$resultAux = ui.content[j].value.split('|');
+							ui.content[j].value=$resultAux[0];
+							ui.content[j].label=$resultAux[1];
 						
-				}
-                                $("#autocompletegame").html("");
+							}
+                            $("#autocompletegame").html("");
                         },
-			select: function( event, ui ) { 
-				document.location.href=ui.item.value; 
-                       //         $("#autocompletegame").value('');
-			}
-                        //close: function( event, ui ) { searchSelection();  }
+						select: function( event, ui ) { 
+							var itemAux = ui.item.value.split('/');
+							$("#juegosrelacionados").append('<input type="hidden" name="juegos['+itemAux[5]+']" id="juegos_'+itemAux[5]+'" value="'+itemAux[5]+'">')
+							$("#juegosrelacionados").append('<div style="margin:5px;" id="label_juegos_'+itemAux[5]+'">'+ui.item.label+'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(&#039'+'juegos_'+itemAux[5]+'&#039, &#039'+'label_juegos_'+itemAux[5]+'&#039); return false;">Borrar</a></div>');
+							$("#autocompletegame").val('');
+						},
+	                    close: function( event, ui ) { 
+	                        $("#autocompletegame").val('');
+	                          
+	                    }
                 });
 
         });
@@ -107,7 +119,7 @@ $(document).ready(function() {
 
 						var itemAux = ui.item.value.split('/');
 						$("#autoresrelacionados").append('<input type="hidden" name="autores['+itemAux[5]+']" id="autores_'+itemAux[5]+'" value="'+itemAux[5]+'">')
-						$("#autoresrelacionados").append(ui.item.label + "  <a href='#' onClick='javascript:borrar()'>Borrar</a><br>");
+						$("#autoresrelacionados").append('<div style="margin:5px;" id="label_autores_'+itemAux[5]+'">'+ui.item.label+'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(&#039'+'autores_'+itemAux[5]+'&#039, &#039'+'label_autores_'+itemAux[5]+'&#039); return false;">Borrar</a></div>');
 						$("#autocompleteautor").val('');
 						//document.location.href=ui.item.value; 
               			//$("#autocompleteautor").value('');
@@ -187,11 +199,10 @@ $(document).ready(function() {
 </div>
 
 
-
-
+<div>
 <label class="sharetwitter">Compartir en twitter (Pruebas al final del desarrollo)</label>
 <input name="sharetwitter" type="checkbox" class="sharetwittercb" />
-
+</div>
 
            
 <input id="submit" name="submit" type="submit" value="Enviar">

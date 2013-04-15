@@ -202,7 +202,7 @@ class User_Suggest_Model extends CI_Model {
 	
 		try {
 			
-			$sql="SELECT comment_id, comment_title, comment_text, comment_votes, comment_date FROM
+			$sql="SELECT comment_id, comment_title, comment_text, comment_votes, comment_date, comment_notes FROM
 				si_comments sic
 				WHERE sic.game_id=".$this->db->escape($itemId)."
 					AND sic.comment_parent_id=0 AND sic.usr_identifier=".$this->db->escape($usrIdentifier).";";
@@ -231,17 +231,18 @@ class User_Suggest_Model extends CI_Model {
 	/*
 	 * Inserta la revision de un usuario
 	 */
-	public function setReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
+	public function setReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto, $notas_privadas) {
 	
 		try {
 			$sql="INSERT INTO si_comments (usr_identifier, game_id, comment_type_id, comment_title, 
-					comment_text, comment_parent_id, comment_date)
+					comment_text, comment_parent_id, comment_notes, comment_date)
 				VALUES (".$this->db->escape($usrIdentifier).","
 						.$this->db->escape($itemId).","
 						.SI_REVIEW_COMMENT.","
 						.$this->db->escape($titulo).","
 						.$this->db->escape($texto).","
 						."0,"
+						.$this->db->escape($notas_privadas).","
 						."NOW())";
 	
 			log_message('debug', 'models.User_Suggest_Model.setReviewUserGame query: '.$sql);
@@ -285,15 +286,219 @@ class User_Suggest_Model extends CI_Model {
 		}
 	}
 	
+	/*
+	 * Devuelve los autores relacionados con una review
+	 */
+	public function getReviewDesignerRel ($commentId) {
+	
+		try {
+				
+				
+	
+			$sql = "SELECT sg.designer_name, sg.gamedesigner_id 
+					FROM cd_comments_designers cd
+					INNER JOIN sg_gamedesigner sg ON sg.gamedesigner_id=cd.gamedesigner_id
+					WHERE cd.comment_id=".$this->db->escape($commentId);
+				
+				
+			log_message('debug', 'models.User_Suggest_Model.getReviewDesignerRel query: '.$sql);
+				
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->result_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+				
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*
+	 * Devuelve los items relacionados con una review
+	*/
+	public function getReviewItemRel ($commentId) {
+	
+		try {
+	
+	
+	
+			$sql = "SELECT sg.game_name, sg.gamename_id
+					FROM cg_comments_games cg
+					INNER JOIN sg_gamename sg ON sg.gamename_id=cg.game_id
+					WHERE cg.comment_id=".$this->db->escape($commentId);
+	
+	
+			log_message('debug', 'models.User_Suggest_Model.getReviewItemRel query: '.$sql);
+			
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->result_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+			
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	/*
+	 * Inserta los autores relacionados de una review
+	*/
+	public function setReviewDesignerRel ($itemId, $usrIdentifier, $autores) {
+	
+		try {
+			
+			
+			if (is_array ($autores)){
+				
+				foreach ($autores as $autor) {
+					$sql = "INSERT INTO cd_comments_designers (gamedesigner_id, comment_id)
+							VALUES (".$this->db->escape($autor).",
+									(SELECT comment_id FROM si_comments 
+										WHERE game_id=".$this->db->escape($itemId)."
+										AND usr_identifier=".$this->db->escape($usrIdentifier)."
+										AND comment_parent_id=0))";
+					
+			
+					log_message('debug', 'models.User_Suggest_Model.setReviewDesignerRel query: '.$sql);
+			
+					$query = $this->db->query($sql);
+				}
+			}
+				
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*
+	 * Borra los autores relacionados de una review
+	*/
+	public function deleteReviewDesignerRel ($itemId, $usrIdentifier, $autores) {
+	
+		try {
+				
+				
+			if (is_array ($autores)){
+				
+				$listaAutores = implode (",", $autores);
+				$sql = "DELETE FROM cd_comments_designers
+						WHERE gamedesigner_id IN (".$listaAutores.
+						") AND comment_id=(SELECT comment_id FROM si_comments
+										WHERE game_id=".$this->db->escape($itemId)."
+										AND usr_identifier=".$this->db->escape($usrIdentifier)."
+										AND comment_parent_id=0)";
+
+				log_message('debug', 'models.User_Suggest_Model.deleteReviewDesignerRel query: '.$sql);
+				
+				$query = $this->db->query($sql);
+								
+			}
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+
+	/*
+	 * Inserta los items relacionados de una review
+	*/
+	public function setReviewItemRel ($itemId, $usrIdentifier, $items) {
+	
+		try {
+						
+			if (is_array ($items)){
+	
+				foreach ($items as $item) {
+					$sql = "INSERT INTO cg_comments_games (game_id, comment_id)
+							VALUES (".$this->db->escape($item).",
+									(SELECT comment_id FROM si_comments
+										WHERE game_id=".$this->db->escape($itemId)."
+										AND usr_identifier=".$this->db->escape($usrIdentifier)."
+										AND comment_parent_id=0))";
+						
+						
+					log_message('debug', 'models.User_Suggest_Model.setReviewItemRel query: '.$sql);
+						
+					$query = $this->db->query($sql);
+				}
+			}
+	
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	/*
+	 * Borra los items relacionados de una review
+	*/
+	public function deleteReviewItemRel ($itemId, $usrIdentifier, $items) {
+	
+		try {
+	
+	
+			if (is_array ($items)){
+	
+				$listaItems = implode (",", $items);
+				$sql = "DELETE FROM cg_comments_games
+						WHERE game_id IN (".$listaItems.
+							") AND comment_id=(SELECT comment_id FROM si_comments
+										WHERE game_id=".$this->db->escape($itemId)."
+										AND usr_identifier=".$this->db->escape($usrIdentifier)." 
+										AND comment_parent_id=0)";
+	
+				log_message('debug', 'models.User_Suggest_Model.deleteReviewItemRel query: '.$sql);
+	
+				$query = $this->db->query($sql);
+	
+			}
+	
+			return true;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
 	
 	/*
 	 * Actualiza la review del usuario de un item
 	*/
-	public function updateReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto) {
+	public function updateReviewUserItem ($itemId, $usrIdentifier, $titulo, $texto, $notas_privadas) {
 	
 		try {
 			$sql="UPDATE si_comments SET comment_title=".$this->db->escape($titulo).
 				", comment_text=".$this->db->escape ($texto).
+				", comment_notes=".$this->db->escape ($notas_privadas).
 				", comment_date=NOW() ".
 				"WHERE comment_parent_id=0 AND usr_identifier=".$this->db->escape($usrIdentifier).
 				" AND game_id=".$this->db->escape($itemId).";";

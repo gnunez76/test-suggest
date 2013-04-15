@@ -23,9 +23,16 @@ class Comments extends CI_Controller {
 	}
 
 	public function insertItemComment ($itemId = null) {
-	
+			
 		$titulo = $_POST['titulo'];
 		$texto = $_POST['texto'];
+		$notas_privadas = $_POST['notas_privadas'];
+		$juegos = $_POST['juegos'];		
+		$autores = $_POST['autores'];	
+		
+		if (isset ($_POST['sharetwitter'])) {	
+			$sharetwitter = $_POST['sharetwitter'];
+		}
 		
 		$this->load->helper('cookie');
 		
@@ -43,14 +50,20 @@ class Comments extends CI_Controller {
 		
 				log_message('debug', 'controllers.Item.rateItem: El juego esta comentado por el usuario '.$user_profile->identifier);
 				
-				$this->user_suggest_model->updateReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto);
+				$this->user_suggest_model->updateReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto, $notas_privadas);
+				$this->user_suggest_model->deleteReviewDesignerRel($itemId, $user_profile->identifier, $autores);
+				$this->user_suggest_model->setReviewDesignerRel ($itemId, $user_profile->identifier, $autores);
+				$this->user_suggest_model->deleteReviewItemRel($itemId, $user_profile->identifier, $juegos);
+				$this->user_suggest_model->setReviewItemRel ($itemId, $user_profile->identifier, $juegos);
 				
 			}
 			else {
 		
 				log_message('debug', 'controllers.Item.ReviewItem: El usuario '.$user_profile->identifier.' crea una review sobre el juego');
 		
-				$this->user_suggest_model->setReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto);
+				$this->user_suggest_model->setReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto, $notas_privadas);
+				$this->user_suggest_model->setReviewDesignerRel ($itemId, $user_profile->identifier, $autores);
+				$this->user_suggest_model->setReviewItemRel ($itemId, $user_profile->identifier, $juegos);
 		
 			}
 				
