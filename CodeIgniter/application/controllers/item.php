@@ -52,6 +52,9 @@ class Item extends CI_Controller {
 		$this->benchmark->mark('Get_Item_end');
 	}
 
+	/*
+	 * Para el buscador predictivo, busca items
+	 */
 	public function buscador () {
 	
 		$this->load->model('item_model');
@@ -59,6 +62,18 @@ class Item extends CI_Controller {
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 		
 	}
+	
+	/*
+	 * Para el buscador predictivo, busca autores
+	 */
+	public function autor () {
+	
+		$this->load->model('item_model');
+		$data = $this->item_model->predictiveSearchAutorResult($_GET['term']);
+		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	
+	}
+	
 	
 	public function rateItem ($game_id, $ratingValue) {
 

@@ -19,7 +19,7 @@ $(document).ready(function() {
 </script>
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
+				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
 				 <div id="userRated"></div>	
 				</div>
 				

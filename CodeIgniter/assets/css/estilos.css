@@ -316,9 +316,19 @@ a:hover {
 }
 
 
-.userrated {
+.userrated, .userrated-form {
 	width: 170px;
 	margin: 0 auto;
+}
+
+.userrated-form {
+	
+	margin: 0;
+	letter-spacing: 2px;
+}
+
+.starblock {
+	
 }
 
 /*Review modal*/
@@ -417,16 +427,29 @@ textarea {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
+.sharetwitter {
+	
+	margin-top: 20px;
+	display: inline;
+}
+
+.sharetwittercb {
+	margin-top: 20px;
+}
+
+
 #submit {
 	width:127px;
 	height:38px;
 	border:none;
 	margin-top:20px;
 	cursor:pointer;
+	background-color: #AAAAAA;
+	display:block;
 }
 
 #submit:hover {
-	opacity:0.9;
+	opacity:0.8;
 }
 
 .allComments {

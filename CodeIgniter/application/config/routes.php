@@ -54,6 +54,7 @@ $route['hauth'] = 'hauth';
 
 $route['juego/getuserrating/(:any)'] = 'item/getuserrating/$1';
 $route['juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$1/$2';
+$route['juego/autor'] = 'item/autor';
 $route['juego/buscador'] = 'item/buscador';
 $route['juego/(:any)/(:any)'] = 'item/index/$2';
 

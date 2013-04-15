@@ -108,6 +108,9 @@ class Item_Model extends CI_Model {
 		return $resultado;
 	}
 
+	/*
+	 * Buscador de predictivo de items
+	 */
 	public function predictiveSearchResult ($search) {
 
 		$this->load->helper('url');
@@ -129,6 +132,31 @@ class Item_Model extends CI_Model {
 
 		return $resultado;
 	}
+	
+	/*
+	 * Buscador de predictivo de autors
+	*/
+	public function predictiveSearchAutorResult ($search) {
+	
+		$this->load->helper('url');
+		$sql = "SELECT gamedesigner_id, designer_name
+			FROM sg_gamedesigner
+			WHERE UPPER(designer_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			foreach ($query->result_array() as $item) {
+	
+				$resultado [] = base_url().'juego/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
+			}
+	
+		}
+	
+		return $resultado;
+	}
+	
 
 }
 /* End of file item_model.php */

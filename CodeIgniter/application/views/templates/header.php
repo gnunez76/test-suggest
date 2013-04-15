@@ -18,7 +18,7 @@
         
         
         <script type="text/javascript" src="/assets/js/jquery.form.js"></script> 
-		<title><?php echo $game_name; ?></title>
+		<title><?php #echo $game_name; ?></title>
 
 <!-- Buscador predictivo -->
 <script>
