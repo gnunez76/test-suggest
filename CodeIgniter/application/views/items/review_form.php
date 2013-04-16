@@ -1,13 +1,17 @@
 <!-- ELIMINAR CSS -->
+<!-- 
 <link href="/assets/css/estilos.css" rel="stylesheet">
 <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">
+-->
 <!-- /ELIMNAR CSS -->
-<!-- ELIMINAR JS -->    
+<!-- ELIMINAR JS -->
+<!--     
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/assets/js/rating-stars/jquery.rating.pack.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.form.js"></script> 
+-->
 <!-- /ELIMINAR JS -->
 
 <script type="text/javascript">
@@ -41,12 +45,16 @@ $(document).ready(function() {
 	
 		//lugar donde defino las funciones que utilizo dentro de "opciones"
 		function mostrarLoader(){
-			$("#comments").append ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>"); //muestro el loader de ajax
+			$("#modalReview").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
+			//$("#comments").append ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>"); //muestro el loader de ajax
 		};
 	
 	
 		function mostrarRespuesta (responseText){
-			document.location.href='#close';
+			
+			if (responseText == 'OK') {
+				$("#modalReview").html ('<h3 style="text-align:center;">Su reseña ha sido guardada</h3><input class="closebtn" name="close" type="button" value="Cerrar" onclick="toogle(\'none\',\'modal\',\'ventana\'); return false;" >');
+			}
 	//		alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
 	//		$("#comments").html('Gracias por enviar tu review <br><div class="botonreview"><a href="#close" title="Close">CERRAR</a></div>'); // Hago desaparecer el loader de ajax
 	//		$("#ajax_loader").append("<br>Mensaje: "+responseText); // Aca utilizo la función append de JQuery para añadir el responseText  dentro del div "ajax_loader"
@@ -69,9 +77,10 @@ $(document).ready(function() {
 
                 $( "#autocompletegame" ).autocomplete({
                         source: "/juego/buscador/",
-//                        search: function (event, ui) {
-//                                $("#autocomplete").html("cargando... ");
-//                        },
+                        search: function (event, ui) {
+                            
+                            $("#autocompletegame").val("Buscando... ");
+                        },
                         response: function ( event, ui ) {
 							for (j=0; j<ui.content.length; j++) {
 
@@ -80,7 +89,7 @@ $(document).ready(function() {
 							ui.content[j].label=$resultAux[1];
 						
 							}
-                            $("#autocompletegame").html("");
+                            $("#autocompletegame").val("");
                         },
 						select: function( event, ui ) { 
 							var itemAux = ui.item.value.split('/');
@@ -101,9 +110,10 @@ $(document).ready(function() {
 
            $( "#autocompleteautor" ).autocomplete({
                    	source: "/juego/autor/",
-//                   search: function (event, ui) {
-//                           $("#autocomplete").html("cargando... ");
-//                   },
+                    search: function (event, ui) {
+                    	
+                           $("#autocompleteautor").val("Buscando... ");
+                    },
                    	response: function ( event, ui ) {
 						for (j=0; j<ui.content.length; j++) {
 			
@@ -112,7 +122,7 @@ $(document).ready(function() {
 							ui.content[j].label=$resultAux[1];
 								
 						}
-						$("#autocompleteautor").html("");
+						$("#autocompleteautor").val("");
                    	},
 					select: function( event, ui ) { 
 
@@ -179,23 +189,51 @@ $(document).ready(function() {
 
         
 <label>T&iacute;tulo*</label>
+<?php if ($reviewItem['comment_title']): ?>
+<input name="titulo" placeholder="Título de tu review..." required="true" value="<?php echo $reviewItem['comment_title']; ?>"/>
+<?php else: ?>
 <input name="titulo" placeholder="Título de tu review..." required="true" />
+<?php endif; ?>
             
 <label>Texto*</label>
-<textarea name="texto" placeholder="Danos tu opinión..." required="true"></textarea>
+<textarea name="texto" placeholder="Danos tu opinión..." required="true"><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_text']; }  ?></textarea>
 
 <label>Notas privadas (solo serán visibles por tí)</label>
-<textarea name="notas_privadas" placeholder="Escribe unas notas solo par tí..."></textarea>
+<textarea name="notas_privadas" placeholder="Escribe unas notas solo par tí..."><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_notes']; }  ?></textarea>
 
 
 <label>Relacionar con juego</label>
 <input type="search" placeholder="Busca un juego..." autocomplete="off" id="autocompletegame" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
 <div class="elementosrelacionados" id="juegosrelacionados">
+<?php 
+	if (isset($reviewItemItems)) {
+
+		foreach ($reviewItemItems as $itemrel) {
+			echo '<input type="hidden" name="juegos['.$itemrel['game_id'].']" id="juegos_'.$itemrel['game_id'].'" value="'.$itemrel['game_id'].'">';
+			echo '<div style="margin:5px;" id="label_juegos_'.$itemrel['game_id'].'">'.$itemrel['game_name'].
+			'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'juegos_'.$itemrel['game_id'].'\', \'label_juegos_'.$itemrel['game_id'].'\'); return false;">Borrar</a></div>';
+		}
+
+	} 
+	
+?>
+
 </div>
 
 <label>Relacionar con autor</label>
 <input type="search" placeholder="Busca un autor..." autocomplete="off" id="autocompleteautor" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
 <div class="elementosrelacionados" id="autoresrelacionados">
+<?php 
+	if (isset($reviewItemAutores)) {
+
+		foreach ($reviewItemAutores as $autor) {
+			echo '<input type="hidden" name="autores['.$autor['gamedesigner_id'].']" id="autores_'.$autor['gamedesigner_id'].'" value="'.$autor['gamedesigner_id'].'">';
+			echo '<div style="margin:5px;" id="label_autores_'.$autor['gamedesigner_id'].'">'.$autor['designer_name'].
+				'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'autores_'.$autor['gamedesigner_id'].'\', \'label_autores_'.$autor['gamedesigner_id'].'\'); return false;">Borrar</a></div>';
+		}
+	} 
+	
+?>
 </div>
 
 
@@ -204,8 +242,12 @@ $(document).ready(function() {
 <input name="sharetwitter" type="checkbox" class="sharetwittercb" />
 </div>
 
-           
-<input id="submit" name="submit" type="submit" value="Enviar">
+<?php if (is_array($reviewItem)): ?>
+<input id="submit" name="submit" type="submit" value="Actualizar">
+<?php else: ?>           
+<input id="submit" name="submit" type="submit" value="Publicar">
+<?php endif; ?>
+<input class="closebtn" name="close" type="button" value="Cancelar" onclick="toogle('none','modal','ventana'); return false;" >
         
 <div id="ajax_loader"></div>
 </form>

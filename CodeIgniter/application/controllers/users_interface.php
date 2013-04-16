@@ -10,10 +10,12 @@ class Users_Interface extends CI_Controller {
 		$this->load->helper('url');
 	}
 	
-	
+	/*
+	 * Devuelve el formulario para la review
+	 */
 	public function setReview ($itemId) {
 		
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(FALSE);
 		
 		
 		$this->load->helper('cookie');

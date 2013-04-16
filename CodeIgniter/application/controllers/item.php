@@ -130,14 +130,16 @@ class Item extends CI_Controller {
 		
 		$userName = get_cookie ('SI_UserName');
 		$provider = get_cookie ('SI_Provider');
+		$data ['itemId'] = $itemId;
 
 		if (!empty($userName) && !empty($provider)) {
 			$this->load->library('HybridAuthLib');
-			$data ['itemId'] = $itemId;
+			
 			$data ['user_profile'] = $this->hybridauthlib->authenticate($provider)->getUserProfile();
 		
 			$this->load->model ('user_suggest_model');
 			$data ['rateGame'] = $this->user_suggest_model->getRateUserItem ($itemId, $data['user_profile']->identifier);
+			$data ['userReview'] = $this->user_suggest_model->getReviewUserItem ($itemId, $data['user_profile']->identifier);
 				
 			if ($data ['rateGame']) {
 										
@@ -153,14 +155,13 @@ class Item extends CI_Controller {
 				echo '<!-- el juego NO ha sido puntuado aun -->';
 			}
 			
-			$this->load->view('items/user_data_item', $data);
 		}
 		else {
 				
 			echo "<!-- Es necesario estar logado para poder votar -->";
 		}
 		
-		
+		$this->load->view('items/user_data_item', $data);
 	}
 }
 /* End of file item.php */

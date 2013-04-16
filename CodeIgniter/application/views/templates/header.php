@@ -59,16 +59,13 @@ function leerMas (tagVisible, tagOculto, tagMore) {
 	if($("#"+tagMore).text() == 'Leer mas...') {
 		$("#"+tagVisible).hide();
 		$("#"+tagOculto).show();
-		$("#"+tagMore).text('Leer menos...');
+		$("#"+tagMore).remove();
+		//$("#"+tagMore).text('Leer menos...');
 	} else {
 		$("#"+tagVisible).show();
 		$("#"+tagOculto).hide();
 		$("#"+tagMore).text('Leer mas...');
 	}
-
-	
-
-	
 
 //	return true;
 	
@@ -147,7 +144,9 @@ function utf8_decode ( str_data ) {
 }  
 
 var ckArr = document.cookie.split("; "); 
-var userInfo = null; 
+var userInfo = null;
+var userAvatar = null;
+//var parametrosCookie
 for (var nBucle=0; nBucle<ckArr.length; nBucle++) 
 {
 	var aCookie = ckArr[nBucle].split("="); 
@@ -157,7 +156,15 @@ for (var nBucle=0; nBucle<ckArr.length; nBucle++)
 		var parametrosCookie = unescape(aCookie[1]); 
 		userInfo = utf8_decode(parametrosCookie.split("|")[0].replace('+',' '));
 	}
+	
+	else if (aCookie[0] == "SI_Avatar") 
+	{
+		var parametrosCookie = unescape(aCookie[1]); 
+		userAvatar = parametrosCookie.split("|")[0].replace('+',' ');
+	}
+
 }
+
 </script>
 		
 	</head>
@@ -183,23 +190,23 @@ for (var nBucle=0; nBucle<ckArr.length; nBucle++)
 			<nav class="navtop">
 				<ul class="userlogin">
 				
-<script>
-var cadRegistro = '';
-if (userInfo == null) 
-{
-  cadRegistro += '<li>Puedes logarte con: </li>';
-  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Google?backURL='.current_url(), '<img src="/assets/images/top-google.png" alt="Google">', array ('title' => 'Login con Google'))."</li>'"; ?>;
-  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Facebook?backURL='.current_url(), '<img src="/assets/images/top-facebook.png" alt="Facebook">', array ('title' => 'Login con Facebook'))."</li>'"; ?>;
-  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Twitter?backURL='.current_url(), '<img src="/assets/images/top-twitter.png" alt="Twitter">', array ('title' => 'Login con Twitter'))."</li>'"; ?>;
-} 
-else 
-{
-  cadRegistro += '<li>Hola '+userInfo+'</li>';
-  cadRegistro += <?php echo "'<li>".anchor('hauth/logout/'.get_cookie('SI_Provider').'?backURL='.current_url(), 'Desconectar', array ('title', 'Desconectar'))."</li>'";  ?>;
-  cadRegistro += '<li class="userimg"><img src="http://a0.twimg.com/profile_images/1487874120/casco_99_ajustada_normal.jpg" alt=""></li>';
-} 
-document.write(cadRegistro);
-</script>
+				<script>
+					var cadRegistro = '';
+					if (userInfo == null) 
+					{
+					  cadRegistro += '<li>Puedes logarte con: </li>';
+					  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Google?backURL='.current_url(), '<img src="/assets/images/top-google.png" alt="Google">', array ('title' => 'Login con Google'))."</li>'"; ?>;
+					  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Facebook?backURL='.current_url(), '<img src="/assets/images/top-facebook.png" alt="Facebook">', array ('title' => 'Login con Facebook'))."</li>'"; ?>;
+					  cadRegistro += <?php echo "'<li>".anchor('hauth/login/Twitter?backURL='.current_url(), '<img src="/assets/images/top-twitter.png" alt="Twitter">', array ('title' => 'Login con Twitter'))."</li>'"; ?>;
+					} 
+					else 
+					{
+					  cadRegistro += '<li>Hola '+userInfo+'</li>';
+					  cadRegistro += <?php echo "'<li>".anchor('hauth/logout/'.get_cookie('SI_Provider').'?backURL='.current_url(), 'Desconectar', array ('title', 'Desconectar'))."</li>'";  ?>;
+					  cadRegistro += '<li class="userimg"><img src="'+userAvatar+'" alt=""></li>';
+					} 
+					document.write(cadRegistro);
+				</script>
 				</ul>
 				
 				<ul class="sitenav">

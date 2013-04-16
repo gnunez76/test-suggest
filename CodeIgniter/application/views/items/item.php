@@ -17,6 +17,28 @@ $(document).ready(function() {
 });
 
 </script>
+<script type="text/javascript">
+
+	/* Abrir ventana modal resena*/
+	function toogle(display,idA,idB)
+	{
+
+		if (display == 'block') {
+
+			$("#modalReview").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>"); //muestro el loader de ajax			
+			$.get('/users_interface/setreview/<?php echo $game_id?>', function(data) {	
+				$("#modalReview").html (data);
+			});
+
+			
+		}
+		
+		document.getElementById(idA).style.display=display;
+		document.getElementById(idB).style.display=display;
+	}
+
+</script>				
+
 			<article class="item clearfix">
 				<div class="imagecol">
 				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
@@ -31,7 +53,7 @@ $(document).ready(function() {
 							<?php 
 								$ratio = 0; 
 								if ($game_totalRating) {
-									$ratio = round($game_totalRating/$game_totalVotes);
+									$ratio = number_format($game_totalRating/$game_totalVotes, 1);
 								}
 								
 								for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
@@ -68,26 +90,6 @@ $(document).ready(function() {
 					</section>
 							
 				</div>
-				<div id="addreviewmodal" class="reviewmodal">
-					
-					<div id="comments">
-					<a href="#close" title="Close" class="close">X</a>
-				        <form method="post" action="/comments/insertitemcomment/<?php echo $game_id?>" id="reviewForm">
-				        
-				            <label>T&iacute;tulo*</label>
-				            <input name="titulo" placeholder="Título de tu review" required="true" />
-				            
-				            <label>Texto*</label>
-				            <textarea name="texto" placeholder="Danos tu opinión" required="true"></textarea>
-				            
-				            
-				            <input id="submit" name="submit" type="submit" value="Submit">
-				        
-							<div id="ajax_loader"></div>
-				        </form>
-					</div>
-				</div>
-			
 			</article>
 <!-- 
 			<section class="userdata clearfix">
@@ -98,7 +100,8 @@ $(document).ready(function() {
 			<h2>Friends Review</h2>			
 			</section>
  -->
- 
+
+			<!-- TODAS LAS REVIEWS -->
 			<section class="userdata clearfix">
 			<h2>Comunity Review</h2>
 				<div class="allComments">
@@ -163,7 +166,8 @@ $(document).ready(function() {
 								</script>
 								<div class="socialcomments">
 									<span id="blike<?php echo $review['comment_id']; ?>"></span>
-									<div class="nummegusta"><?php echo $review['comment_votes']; ?> me gusta</div>
+									<!--  div class="nummegusta"><?php echo $review['comment_votes']; ?> me gusta</div -->
+									<div class="nummegusta"><?php echo count($review["hijos"]); ?> comentarios</div>
 									<div class="mun"></div>
 								</div>
 							</div>
@@ -251,4 +255,16 @@ $(document).ready(function() {
 			<section class="colder clearfix">
 			<h2>Otros datos</h2>			
 			</section>
+			
+				
+				
+			
+<div id="modal" style="display:none">
+	<div id="ventana" class="contenedor" style="display:none">
+		<span id="modalReview"></span>
+		<a href="#close" title="Cerrar" onclick="toogle('none','modal','ventana'); return false;" >Close</a>
+	</div>
+</div>
+
+
 			

@@ -51,9 +51,9 @@ class Comments extends CI_Controller {
 				log_message('debug', 'controllers.Item.rateItem: El juego esta comentado por el usuario '.$user_profile->identifier);
 				
 				$this->user_suggest_model->updateReviewUserItem ($itemId, $user_profile->identifier, $titulo, $texto, $notas_privadas);
-				$this->user_suggest_model->deleteReviewDesignerRel($itemId, $user_profile->identifier, $autores);
+				$this->user_suggest_model->deleteReviewDesignerRel($itemId, $user_profile->identifier);
 				$this->user_suggest_model->setReviewDesignerRel ($itemId, $user_profile->identifier, $autores);
-				$this->user_suggest_model->deleteReviewItemRel($itemId, $user_profile->identifier, $juegos);
+				$this->user_suggest_model->deleteReviewItemRel($itemId, $user_profile->identifier);
 				$this->user_suggest_model->setReviewItemRel ($itemId, $user_profile->identifier, $juegos);
 				
 			}
@@ -67,12 +67,12 @@ class Comments extends CI_Controller {
 		
 			}
 				
-			echo $user_profile->identifier . ' - ' . $provider . ' - ' . $itemId . " - ";
+			echo 'OK';
 		
 		}
 		else {
 				
-			echo "Es necesario estar logado para poder votar";
+			echo 'KO';
 		}
 		
 	}
@@ -107,7 +107,7 @@ class Comments extends CI_Controller {
 	}
 	
 	
-	function getLikeButton ($commentId) {
+	public function getLikeButton ($commentId) {
 		
 		$data ['commentId'] = $commentId;
 		$this->load->helper('cookie');
@@ -136,7 +136,7 @@ class Comments extends CI_Controller {
 		$this->load->view('comments/likebutton', $data);
 	}
 	
-	function likeThisReview ($commentId) {
+	public function likeThisReview ($commentId) {
 		
 		
 		$this->load->helper('cookie');
@@ -159,6 +159,11 @@ class Comments extends CI_Controller {
 		
 			echo "Es necesario estar logado para poder votar";
 		}
+		
+	}
+	
+
+	public function getAllReviews () {
 		
 	}
 	

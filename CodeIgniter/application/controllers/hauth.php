@@ -60,6 +60,7 @@ class HAuth extends CI_Controller {
 						set_cookie('UserName', $user_profile->displayName, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 					}
 
+					set_cookie('Avatar', $user_profile->photoURL, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 					set_cookie('Provider', $provider, '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 
 					$this->load->model('user_suggest_model');
@@ -158,6 +159,7 @@ class HAuth extends CI_Controller {
 //			set_cookie('UserName', utf8_encode($user_profile->displayName), '86500', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_', false);
 			delete_cookie('UserName', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_');
 			delete_cookie('Provider', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_');
+			delete_cookie('Avatar', '.'.$_SERVER['HTTP_HOST'], '/', 'SI_');
 			if (isset ($_GET['backURL'])) {
 				$bURL = explode ('#', $_GET['backURL']);
 				header ('Location: ' . $bURL[0]);

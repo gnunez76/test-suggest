@@ -11,8 +11,15 @@ $(document).ready(function() {
 	});
 });
 </script>
-<div class="botonreview"><a href="#addreviewmodal">A&Ntilde;ADE TU REVIEW</a></div>
+
+<?php if  (isset ($userReview['comment_id'])): ?>
+<div class="botonreview"><a href="#" onclick="toogle('block','modal','ventana');return false;">EDITA TU RESE&Ntilde;A</a></div>
+<?php else: ?>
+<div class="botonreview"><a href="#" onclick="toogle('block','modal','ventana');return false;">A&Ntilde;ADE TU RESE&Ntilde;A</a></div>
+<?php endif; ?>
 <span class="label10">Tu puntuaci&oacute;n</span>
+
+<?php if (isset($user_profile)): ?>
 <div class="userrated">
 	<?php  
 	
@@ -28,3 +35,15 @@ $(document).ready(function() {
 		
 	?>
 </div>
+<?php else: ?>
+<div class="userrated">
+	<?php  
+	
+		for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
+
+			echo '<input name="rating" type="radio" class="star" value="'.$i.'" disabled="disabled" />';
+		}
+		
+	?>
+</div>
+<?php endif; ?>

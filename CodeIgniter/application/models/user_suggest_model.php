@@ -327,11 +327,10 @@ class User_Suggest_Model extends CI_Model {
 	
 		try {
 	
-	
-	
-			$sql = "SELECT sg.game_name, sg.gamename_id
+			$sql = "SELECT sg.game_name, sgg.game_id
 					FROM cg_comments_games cg
-					INNER JOIN sg_gamename sg ON sg.gamename_id=cg.game_id
+					INNER JOIN sg_games_gamename sgg ON sgg.game_id=cg.game_id AND sgg.gamename_priority=1
+					INNER JOIN sg_gamename sg ON sg.gamename_id=sgg.gamename_id
 					WHERE cg.comment_id=".$this->db->escape($commentId);
 	
 	
@@ -392,26 +391,20 @@ class User_Suggest_Model extends CI_Model {
 	/*
 	 * Borra los autores relacionados de una review
 	*/
-	public function deleteReviewDesignerRel ($itemId, $usrIdentifier, $autores) {
+	public function deleteReviewDesignerRel ($itemId, $usrIdentifier) {
 	
 		try {
 				
-				
-			if (is_array ($autores)){
-				
-				$listaAutores = implode (",", $autores);
-				$sql = "DELETE FROM cd_comments_designers
-						WHERE gamedesigner_id IN (".$listaAutores.
-						") AND comment_id=(SELECT comment_id FROM si_comments
-										WHERE game_id=".$this->db->escape($itemId)."
-										AND usr_identifier=".$this->db->escape($usrIdentifier)."
-										AND comment_parent_id=0)";
+			$sql = "DELETE FROM cd_comments_designers
+					WHERE comment_id=(SELECT comment_id FROM si_comments
+									WHERE game_id=".$this->db->escape($itemId)."
+									AND usr_identifier=".$this->db->escape($usrIdentifier)."
+									AND comment_parent_id=0)";
 
-				log_message('debug', 'models.User_Suggest_Model.deleteReviewDesignerRel query: '.$sql);
-				
-				$query = $this->db->query($sql);
+			log_message('debug', 'models.User_Suggest_Model.deleteReviewDesignerRel query: '.$sql);
+			
+			$query = $this->db->query($sql);
 								
-			}
 	
 			return true;
 		}
@@ -459,26 +452,19 @@ class User_Suggest_Model extends CI_Model {
 	/*
 	 * Borra los items relacionados de una review
 	*/
-	public function deleteReviewItemRel ($itemId, $usrIdentifier, $items) {
+	public function deleteReviewItemRel ($itemId, $usrIdentifier) {
 	
 		try {
 	
-	
-			if (is_array ($items)){
-	
-				$listaItems = implode (",", $items);
-				$sql = "DELETE FROM cg_comments_games
-						WHERE game_id IN (".$listaItems.
-							") AND comment_id=(SELECT comment_id FROM si_comments
-										WHERE game_id=".$this->db->escape($itemId)."
-										AND usr_identifier=".$this->db->escape($usrIdentifier)." 
-										AND comment_parent_id=0)";
-	
-				log_message('debug', 'models.User_Suggest_Model.deleteReviewItemRel query: '.$sql);
-	
-				$query = $this->db->query($sql);
-	
-			}
+			$sql = "DELETE FROM cg_comments_games
+					WHERE comment_id=(SELECT comment_id FROM si_comments
+									WHERE game_id=".$this->db->escape($itemId)."
+									AND usr_identifier=".$this->db->escape($usrIdentifier)." 
+									AND comment_parent_id=0)";
+
+			log_message('debug', 'models.User_Suggest_Model.deleteReviewItemRel query: '.$sql);
+
+			$query = $this->db->query($sql);
 	
 			return true;
 		}
@@ -592,7 +578,7 @@ class User_Suggest_Model extends CI_Model {
 
 				foreach ($query->result_array() as $row) {
 					
-					$row ['hijos'] = $this->getAllCommentsReviews ($itemId, $orderBy, $row['comment_id']);
+					$row ['hijos'] = $this->getAllCommentsReviews ($itemId, ' comment_date ASC', $row['comment_id']);
 					$data [] = $row;
 				}
 				
