@@ -126,6 +126,8 @@ class Item extends CI_Controller {
 	
 	public function getUserRating ($itemId) {
 
+		$this->output->enable_profiler(false);
+		
 		$this->load->helper('cookie');
 		
 		$userName = get_cookie ('SI_UserName');

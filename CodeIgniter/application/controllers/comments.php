@@ -108,6 +108,7 @@ class Comments extends CI_Controller {
 	
 	
 	public function getLikeButton ($commentId) {
+		$this->output->enable_profiler(false);
 		
 		$data ['commentId'] = $commentId;
 		$this->load->helper('cookie');
@@ -163,7 +164,34 @@ class Comments extends CI_Controller {
 	}
 	
 
-	public function getAllReviews () {
+	/*
+	 * Devuelve todas las rese–as de un item
+	 */
+	public function getAllReviews ($itemId) {
+		
+		$this->output->enable_profiler(false);
+		
+		$data ['itemId'] = $itemId;
+		
+		$this->load->model ('user_suggest_model');
+		$data ["reviews"] = $this->user_suggest_model->getAllReviewsItem ($itemId);
+		
+		$this->load->view('comments/reviews', $data);
+	}
+	
+	public function getReviewsComments ($itemId, $commentId) {
+		
+		$this->output->enable_profiler(FALSE);
+		$data ['itemId'] = $itemId;
+		$data ['commentId'] = $commentId;
+		
+		$this->load->model ('user_suggest_model');
+		$data ['hijos'] = $this->user_suggest_model->getAllCommentsReviews ($itemId, "comment_date ASC", $commentId);
+		
+		//echo "<pre>"; var_dump ($data); echo "</pre>";die;
+		
+		$this->load->view('comments/reviewcomments', $data);
+		
 		
 	}
 	

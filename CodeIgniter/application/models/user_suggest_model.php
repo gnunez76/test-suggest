@@ -502,6 +502,46 @@ class User_Suggest_Model extends CI_Model {
 	}
 
 
+	/*
+	 * Obtener el numero de comentarios de una review
+	*/
+	public function getNumCommentsReviews ($itemId, $commentParentId) {
+	
+		try {
+	
+			$sql="SELECT count(comment_id) as numComments
+					FROM si_comments s
+					WHERE s.game_id=".$this->db->escape($itemId)." AND s.comment_parent_id=".$commentParentId;
+	
+		
+			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+	
+	
+				if ($row = $query->row_array()) {
+
+					return $row;
+				}
+				else {
+					return false;
+				}
+	
+			}
+			else{
+	
+				return false;
+			}
+	
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	
 
 	
 	/*
@@ -552,9 +592,9 @@ class User_Suggest_Model extends CI_Model {
 	
 	
 	/*
-	 * Obtener todas las reviews de un Item
+	 * Obtener todas las reviews y comentarios de un Item
 	*/
-	public function getAllReviewsItem ($itemId, $orderBy = "comment_votes DESC, comment_date DESC") {
+	public function getAllReviewsAndCommentsItem ($itemId, $orderBy = "comment_votes DESC, comment_date DESC") {
 	
 		$data = array ();
 		try {
@@ -573,15 +613,16 @@ class User_Suggest_Model extends CI_Model {
 					
 						
 			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
-	
+
+
 			if ($query = $this->db->query($sql)) {
 
 				foreach ($query->result_array() as $row) {
-					
+						
 					$row ['hijos'] = $this->getAllCommentsReviews ($itemId, ' comment_date ASC', $row['comment_id']);
 					$data [] = $row;
 				}
-				
+								
 				return $data;						
 			}
 			else{
@@ -594,7 +635,56 @@ class User_Suggest_Model extends CI_Model {
 			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
-	}	
+	}
+
+
+	/*
+	 * Obtener todas las reviews de un Item
+	*/
+	public function getAllReviewsItem ($itemId, $orderBy = "comment_votes DESC, comment_date DESC") {
+	
+		$data = array ();
+		try {
+				
+			$sql="SELECT comment_id, usr_name, usr_photoURL, comment_title, substr(comment_text, 1, ".SI_REVIEW_SUMMARY.") as summary,comment_text, comment_votes,
+					DATE_FORMAT (comment_date, '%d-%m-%Y') as fecha, game_rating, game_timeplayed
+					FROM si_comments s
+					INNER JOIN usr_users u ON u.usr_identifier=s.usr_identifier
+					LEFT JOIN usr_users_games ug ON ug.usr_identifier=s.usr_identifier
+					WHERE s.game_id=".$this->db->escape($itemId)." AND s.comment_parent_id=0";
+				
+			if (!is_null ($orderBy)) {
+	
+				$sql .= " ORDER BY ".$orderBy;
+			}
+				
+	
+			log_message('debug', 'models.User_Suggest_Model.getAllReviewsItem query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+				
+				foreach ($query->result_array() as $row) {
+						
+					$row ['hijos'] = $this->getNumCommentsReviews ($itemId, $row['comment_id']);
+					$data [] = $row;
+				}
+								
+				return $data;			
+			}
+			else{
+	
+				return false;
+			}
+				
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
+	
+	
 
 	/* Obtener si ha votado una review */
 	

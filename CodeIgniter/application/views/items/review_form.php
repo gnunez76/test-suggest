@@ -171,10 +171,10 @@ $(document).ready(function() {
 			for ($i = 1; $i <= SI_ITEM_RATING_AVAILABE; $i++) {
 	
 				if ($i == $rateGame) {
-					echo '<input name="rating" type="radio" class="star-review" value="'.$i.'" checked="checked" />';
+					echo '<input name="rating-review" type="radio" class="star-review" value="'.$i.'" checked="checked" />';
 				}
 				else {
-					echo '<input name="rating" type="radio" class="star-review" value="'.$i.'" />';
+					echo '<input name="rating-review" type="radio" class="star-review" value="'.$i.'" />';
 				}
 			}
 			
