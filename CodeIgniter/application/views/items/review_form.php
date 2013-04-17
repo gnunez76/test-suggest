@@ -212,7 +212,7 @@ $(document).ready(function() {
 <input type="search" placeholder="Busca un juego..." autocomplete="off" id="autocompletegame" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
 <div class="elementosrelacionados" id="juegosrelacionados">
 <?php 
-	if (isset($reviewItemItems)) {
+	if (isset($reviewItemItems) && is_array($reviewItemItems)) {
 
 		foreach ($reviewItemItems as $itemrel) {
 			echo '<input type="hidden" name="juegos['.$itemrel['game_id'].']" id="juegos_'.$itemrel['game_id'].'" value="'.$itemrel['game_id'].'">';
@@ -230,7 +230,7 @@ $(document).ready(function() {
 <input type="search" placeholder="Busca un autor..." autocomplete="off" id="autocompleteautor" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
 <div class="elementosrelacionados" id="autoresrelacionados">
 <?php 
-	if (isset($reviewItemAutores)) {
+	if (isset($reviewItemAutores) && is_array($reviewItemAutores)) {
 
 		foreach ($reviewItemAutores as $autor) {
 			echo '<input type="hidden" name="autores['.$autor['gamedesigner_id'].']" id="autores_'.$autor['gamedesigner_id'].'" value="'.$autor['gamedesigner_id'].'">';

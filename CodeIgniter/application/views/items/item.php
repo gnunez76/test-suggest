@@ -24,7 +24,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 
 	/* Abrir ventana modal resena*/
-	function toogle(display,idA,idB=null)
+	function toogle(display,idA,idB)
 	{
 
 		if (display == 'block') {

@@ -10,6 +10,11 @@ class Item extends CI_Controller {
 		
 		$this->load->helper('url');
 	}
+	
+	public function info () 
+	{
+		phpinfo();
+	}
 
 	public function index ($itemId, $titleItem = null)
 	{
