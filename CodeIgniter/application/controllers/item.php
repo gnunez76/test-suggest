@@ -13,8 +13,8 @@ class Item extends CI_Controller {
 
 	public function index ($itemId, $titleItem = null)
 	{
-
-		$this->output->enable_profiler(FALSE);
+		
+		$this->output->enable_profiler(TRUE);
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
 		$this->benchmark->mark('Get_Item_start');

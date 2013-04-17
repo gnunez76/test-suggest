@@ -80,10 +80,22 @@ class Comments extends CI_Controller {
 	
 	public function insertReviewComment ($itemId = null) {
 	
+		
+		$this->load->library('HTMLPurifierLib');
+		
+		
+		$dirty_html = '<a href="javascript:alert(\'test\')">ds</a><p>test<br /><img src="noalt.jpg">';
+		$configHP = HTMLPurifier_Config::createDefault();
+
+		$configHP->set('HTML.Allowed', SI_REVIEW_HTML_AVAILABLE);
+		$texto = $this->htmlpurifierlib->purify( $_POST['texto'] , $configHP );
+		
 		$parentid = $_POST['parentid'];
-		$texto = $_POST['texto'];
+		//$texto = $_POST['texto'];
 	
 		$this->load->helper('cookie');
+		
+
 	
 		$userName = get_cookie ('SI_UserName');
 		$provider = get_cookie ('SI_Provider');
@@ -165,7 +177,7 @@ class Comments extends CI_Controller {
 	
 
 	/*
-	 * Devuelve todas las rese–as de un item
+	 * Devuelve todas las reseï¿½as de un item
 	 */
 	public function getAllReviews ($itemId) {
 		

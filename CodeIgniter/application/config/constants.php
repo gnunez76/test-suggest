@@ -57,6 +57,10 @@ define ('SI_REVIEW_SUMMARY', 300);
 define ('SI_COMMENT_SUMMARY', 300);
 
 
+// HTML Permitido para la REVIEW y los COMENTARIOS
+define ('SI_REVIEW_HTML_AVAILABLE', 'a');
+define ('SI_COMMENT_HTML_AVAILABLE', 'p');
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

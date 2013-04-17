@@ -54,6 +54,12 @@ $(document).ready(function() {
 			
 			if (responseText == 'OK') {
 				$("#modalReview").html ('<h3 style="text-align:center;">Su reseña ha sido guardada</h3><input class="closebtn" name="close" type="button" value="Cerrar" onclick="toogle(\'none\',\'modal\',\'ventana\'); return false;" >');
+
+				$("#comunityReviews").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
+				$.get('/comments/getallreviews/<?php echo $itemId?>', function(data) {
+					$('#comunityReviews').html(data);
+				});
+				
 			}
 	//		alert("Mensaje enviado: "+responseText);  //responseText es lo que devuelve la página contacto.php. Si en contacto.php hacemos echo "Hola" , la variable responseText = "Hola" . Aca hago un alert con el valor de response text
 	//		$("#comments").html('Gracias por enviar tu review <br><div class="botonreview"><a href="#close" title="Close">CERRAR</a></div>'); // Hago desaparecer el loader de ajax
