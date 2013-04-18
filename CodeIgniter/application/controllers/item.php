@@ -29,6 +29,9 @@ class Item extends CI_Controller {
 		$data ["autor"] = $this->item_model->getItemCreator ($itemId); 
 		$data ["editorial"] = $this->item_model->getItemEditorial ($itemId); 
 		$data ["artist"] = $this->item_model->getItemArtist ($itemId);
+		$data ["mechanics"] = $this->item_model->getItemMechanical ($itemId);
+		$data ["category"] = $this->item_model->getItemCategory ($itemId);
+		$data ["language"] = $this->item_model->getItemLanguageDep ($itemId);
 		
 		$this->load->model ('user_suggest_model');
 		$data ["reviews"] = $this->user_suggest_model->getAllReviewsItem ($itemId);

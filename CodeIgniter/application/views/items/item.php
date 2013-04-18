@@ -84,10 +84,17 @@ $(document).ready(function() {
 							</span>
 						</div>						
 						 
-						<div class="labelitemleft">Autor: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
+						<div class="labelitemleft">Diseñador: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
 						<div class="labelitemleft">Ilustrador: </div><div class="textitemleft"><?php echo implode (', ', $artist); ?></div>
+						<div class="labelitemleft">Nº Jugadores: </div><div class="textitemleft"><?php echo $game_minplayers . " - " . $game_maxplayers; ?></div>
+						<div class="labelitemleft">Edad recomendada: </div><div class="textitemleft"><?php echo $game_age; ?></div>
+						<div class="labelitemleft">Duraci&oacute;n: </div><div class="textitemleft"><?php echo $game_duration; ?> minutos</div>
+						<div class="labelitemleft">Dependencia del idioma: </div><div class="textitemleft"><?php echo $language['language_name']; ?></div>
 						<div class="labelitemleft">A&ntilde;o de publicac&oacute;n: </div><div class="textitemleft"><?php echo $game_yearpub; ?></div>
+						<div class="labelitemleft">Mec&aacute;nicas: </div><div class="textitemleft"><?php echo implode (', ', $mechanics); ?></div>
+						<div class="labelitemleft">Categorias: </div><div class="textitemleft"><?php echo implode (', ', $category); ?></div>
 						<div class="labelitemleft">Editorial: </div><div class="textitemleft"><?php echo implode (', ', $editorial); ?></div>
+						
 						
 						<div style="float: left; clear:left;">
 						<p><?php echo $game_description; ?></p>

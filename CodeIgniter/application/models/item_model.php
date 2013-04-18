@@ -13,7 +13,9 @@ class Item_Model extends CI_Model {
 
 
 		$sql = "SELECT sg_games.game_id, sg_gamename.game_name, sg_games.game_description, 
-				sg_games.game_thumbnail, sg_games.game_yearpub, sg_games.game_totalRating, sg_games.game_totalVotes
+				sg_games.game_thumbnail, sg_games.game_yearpub, sg_games.game_totalRating, 
+				sg_games.game_totalVotes, sg_games.game_minplayers, sg_games.game_maxplayers,
+				sg_games.game_age, sg_games.game_duration
 			FROM sg_games
 			INNER JOIN sg_games_gamename ON sg_games_gamename.game_id = sg_games.game_id and gamename_priority='1'
 			INNER JOIN sg_gamename ON sg_gamename.gamename_id = sg_games_gamename.gamename_id
@@ -78,7 +80,7 @@ class Item_Model extends CI_Model {
 
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {	
-
+			
 			foreach ($query->result_array() as $item) {
 
 				$resultado [] = $item["editorial_name"];
@@ -88,6 +90,67 @@ class Item_Model extends CI_Model {
 
 		return $resultado;
 	}
+	
+	/*
+	 * Devuelve las mecanicas de un item
+	 */
+	public function getItemMechanical ($itemId) {
+	
+		$sql = "SELECT mechanic_name
+			FROM sg_gamemechanic a, sg_games_gamemechanic b
+			WHERE a.gamemechanic_id=b.gamemechanic_id AND b.game_id='".$itemId."'";
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+			
+			foreach ($query->result_array() as $item) {
+	
+				$resultado [] = $item["mechanic_name"];
+			}
+		}
+	
+		return $resultado;
+	}
+	
+	/*
+	 * Devuelve las categorias de un item
+	*/
+	public function getItemCategory ($itemId) {
+	
+		$sql = "SELECT category_name
+			FROM sg_gamecategory a, sg_games_gamecategory b
+			WHERE a.gamecategory_id=b.gamecategory_id AND b.game_id='".$itemId."'";
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+				
+			foreach ($query->result_array() as $item) {
+	
+				$resultado [] = $item["category_name"];
+			}
+		}
+	
+		return $resultado;
+	}
+	
+	
+	/*
+	 * Devuelve la dependencia del idioma de un item
+	*/
+	public function getItemLanguageDep ($itemId) {
+	
+		$sql = "SELECT language_name
+			FROM sg_gamelanguagedep a, sg_games_gamelanguagedep b
+			WHERE a.gamelanguagedep_id=b.gamelanguagedep_id AND b.game_id='".$itemId."'";
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+			
+			$row = $query->row_array();
+			return $row;
+		}
+	
+		return $resultado;
+	}
+	
+	
 
 	public function getItemArtist ($itemId) {
 
