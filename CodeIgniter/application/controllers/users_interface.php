@@ -38,12 +38,14 @@ class Users_Interface extends CI_Controller {
 			$data ['rateGame'] = $this->user_suggest_model->getRateUserItem ($itemId, $data['user_profile']->identifier);
 			$data ['reviewItem'] = $this->user_suggest_model->getReviewUserItem ($itemId, $data['user_profile']->identifier);
 			
+			
+/*			
 			if ($data ['reviewItem']) {
 				
 				$data ['reviewItemAutores'] = $this->user_suggest_model->getReviewDesignerRel($data ['reviewItem']['comment_id']);
 				$data ['reviewItemItems'] = $this->user_suggest_model->getReviewItemRel($data ['reviewItem']['comment_id']);
 			}
-			
+*/			
 			$this->benchmark->mark('get_rate_end');
 				
 			if ($data ['rateGame']) {
@@ -71,6 +73,35 @@ class Users_Interface extends CI_Controller {
 		$this->load->view('items/review_form', $data);
 				
 	}
+	
+	public function uploadfile () {
+		//$this->load->library ('UploadHandlerLib');
+		$data = array();
+		$this->load->view('items/uploadfiles', $data);
+	}
+	
+	public function uploadfilestoserver ($itemId) {
+		
+		$this->load->library ('UploadHandlerLib');
+		$this->load->helper('cookie');
+				
+		$userName = get_cookie ('SI_UserName');
+		$provider = get_cookie ('SI_Provider');
+		
+		if (!empty($userName) && !empty($provider)) {
+			$this->load->library('HybridAuthLib');
+		
+			$this->benchmark->mark('user_data_start');
+			$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
+			
+		//	$this->uploadhandlerlib->setUserId($user_profile->identifier);
+		//	$this->uploadhandlerlib->setItemId ($itemId);
+			$this->uploadhandlerlib->iniciar();
+		}
+		
+		
+	}
+	
 	
 	
 }

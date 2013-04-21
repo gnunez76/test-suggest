@@ -1,17 +1,28 @@
 <!-- ELIMINAR CSS -->
-<!-- 
+ 
 <link href="/assets/css/estilos.css" rel="stylesheet">
+<!-- 
 <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+ -->
 <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">
--->
+<link href="/assets/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+
+ <!---->
 <!-- /ELIMNAR CSS -->
 <!-- ELIMINAR JS -->
-<!--     
+     
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/assets/js/rating-stars/jquery.rating.pack.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.form.js"></script> 
--->
+<script>
+function toogle (display, element) {
+	
+	document.getElementById(element).style.display=display;
+}
+
+</script>
+<!-- -->
 <!-- /ELIMINAR JS -->
 
 <script type="text/javascript">
@@ -26,6 +37,44 @@ $(document).ready(function() {
 		}
 	});
 });
+</script>
+
+<script type="text/javascript">
+
+function insertAtCaret(areaId,text) {
+    var txtarea = document.getElementById(areaId);
+    var scrollPos = txtarea.scrollTop;
+    var strPos = 0;
+    var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? 
+    	"ff" : (document.selection ? "ie" : false ) );
+    if (br == "ie") { 
+    	txtarea.focus();
+    	var range = document.selection.createRange();
+    	range.moveStart ('character', -txtarea.value.length);
+    	strPos = range.text.length;
+    }
+    else if (br == "ff") strPos = txtarea.selectionStart;
+
+    var front = (txtarea.value).substring(0,strPos);  
+    var back = (txtarea.value).substring(strPos,txtarea.value.length); 
+    txtarea.value=front+text+back;
+    strPos = strPos + text.length;
+    if (br == "ie") { 
+    	txtarea.focus();
+    	var range = document.selection.createRange();
+    	range.moveStart ('character', -txtarea.value.length);
+    	range.moveStart ('character', strPos);
+    	range.moveEnd ('character', 0);
+    	range.select();
+    }
+    else if (br == "ff") {
+    	txtarea.selectionStart = strPos;
+    	txtarea.selectionEnd = strPos;
+    	txtarea.focus();
+    }
+    txtarea.scrollTop = scrollPos;
+}
+
 </script>
 
 
@@ -53,7 +102,7 @@ $(document).ready(function() {
 		function mostrarRespuesta (responseText){
 			
 			if (responseText == 'OK') {
-				$("#modalReview").html ('<h3 style="text-align:center;">Su reseña ha sido guardada</h3><input class="closebtn" name="close" type="button" value="Cerrar" onclick="toogle(\'none\',\'modal\',\'ventana\'); return false;" >');
+				$("#modalReview").html ('<h3 style="text-align:center;">Su rese&ntilde;a ha sido guardada</h3><input class="closebtn" name="close" type="button" value="Cerrar" onclick="modalReview(\'none\',\'modal\',\'ventana\'); return false;" >');
 
 				$("#comunityReviews").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
 				$.get('/comments/getallreviews/<?php echo $itemId?>', function(data) {
@@ -72,12 +121,6 @@ $(document).ready(function() {
         
 <script>
 
-	function borrar (field, label) {
-
-		$("#"+field).remove();
-		$("#"+label).remove();
-		return false;
-	}
 
        $(function() {
 
@@ -98,9 +141,14 @@ $(document).ready(function() {
                             $("#autocompletegame").val("");
                         },
 						select: function( event, ui ) { 
-							var itemAux = ui.item.value.split('/');
+							
+							//var itemAux = ui.item.value.split('/');
+							//$('#userreviewtext').val($('#userreviewtext').val()+'<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+							insertAtCaret('userreviewtext','<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+							/*
 							$("#juegosrelacionados").append('<input type="hidden" name="juegos['+itemAux[5]+']" id="juegos_'+itemAux[5]+'" value="'+itemAux[5]+'">')
 							$("#juegosrelacionados").append('<div style="margin:5px;" id="label_juegos_'+itemAux[5]+'">'+ui.item.label+'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(&#039'+'juegos_'+itemAux[5]+'&#039, &#039'+'label_juegos_'+itemAux[5]+'&#039); return false;">Borrar</a></div>');
+							*/
 							$("#autocompletegame").val('');
 						},
 	                    close: function( event, ui ) { 
@@ -134,8 +182,14 @@ $(document).ready(function() {
 
 
 						var itemAux = ui.item.value.split('/');
+
+						//$('#userreviewtext').val($('#userreviewtext').val()+'<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+						insertAtCaret('userreviewtext','<a href="'+ui.item.value+'">'+ui.item.label+'</a>');
+						
+						/*
 						$("#autoresrelacionados").append('<input type="hidden" name="autores['+itemAux[5]+']" id="autores_'+itemAux[5]+'" value="'+itemAux[5]+'">')
 						$("#autoresrelacionados").append('<div style="margin:5px;" id="label_autores_'+itemAux[5]+'">'+ui.item.label+'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(&#039'+'autores_'+itemAux[5]+'&#039, &#039'+'label_autores_'+itemAux[5]+'&#039); return false;">Borrar</a></div>');
+						*/
 						$("#autocompleteautor").val('');
 						//document.location.href=ui.item.value; 
               			//$("#autocompleteautor").value('');
@@ -196,51 +250,162 @@ $(document).ready(function() {
         
 <label>T&iacute;tulo*</label>
 <?php if ($reviewItem['comment_title']): ?>
-<input name="titulo" placeholder="Título de tu review..." required="true" value="<?php echo $reviewItem['comment_title']; ?>"/>
+<input class="reviewtitle" name="titulo" placeholder="T&iacute;tulo de tu rese&nacute;a..." required="true" value="<?php echo $reviewItem['comment_title']; ?>"/>
 <?php else: ?>
-<input name="titulo" placeholder="Título de tu review..." required="true" />
+<input class="reviewtitle" name="titulo" placeholder="T&iacute;tulo de tu rese&ntilde;a..." required="true" />
 <?php endif; ?>
             
-<label>Texto*</label>
-<textarea name="texto" placeholder="Danos tu opinión..." required="true"><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_text']; }  ?></textarea>
+<label>Texto*
 
-<label>Notas privadas (solo serán visibles por tí)</label>
-<textarea name="notas_privadas" placeholder="Escribe unas notas solo par tí..."><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_notes']; }  ?></textarea>
+<span style="margin-left: 400px;">
+<input class="closebtn" name="close" type="button" value="Citar juego o autor" onclick="javascript:toogle('block', 'relautite');; return false;" >
+
+</span></label>
+<textarea name="texto" id="userreviewtext" placeholder="Danos tu opini&oacute;n..." required="true"><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_text']; }  ?></textarea>
 
 
-<label>Relacionar con juego</label>
-<input type="search" placeholder="Busca un juego..." autocomplete="off" id="autocompletegame" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
-<div class="elementosrelacionados" id="juegosrelacionados">
-<?php 
-	if (isset($reviewItemItems) && is_array($reviewItemItems)) {
-
-		foreach ($reviewItemItems as $itemrel) {
-			echo '<input type="hidden" name="juegos['.$itemrel['game_id'].']" id="juegos_'.$itemrel['game_id'].'" value="'.$itemrel['game_id'].'">';
-			echo '<div style="margin:5px;" id="label_juegos_'.$itemrel['game_id'].'">'.$itemrel['game_name'].
-			'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'juegos_'.$itemrel['game_id'].'\', \'label_juegos_'.$itemrel['game_id'].'\'); return false;">Borrar</a></div>';
-		}
-
-	} 
+<label>Imagenes</label>
+<div id="imgfail"></div>
+<div id="imgsuccess" class="imgsuccess"></div>
+<div class="moduloimagesformreview">
 	
-?>
+<!-- ########################################## -->
+<script>
+var VIGET = VIGET || {};
+VIGET.fileInputs = function() {
+    var $this = $(this),
+    $val = $this.val(),
+    valArray = $val.split('\\'),
+    newVal = valArray[valArray.length-1],
+    $button = $this.siblings('.button'),
+    $fakeFile = $this.siblings('.file-holder');
+};
+     
+$(document).ready(function() {
+    $('.file-wrapper input[type=file]')
+    .bind('change focus click', VIGET.fileInputs);
+});
+</script>
+
+
+<span class="file-wrapper">
+<input id="fileupload" type="file" name="files[]" multiple>
+<span class="button">A&ntilde;adir im&aacute;genes...</span>
+</span>
+
+	
+
+
+<script src="/assets/js/fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/assets/js/fileupload/jquery.iframe-transport.js"></script>
+<script src="/assets/js/fileupload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        url: '/users_interface/uploadfilestoserver/'+<?php echo $itemId; ?>,
+        dataType: 'json',
+
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                //alert (file.error);
+                //alert (file.name);
+                
+                if (file.error == undefined) {
+                    var tagImg = '<img src=&quot'+file.thumbnail_url+'&quot/>';
+                    //alert (tagImg);
+                    // onclick="insertAtCaret(\'userreviewtext\','+tagImg+'); return false;"
+                    
+                	$('#imgsuccess').append('<span style="padding: 10px;"><a href="#" onclick="javascript:insertAtCaret(\'userreviewtext\',\''+tagImg+'\'); return false;"><img src="'+file.thumbnail_url+'"></a></span>');
+                	$('#imgsuccess').css('display', 'block');
+                }
+                else {
+                	$('#imgfail').append(file.name+' - '+file.error+'<br>');
+                }
+                
+            });
+        },
+
+
+        
+	    progressall: function (e, data) {
+	        var progress = parseInt(data.loaded / data.total * 100, 10);
+
+
+	        $(function() {
+	        	$( "#progressbar" ).progressbar({
+	        	value: progress
+	        	});
+	        });
+	        
+	        /*
+	        $('#progress .bar').css(
+	            'width',
+	            progress + '%'
+	        );
+	        */
+	    }
+        
+
+
+    });
+    
+});
+</script>
+
+
+
+
+
+
+<!-- ########################################## -->
+
+
+ 
+	
 
 </div>
+<div id="progressbar"></div>
 
-<label>Relacionar con autor</label>
-<input type="search" placeholder="Busca un autor..." autocomplete="off" id="autocompleteautor" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
-<div class="elementosrelacionados" id="autoresrelacionados">
-<?php 
-	if (isset($reviewItemAutores) && is_array($reviewItemAutores)) {
-
-		foreach ($reviewItemAutores as $autor) {
-			echo '<input type="hidden" name="autores['.$autor['gamedesigner_id'].']" id="autores_'.$autor['gamedesigner_id'].'" value="'.$autor['gamedesigner_id'].'">';
-			echo '<div style="margin:5px;" id="label_autores_'.$autor['gamedesigner_id'].'">'.$autor['designer_name'].
-				'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'autores_'.$autor['gamedesigner_id'].'\', \'label_autores_'.$autor['gamedesigner_id'].'\'); return false;">Borrar</a></div>';
-		}
-	} 
+<div class="relacionarcon" id="relautite" style="display:none">
+	<label>Relacionar con juego</label>
+	<input type="search" placeholder="Busca un juego..." autocomplete="off" id="autocompletegame" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+	<div class="elementosrelacionados" id="juegosrelacionados">
+	<?php 
+		if (isset($reviewItemItems) && is_array($reviewItemItems)) {
 	
-?>
+			foreach ($reviewItemItems as $itemrel) {
+				echo '<input type="hidden" name="juegos['.$itemrel['game_id'].']" id="juegos_'.$itemrel['game_id'].'" value="'.$itemrel['game_id'].'">';
+				echo '<div style="margin:5px;" id="label_juegos_'.$itemrel['game_id'].'">'.$itemrel['game_name'].
+				'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'juegos_'.$itemrel['game_id'].'\', \'label_juegos_'.$itemrel['game_id'].'\'); return false;">Borrar</a></div>';
+			}
+	
+		} 
+		
+	?>
+	
+	</div>
+	
+	<label>Relacionar con autor</label>
+	<input type="search" placeholder="Busca un autor..." autocomplete="off" id="autocompleteautor" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+	<div class="elementosrelacionados" id="autoresrelacionados">
+	<?php 
+		if (isset($reviewItemAutores) && is_array($reviewItemAutores)) {
+	
+			foreach ($reviewItemAutores as $autor) {
+				echo '<input type="hidden" name="autores['.$autor['gamedesigner_id'].']" id="autores_'.$autor['gamedesigner_id'].'" value="'.$autor['gamedesigner_id'].'">';
+				echo '<div style="margin:5px;" id="label_autores_'.$autor['gamedesigner_id'].'">'.$autor['designer_name'].
+					'<a style="padding-left:5px;" href="#" onClick="javascript:borrar(\'autores_'.$autor['gamedesigner_id'].'\', \'label_autores_'.$autor['gamedesigner_id'].'\'); return false;">Borrar</a></div>';
+			}
+		} 
+		
+	?>
+	</div>
+	<input class="closebtn" name="close" type="button" value="Cerrar" onclick="toogle('none','relautite'); return false;" >
+	<a href="#close" title="Cerrar" onclick="modalReview('none','modal','ventana'); return false;" >Close</a>
 </div>
+
+<label>Notas privadas (solo ser&aacute;n visibles por t&iacute;)</label>
+<textarea name="notas_privadas" placeholder="Escribe unas notas solo par t&iacuta;..."><?php if($reviewItem['comment_text']) { echo $reviewItem['comment_notes']; }  ?></textarea>
 
 
 <div>
@@ -253,7 +418,7 @@ $(document).ready(function() {
 <?php else: ?>           
 <input id="submit" name="submit" type="submit" value="Publicar">
 <?php endif; ?>
-<input class="closebtn" name="close" type="button" value="Cancelar" onclick="toogle('none','modal','ventana'); return false;" >
+<input class="closebtn" name="close" type="button" value="Cancelar" onclick="modalReview('none','modal','ventana'); return false;" >
         
 <div id="ajax_loader"></div>
 </form>

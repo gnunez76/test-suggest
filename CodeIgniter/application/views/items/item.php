@@ -24,7 +24,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 
 	/* Abrir ventana modal resena*/
-	function toogle(display,idA,idB)
+	function modalReview(display,idA,idB)
 	{
 
 		if (display == 'block') {
@@ -36,25 +36,28 @@ $(document).ready(function() {
 
 			
 		}
+
+		toogle (display, idA);
+		toogle (display, idB);		
+	}
+
+	function toogle (display, element) {
 		
-		document.getElementById(idA).style.display=display;
-		if (idB != null) {
-			document.getElementById(idB).style.display=display;
-		}
+		document.getElementById(element).style.display=display;
 	}
 
 </script>				
 
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo $game_name;?>">
+				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo stripslashes($game_name);?>">
 				 <div id="userRated"></div>	
 				</div>
 				
 				<div class="datoscol">
 					
 					<section class="infoItem">
-						<h1><?php echo $game_name; ?></h1>
+						<h1><?php echo stripslashes($game_name); ?></h1>
 						<div class="itemrates">
 							<?php 
 								$ratio = 0; 
@@ -84,9 +87,9 @@ $(document).ready(function() {
 							</span>
 						</div>						
 						 
-						<div class="labelitemleft">Diseñador: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
+						<div class="labelitemleft">Dise&ntilde;ador: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
 						<div class="labelitemleft">Ilustrador: </div><div class="textitemleft"><?php echo implode (', ', $artist); ?></div>
-						<div class="labelitemleft">Nº Jugadores: </div><div class="textitemleft"><?php echo $game_minplayers . " - " . $game_maxplayers; ?></div>
+						<div class="labelitemleft">N&uacute;mero Jugadores: </div><div class="textitemleft"><?php echo $game_minplayers . " - " . $game_maxplayers; ?></div>
 						<div class="labelitemleft">Edad recomendada: </div><div class="textitemleft"><?php echo $game_age; ?></div>
 						<div class="labelitemleft">Duraci&oacute;n: </div><div class="textitemleft"><?php echo $game_duration; ?> minutos</div>
 						<div class="labelitemleft">Dependencia del idioma: </div><div class="textitemleft"><?php echo $language['language_name']; ?></div>
@@ -133,7 +136,7 @@ $(document).ready(function() {
 <div id="modal" style="display:none">
 	<div id="ventana" class="contenedor" style="display:none">
 		<span id="modalReview"></span>
-		<a href="#close" title="Cerrar" onclick="toogle('none','modal','ventana'); return false;" >Close</a>
+		<a href="#close" title="Cerrar" onclick="modalReview('none','modal','ventana'); return false;" >Close</a>
 	</div>
 </div>
 

@@ -331,6 +331,53 @@ a:hover {
 	
 }
 
+
+/* Boton examinar */
+
+.file-wrapper {
+cursor: pointer;
+display: inline-block;
+overflow: hidden;
+position: relative;
+
+
+}
+
+.file-wrapper:hover {
+opacity: 0.8;
+}
+
+
+.file-wrapper input {
+cursor: pointer;
+font-size: 100px;
+height: 100%;
+filter: alpha(opacity=1);
+-moz-opacity: 0.01;
+opacity: 0.01;
+position: absolute;
+right: 0;
+top: 0;
+}
+.file-wrapper .button {
+background: #AAAAAA;
+/*
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+*/
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-size: 11px;
+font-weight: bold;
+margin-right: 5px;
+padding: 10px;
+text-transform: uppercase;
+}
+
+
+
 /* Ventana modal JS */
 #modal
 {
@@ -347,7 +394,7 @@ a:hover {
   	overflow: auto;
 }
 
-.contenedor
+.contenedor, .relacionarcon
 {
   
   width: 800px;
@@ -430,8 +477,8 @@ label {
 
 
 input, textarea {
-	width:439px;
 /*
+	width:439px;
 	height:27px;
 	background:#efefef;
 	border-radius:5px;
@@ -464,6 +511,30 @@ textarea {
 .sharetwittercb {
 	margin-top: 20px;
 	width: 20px;
+}
+
+.moduloimagesformreview {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.imgsuccess {
+	width: 760px;
+	border: 1px solid #dedede;
+	display: none;
+	padding: 5px;
+}
+
+.reviewtitle {
+	width: 500px;
+}
+
+.relacionarcon {
+	z-index: 70;
+	width: 300px;
+	position:absolute;
+	top:110px;
+	left: 200px;
 }
 
 

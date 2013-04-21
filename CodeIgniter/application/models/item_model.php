@@ -212,7 +212,7 @@ class Item_Model extends CI_Model {
 	
 			foreach ($query->result_array() as $item) {
 	
-				$resultado [] = base_url().'juego/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
+				$resultado [] = base_url().'autor/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
 			}
 	
 		}

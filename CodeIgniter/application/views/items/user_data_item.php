@@ -13,9 +13,9 @@ $(document).ready(function() {
 </script>
 
 <?php if  (isset ($userReview['comment_id'])): ?>
-<div class="botonreview"><a href="#" onclick="toogle('block','modal','ventana');return false;">EDITA TU RESE&Ntilde;A</a></div>
+<div class="botonreview"><a href="#" onclick="modalReview('block','modal','ventana');return false;">EDITA TU RESE&Ntilde;A</a></div>
 <?php else: ?>
-<div class="botonreview"><a href="#" onclick="toogle('block','modal','ventana');return false;">A&Ntilde;ADE TU RESE&Ntilde;A</a></div>
+<div class="botonreview"><a href="#" onclick="modalReview('block','modal','ventana');return false;">A&Ntilde;ADE TU RESE&Ntilde;A</a></div>
 <?php endif; ?>
 <span class="label10">Tu puntuaci&oacute;n</span>
 
