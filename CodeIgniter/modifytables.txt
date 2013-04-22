@@ -1,0 +1,12 @@
+//22042013
+CREATE  TABLE IF NOT EXISTS `suggest`.`ri_review_images` (
+  `ri_id` INT(11) NOT NULL ,
+  `item_id` INT(11) NULL DEFAULT NULL ,
+  `usr_identifier` VARCHAR(45) NULL DEFAULT NULL ,
+  `image_original` VARCHAR(100) NULL DEFAULT NULL ,
+  `image_thumbnail` VARCHAR(100) NULL DEFAULT NULL ,
+  PRIMARY KEY (`ri_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
