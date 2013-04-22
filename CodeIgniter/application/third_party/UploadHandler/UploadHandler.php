@@ -14,6 +14,7 @@ class UploadHandler
 {
 	public $itemId;
 	public $userId;
+	public $db;
 	
     protected $options;
     // PHP File Upload error message codes:
@@ -41,7 +42,7 @@ class UploadHandler
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
 //            'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).'/files/',
-        	'upload_dir' => CIPATH.'/assets/images/usersuploads/',
+        	'upload_dir' => CIPATH.'assets/images/usersuploads/',
             'upload_url' => $this->get_full_url().'/files/',
 			'upload_url' => '/assets/images/usersuploads/',
             'user_dirs' => false,
@@ -74,7 +75,7 @@ class UploadHandler
             'accept_file_types' => '/.+$/i',
             // The php.ini settings upload_max_filesize and post_max_size
             // take precedence over the following max_file_size setting:
-            'max_file_size' => 1000000,
+            'max_file_size' => 500000,
             'min_file_size' => 1,
             // The maximum number of files for the upload directory:
             'max_number_of_files' => null,
@@ -127,6 +128,10 @@ class UploadHandler
         */
     }
 
+    public function setDb ($db) {
+    	$this->db = $db;
+    }
+    
     public function setItemId ($itemId) {
     	$this->itemId = $itemId;
     }
@@ -590,6 +595,26 @@ class UploadHandler
                     .implode($failed_versions,', ');
         }
     }
+    
+    protected function insertImagesDB ($file) {
+
+    	
+    	try {
+    		
+	    	$sql = "INSERT INTO ri_review_images (item_id, usr_identifier, image_original, image_thumbnail)
+	    			VALUE (".$this->db->escape ($this->itemId).", "
+	    				.$this->db->escape ($this->userId).","
+	    				.$this->db->escape ($file->url).","
+	    				.$this->db->escape ($file->thumbnail_url).");";
+	    	$this->db->query ($sql);
+    	}
+    	catch (Exception $e) {
+	    	log_message('error', 'model.User_Suggest_Model.setUser: Error al insertar usuario en la BD');
+    		log_message('error', $e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage());
+    		trigger_error($e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage(), E_USER_ERROR);
+    	}
+    	
+    }
 
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
             $index = null, $content_range = null) {
@@ -634,13 +659,14 @@ class UploadHandler
                     $this->handle_image_file($file_path, $file);
                 }
             } else {
-                $file->size = $file_size;
+                $file->size = $file_size;                
                 if (!$content_range && $this->options['discard_aborted_uploads']) {
                     unlink($file_path);
                     $file->error = 'abort';
                 }
             }
             $this->set_file_delete_properties($file);
+            $this->insertImagesDB ($file);
         }
         return $file;
     }

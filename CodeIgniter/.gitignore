@@ -8,5 +8,6 @@
 Servers/
 target/
 assets/images/games/
+assets/images/usersuploads/
 application/logs/
 bgg_log/

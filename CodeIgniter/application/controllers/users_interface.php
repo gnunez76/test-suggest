@@ -39,13 +39,12 @@ class Users_Interface extends CI_Controller {
 			$data ['reviewItem'] = $this->user_suggest_model->getReviewUserItem ($itemId, $data['user_profile']->identifier);
 			
 			
-/*			
+			
 			if ($data ['reviewItem']) {
 				
-				$data ['reviewItemAutores'] = $this->user_suggest_model->getReviewDesignerRel($data ['reviewItem']['comment_id']);
-				$data ['reviewItemItems'] = $this->user_suggest_model->getReviewItemRel($data ['reviewItem']['comment_id']);
+				$data ['reviewImages'] = $this->user_suggest_model->getReviewImagesUpload ($itemId, $data ['user_profile']->identifier);
 			}
-*/			
+			
 			$this->benchmark->mark('get_rate_end');
 				
 			if ($data ['rateGame']) {
@@ -94,8 +93,12 @@ class Users_Interface extends CI_Controller {
 			$this->benchmark->mark('user_data_start');
 			$user_profile = $this->hybridauthlib->authenticate($provider)->getUserProfile();
 			
-		//	$this->uploadhandlerlib->setUserId($user_profile->identifier);
-		//	$this->uploadhandlerlib->setItemId ($itemId);
+			$this->uploadhandlerlib->setUserId($user_profile->identifier);
+			$this->uploadhandlerlib->setItemId ($itemId);
+			
+			$this->load->database();
+			$this->uploadhandlerlib->setDb ($this->db);
+			
 			$this->uploadhandlerlib->iniciar();
 		}
 		

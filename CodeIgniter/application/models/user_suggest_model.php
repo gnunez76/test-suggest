@@ -5,6 +5,7 @@ class User_Suggest_Model extends CI_Model {
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->load->database();
 	}
 
@@ -285,6 +286,41 @@ class User_Suggest_Model extends CI_Model {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
+	
+	/*
+	 * Devuelve las imagenes subidas por un usuario a una review
+	*/
+	public function getReviewImagesUpload ($itemId, $usrId) {
+	
+		try {
+	
+	
+	
+			$sql = "SELECT image_original, image_thumbnail
+					FROM ri_review_images
+					WHERE item_id=".$this->db->escape($itemId)." AND 
+						usr_identifier=".$this->db->escape($usrId);
+						
+	
+			log_message('debug', 'models.User_Suggest_Model.getReviewImagesUpload query: '.$sql);
+	
+			if ($query = $this->db->query($sql)) {
+				if ($row = $query->result_array()) {
+					return $row;
+				}
+				else {
+					return false;
+				}
+			}
+	
+			return false;
+		}
+		catch (Exception $e) {
+			log_message('error', $e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	
 	
 	/*
 	 * Devuelve los autores relacionados con una review

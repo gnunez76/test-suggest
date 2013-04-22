@@ -1,16 +1,16 @@
 <!-- ELIMINAR CSS -->
- 
+<!--  
 <link href="/assets/css/estilos.css" rel="stylesheet">
-<!-- 
+
 <link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
- -->
+
 <link href="/assets/css/rating-stars/jquery.rating.css" rel="stylesheet">
 <link href="/assets/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
 
- <!---->
+-->
 <!-- /ELIMNAR CSS -->
 <!-- ELIMINAR JS -->
-     
+<!--      
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/assets/js/rating-stars/jquery.rating.pack.js"></script>
@@ -22,7 +22,7 @@ function toogle (display, element) {
 }
 
 </script>
-<!-- -->
+-->
 <!-- /ELIMINAR JS -->
 
 <script type="text/javascript">
@@ -266,7 +266,34 @@ function insertAtCaret(areaId,text) {
 
 <label>Imagenes</label>
 <div id="imgfail"></div>
-<div id="imgsuccess" class="imgsuccess"></div>
+<div id="imgsuccess" class="imgsuccess">
+
+
+ 
+
+
+<?php if (isset($reviewImages) && is_array($reviewImages)): ?>
+	
+	<script>
+		$(function () {
+				$('#imgsuccess').css('display', 'block');
+		});
+	</script>
+
+	<?php  foreach ($reviewImages as $images): ?>
+	
+	
+		
+                    
+		<span style="padding: 10px;"><a href="#" onclick="javascript:insertAtCaret('userreviewtext','<img src=&quot<?php echo $images ['image_original']?>&quot>'); return false;"><img src="<?php echo $images['image_thumbnail']; ?>"></a></span>
+		
+
+	<?php endforeach; ?>
+<?php endif; ?>
+
+
+
+</div>
 <div class="moduloimagesformreview">
 	
 <!-- ########################################## -->
