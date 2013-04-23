@@ -79,6 +79,18 @@ class CI_Session {
 			return ( ! isset($_SESSION[$item])) ? false : $_SESSION[$item];
 		}
 	}
+	
+
+	/**
+	 * Fetch all session data
+	 *
+	 * @access public
+	 * @return array
+	 */
+	function all_userdata()
+	{
+		return array();
+	}
 
 	/**
     * Sets session attributes to the given values

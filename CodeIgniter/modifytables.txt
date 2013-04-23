@@ -11,3 +11,15 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 ALTER TABLE `suggest`.`ri_review_images` CHANGE COLUMN `ri_id` `ri_id` INT(11) NOT NULL AUTO_INCREMENT  ;
+
+
+CREATE  TABLE IF NOT EXISTS `suggest`.`au_admin_users` (
+  `au_id` TINYINT(4) NOT NULL AUTO_INCREMENT ,
+  `au_username` VARCHAR(100) NOT NULL ,
+  `au_realname` VARCHAR(50) NOT NULL ,
+  `au_password` VARCHAR(100) NOT NULL ,
+  `au_active` TINYINT(1) NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`au_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
