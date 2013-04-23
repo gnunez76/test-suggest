@@ -164,12 +164,10 @@ class SI_Admin extends CI_Controller {
 			$data ["mechanics"] = $this->si_admin_model->getItemMechanical ($itemId);
 			$data ["categories"] = $this->si_admin_model->getItemCategory ($itemId);
 			$data ["languages"] = $this->si_admin_model->getItemLanguageDep ($itemId);
-			$data ["allLanDep"] = $this->si_admin_model->getAllLanDep ($itemId);;
-			
+			$data ["allLanDep"] = $this->si_admin_model->getAllLanDep ($itemId);
 			
 			$this->load->view ('admin/items/edititem', $data);
-				
-				
+					
 			$this->load->view('admin/footer_admin', $data);
 		}
 		else

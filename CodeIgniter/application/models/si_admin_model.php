@@ -190,8 +190,7 @@ class SI_Admin_Model extends CI_Model {
 	public function getAllLanDep () {
 		
 		$sql = "SELECT a.gamelanguagedep_id, a.language_name
-			FROM sg_gamelanguagedep a, sg_games_gamelanguagedep b
-			WHERE a.gamelanguagedep_id=b.gamelanguagedep_id";	
+			FROM sg_gamelanguagedep a";	
 
 		if ($query = $this->db->query($sql)) {
 		

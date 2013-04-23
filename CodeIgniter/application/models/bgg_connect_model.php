@@ -414,4 +414,29 @@ class BGG_Connect_Model extends CI_Model {
 
 	}
 	
+	public function cleanTable  ($texto, $idBase) {
+		
+		$sql = "SELECT gamelanguagedep_id 
+				FROM sg_gamelanguagedep 
+				WHERE language_name=".$this->db->escape($texto);
+		
+		
+		$query = $this->db->query($sql);
+		
+		if ($rows = $query->result_array()) {
+			
+			foreach ($rows as $row) {
+							
+				echo $row ['gamelanguagedep_id'] . " - ";
+				$sql = "UPDATE sg_games_gamelanguagedep SET gamelanguagedep_id=".$this->db->escape($idBase).
+				" WHERE gamelanguagedep_id=".$this->db->escape($row['gamelanguagedep_id']);
+
+				echo $sql . "<br>";
+				$this->db->query($sql);
+			}
+				
+		}		
+	}
+	
+	
 }

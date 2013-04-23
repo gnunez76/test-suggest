@@ -30,7 +30,7 @@
   
   
     <tr>
-      <td><img src="<?php #echo $item['game_thumbnail']; ?>" width="80"></td>
+      <td><img src="<?php echo $item['game_thumbnail']; ?>" width="80"></td>
       <td><?php echo $item['game_name']; ?></td>
       <td><?php echo $item['game_yearpub']; ?></td>
       <td><?php echo anchor('/si_admin/editarItem/'.$item['game_id'], 'Editar', 'title="Editar"'); ?></td>

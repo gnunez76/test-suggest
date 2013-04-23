@@ -17,6 +17,19 @@ class BGG_Connect extends CI_Controller {
 		
 		$this->output->set_output ($data);
 	}
+	
+	public function clean () {
+		
+		$this->output->enable_profiler(TRUE);
+		$this->bgg_connect_model->cleanTable ('No necessary in-game text', 1);
+		$this->bgg_connect_model->cleanTable ('Some necessary text - easily memorized or small crib sheet', 2);
+		$this->bgg_connect_model->cleanTable ('Moderate in-game text - needs crib sheet or paste ups', 3);
+		$this->bgg_connect_model->cleanTable ('Extensive use of text - massive conversion needed to be playable', 4);
+		$this->bgg_connect_model->cleanTable ('Unplayable in another language', 5);
+		
+		
+		
+	}
 
 /*	
 	public function view($slug)
