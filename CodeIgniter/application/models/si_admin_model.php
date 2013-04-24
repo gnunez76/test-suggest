@@ -81,7 +81,7 @@ class SI_Admin_Model extends CI_Model {
 	}
 	
 	public function getGameNames ($itemId) {
-		$sql = "SELECT sg.gamename_id, sg.game_name 
+		$sql = "SELECT sg.gamename_id, sg.game_name, sgg.gamename_priority, sgg.active 
 				FROM sg_gamename sg
 				INNER JOIN sg_games_gamename sgg ON sgg.gamename_id=sg.gamename_id AND sgg.game_id=".$this->db->escape($itemId).
 				" ORDER BY sgg.gamename_priority DESC";
@@ -97,7 +97,7 @@ class SI_Admin_Model extends CI_Model {
 	
 	public function getItemCreator ($itemId) {
 	
-		$sql = "SELECT a.gamedesigner_id, designer_name
+		$sql = "SELECT a.gamedesigner_id, designer_name, b.active
 			FROM sg_gamedesigner a, sg_games_gamedesigner b
 			WHERE a.gamedesigner_id=b.gamedesigner_id AND b.game_id='".$itemId."'";
 		
@@ -111,7 +111,7 @@ class SI_Admin_Model extends CI_Model {
 	
 	public function getItemEditorial ($itemId) {
 	
-		$sql = "SELECT a.gameeditorial_id, editorial_name
+		$sql = "SELECT a.gameeditorial_id, editorial_name, b.active
 			FROM sg_gameeditorial a, sg_games_gameeditorial b
 			WHERE a.gameeditorial_id=b.gameeditorial_id AND b.game_id='".$itemId."'";
 	
@@ -125,7 +125,7 @@ class SI_Admin_Model extends CI_Model {
 	
 	public function getItemArtist ($itemId) {
 	
-		$sql = "SELECT a.gameartist_id, a.artist_name
+		$sql = "SELECT a.gameartist_id, a.artist_name, b.active
 			FROM sg_gameartist a, sg_games_gameartist b
 			WHERE a.gameartist_id=b.gameartist_id AND b.game_id='".$itemId."'";
 	
@@ -142,7 +142,7 @@ class SI_Admin_Model extends CI_Model {
 	*/
 	public function getItemMechanical ($itemId) {
 	
-		$sql = "SELECT a.gamemechanic_id,  a.mechanic_name
+		$sql = "SELECT a.gamemechanic_id,  a.mechanic_name, b.active
 			FROM sg_gamemechanic a, sg_games_gamemechanic b
 			WHERE a.gamemechanic_id=b.gamemechanic_id AND b.game_id='".$itemId."'";
 		if ($query = $this->db->query($sql)) {
@@ -158,7 +158,7 @@ class SI_Admin_Model extends CI_Model {
 	*/
 	public function getItemCategory ($itemId) {
 	
-		$sql = "SELECT a.gamecategory_id, a.category_name
+		$sql = "SELECT a.gamecategory_id, a.category_name, b.active
 			FROM sg_gamecategory a, sg_games_gamecategory b
 			WHERE a.gamecategory_id=b.gamecategory_id AND b.game_id='".$itemId."'";
 		
@@ -187,6 +187,9 @@ class SI_Admin_Model extends CI_Model {
 		return false;
 	}
 	
+	/*
+	 * Devuelve todos las dependencias del lenguaje
+	 */
 	public function getAllLanDep () {
 		
 		$sql = "SELECT a.gamelanguagedep_id, a.language_name
@@ -201,5 +204,83 @@ class SI_Admin_Model extends CI_Model {
 		
 	}
 	
+	/*
+	 * Activa o desactiva el autor
+	 */
+	public function changeActiveAutor ($autorId, $itemId, $active) {
+		
+		$sql = "UPDATE sg_games_gamedesigner 
+				SET active=".$this->db->escape($active).
+				" WHERE gamedesigner_id=".$this->db->escape($autorId).
+				" AND  game_id=".$this->db->escape($itemId);
+		
+		$this->db->query($sql);	
+	}
+
+	
+	/*
+	 * Activa o desactiva el nombre del item
+	 */
+	public function changeActiveItemName ($nameId, $itemId, $active) {
+	
+		$sql = "UPDATE sg_games_gamename
+				SET active=".$this->db->escape($active).
+				" WHERE gamename_id=".$this->db->escape($nameId).
+				" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
+
+	/*
+	 * Activa o desactiva el nombre del ilustrador
+	*/
+	public function changeActiveArtist ($artistId, $itemId, $active) {
+	
+		$sql = "UPDATE sg_games_gameartist
+				SET active=".$this->db->escape($active).
+				" WHERE gameartist_id=".$this->db->escape($artistId).
+				" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
+
+	/*
+	 * Activa o desactiva la editorial
+	*/
+	public function changeActiveEditorial ($editorialId, $itemId, $active) {
+	
+		$sql = "UPDATE sg_games_gameeditorial
+				SET active=".$this->db->escape($active).
+					" WHERE gameeditorial_id=".$this->db->escape($editorialId).
+					" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
+
+	/*
+	 * Activa o desactiva las mecanicas
+	*/
+	public function changeActiveMechanic ($mechanicId, $itemId, $active) {
+	
+		$sql = "UPDATE sg_games_gamemechanic
+				SET active=".$this->db->escape($active).
+					" WHERE gamemechanic_id=".$this->db->escape($mechanicId).
+					" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
+	
+	/*
+	 * Activa o desactiva las categorias
+	*/
+	public function changeActiveCategory ($categoryId, $itemId, $active) {
+	
+		$sql = "UPDATE sg_games_gamecategory
+				SET active=".$this->db->escape($active).
+					" WHERE gamecategory_id=".$this->db->escape($categoryId).
+					" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
 	
 }

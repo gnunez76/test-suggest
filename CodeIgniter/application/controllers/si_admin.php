@@ -98,6 +98,12 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	
+	
+	/*
+	 * Listado items para el backend 
+	 *
+	 */
 	public function items ($page=0) {
 
 		
@@ -140,6 +146,9 @@ class SI_Admin extends CI_Controller {
 	}
 	
 	
+	/*
+	 * Editar item
+	 */
 	public function editarItem ($itemId) {
 	
 	
@@ -166,6 +175,7 @@ class SI_Admin extends CI_Controller {
 			$data ["languages"] = $this->si_admin_model->getItemLanguageDep ($itemId);
 			$data ["allLanDep"] = $this->si_admin_model->getAllLanDep ($itemId);
 			
+
 			$this->load->view ('admin/items/edititem', $data);
 					
 			$this->load->view('admin/footer_admin', $data);
@@ -177,10 +187,231 @@ class SI_Admin extends CI_Controller {
 		}
 	
 	
+	}
+
+	/*
+	 * Bloque de nombres de item
+	 */
+	public function getBlockItemName ($itemId) {
+
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+		
+			$this->load->model ('si_admin_model');
+			$data ["itemnames"] = $this->si_admin_model->getGameNames ($itemId);
+			$this->load->view ('admin/items/itemnameblock', $data);				
+		}
+	}
+	
+	/*
+	 * Bloque autor item
+	 */
+	public function getBlockAutor ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["autores"] = $this->si_admin_model->getItemCreator ($itemId);
+			$this->load->view ('admin/items/autorblock', $data);
+		}
+	}
+	
+	/*
+	 * Bloque  diseñador
+	*/
+	public function getBlockIlustrador ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["artists"] = $this->si_admin_model->getItemArtist ($itemId);
+			$this->load->view ('admin/items/ilustradorblock', $data);
+		}
+	}
+	
+	
+	/*
+	 * Bloque editorial
+	*/
+	public function getBlockEditorial ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["editoriales"] = $this->si_admin_model->getItemEditorial ($itemId);
+			$this->load->view ('admin/items/editorialblock', $data);
+		}
 	}	
 	
+	/*
+	 * Bloque mecanicas
+	*/
+	public function getBlockMecanicas ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["mechanics"] = $this->si_admin_model->getItemMechanical ($itemId);
+			$this->load->view ('admin/items/mechanicblock', $data);
+		}
+	}
 	
 	
+	/*
+	 * Desactivar autor
+	 */
+	public function deactivateAutor ($id, $itemId) {
+
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveAutor($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar autor
+	 */
+	public function activateAutor ($id, $itemId) { 
+
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveAutor($id, $itemId, 1);
+		}
+	}
+	
+	
+	/*
+	 * Desactivar nombre Item
+	*/
+	public function deactivateItemName ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveItemName($id, $itemId, 0);
+		}
+	}
+		
+	/*
+	 * Activar nombre Item
+	*/
+	public function activateItemName ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveItemName($id, $itemId, 1);
+		}
+	}
+	
+
+	/*
+	 * Desactivar ilustrador
+	*/
+	public function deactivateIlustrador ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveArtist($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar ilustrador
+	*/
+	public function activateIlustrador ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveArtist($id, $itemId, 1);
+		}
+	}
+	
+	
+	/*
+	 * Desactivar editorial
+	*/
+	public function deactivateEditorial ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveEditorial($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar editorial
+	*/
+	public function activateEditorial ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveEditorial($id, $itemId, 1);
+		}
+	}
+
+	
+	/*
+	 * Desactivar mecanicas
+	*/
+	public function deactivateMecanica ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveMechanic($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar mecanicas
+	*/
+	public function activateMecanica ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveMechanic($id, $itemId, 1);
+		}
+	}
+		
+	
+/*
 	public function getItemsGrid () {
 		
 		$this->load->model ('si_admin_model');
@@ -191,6 +422,9 @@ class SI_Admin extends CI_Controller {
 		return $salida;
 		
 	}
+*/
+
+
 
 	function logout()
 	{
@@ -199,6 +433,8 @@ class SI_Admin extends CI_Controller {
 		redirect('si_admin/home', 'refresh');
 	}
 
+	
+	
 	
 		
 	
