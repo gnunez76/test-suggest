@@ -283,4 +283,32 @@ class SI_Admin_Model extends CI_Model {
 		$this->db->query($sql);
 	}
 	
+	/*
+	 * Actualiza informacion de un item
+	 */
+	public function updateItem ($data) {
+		
+		$sql = "UPDATE sg_games 
+				SET game_yearpub=".$this->db->escape($data["yearpub"]).
+				", game_minplayers=".$this->db->escape($data["minplayer"]).
+				", game_maxplayers=".$this->db->escape($data["maxplayer"]).
+				", game_age=".$this->db->escape($data["age"]).
+				", game_duration=".$this->db->escape($data["duration"]).
+				", game_description=".$this->db->escape($data["bgg_description"]).
+				" WHERE game_id=".$this->db->escape($data["itemId"]);
+		
+		$this->db->query($sql);
+	}
+	
+	/*
+	 * Actualiza la dependencia linguistica del item
+	 */
+	public function updateItemLanDep ($data) {
+		
+		$sql = "UPDATE sg_games_gamelanguagedep
+				SET gamelanguagedep_id=".$this->db->escape($data["deplenguaje"]).
+				" WHERE game_id=".$this->db->escape($data["itemId"]);
+		
+		$this->db->query ($sql);
+	}
 }

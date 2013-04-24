@@ -188,6 +188,27 @@ class SI_Admin extends CI_Controller {
 	
 	
 	}
+	
+	/*
+	 * Actualiza el item editado
+	 */
+	public function updateItem () {
+		$this->output->enable_profiler(TRUE);
+		if($this->session->userdata('logged_in'))
+		{
+
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->updateItem ($_POST);
+			$this->si_admin_model->updateItemLanDep ($_POST);
+				
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+		
+	}
 
 	/*
 	 * Bloque de nombres de item
@@ -275,6 +296,22 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	/*
+	 * Bloque mecanicas
+	*/
+	public function getBlockCategorias ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["categories"] = $this->si_admin_model->getItemCategory ($itemId);
+			$this->load->view ('admin/items/categoriasblock', $data);
+		}
+	}
 	
 	/*
 	 * Desactivar autor
@@ -409,7 +446,34 @@ class SI_Admin extends CI_Controller {
 			$this->si_admin_model->changeActiveMechanic($id, $itemId, 1);
 		}
 	}
+
+	/*
+	 * Desactivar categorias
+	*/
+	public function deactivateCategoria ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveCategory($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar mecanicas
+	*/
+	public function activateCategoria ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveCategory($id, $itemId, 1);
+		}
+	}
 		
+	
 	
 /*
 	public function getItemsGrid () {

@@ -35,6 +35,7 @@ select, option {
 	border: 1px solid #669;
 }
 
+
 .bloquecheckboxdesactivados {
 
 	background-color: #AAAAAA;
@@ -50,12 +51,47 @@ select, option {
 	width: 300px;
 }
 
-.boton {
+.boton, .boton_plus {
 
 	padding: 5px;
 	border: 1px solid #555555;
 	background-color: #F8F8F8 ;
+	text-decoration: none;
 }
+
+.boton:hover {
+	background-color: #CCCCCC;
+	
+}
+
+.boton_plus {
+	width: 100px;
+}
+
+.boton_plus:hover {
+	background-color: #CCCCCC;	
+}
+
+.boton_plus a {
+	float: right;
+}
+
+
+.bloquecheckbox .boton {
+
+	background-color: #BCF5A9;
+}
+
+.bloquecheckbox .boton:hover {
+
+	background-color: #CCCCCC;
+}
+
+.bloquecheckboxdesactivados .boton:hover {
+
+	background-color: #BCF5A9;
+}
+
 
 .imgright {
 	float: right;
@@ -115,6 +151,13 @@ function desactivarElemento (tipo, id) {
 				$('#bloqueMecanicas').html(data);
 			});
 			break;
+
+		case 'categorias':
+			$.get('/si_admin/deactivateCategoria/'+id+'/'+<?php echo $game_id; ?>);
+			$.get('/si_admin/getBlockCategorias/'+<?php echo $game_id; ?>, function(data) {
+				$('#bloqueCategorias').html(data);
+			});
+			break;
 			
 	}
 
@@ -161,6 +204,13 @@ function activarElemento (tipo, id) {
 			});
 			break;
 			
+		case 'categorias':
+			$.get('/si_admin/activateCategoria/'+id+'/'+<?php echo $game_id; ?>);
+			$.get('/si_admin/getBlockCategorias/'+<?php echo $game_id; ?>, function(data) {
+				$('#bloqueCategorias').html(data);
+			});
+			break;
+			
 	}
 
 	
@@ -170,11 +220,15 @@ function activarElemento (tipo, id) {
 </script>
 
 
-<form id="form" name="form" method="post" action="">
+<form id="form" name="form" method="post" action="/si_admin/updateItem/">
 
 
 
 <label>Nombre</label>
+<div id="addName">
+	<input type="text" name="newName" value="">
+	<a class="boton" href="#">A&Ntilde;ADIR NOMBRE</a>
+</div>
 <div id="bloqueItemName">
 	<div class="bloquecheckbox">
 	<table>
@@ -392,24 +446,42 @@ function activarElemento (tipo, id) {
 </div>
 
 <label>Categorias</label>
-<div class="bloquecheckbox">
-<table>
-<tr>
-<?php $i=1;foreach ($categories as $category): ?>
-<td>
-<!-- 
-<input name="categorias[]" type="checkbox" value="<?php echo $category['gamecategory_id']; ?>" checked><?php echo $category['category_name']; ?>
--->
-
-<div class="boton"><?php echo $category['category_name']; ?><a href="#" class="ui-icon ui-icon-circle-minus imgright"></a></div>
-</td>
-<?php if ($i%3 == 0) { echo "</tr><tr>"; } $i++; ?>
-<?php endforeach; ?>
-</tr>
-</table>
+<div id="bloqueCategorias">
+	<div class="bloquecheckbox">
+	<table>
+	<tr>
+	<?php $i=1;foreach ($categories as $category): ?>
+	<?php if ($category['active'] == 1):?>
+	<td>
+	<div class="boton"><?php echo $category['category_name']; ?>
+	<a href="#" class="ui-icon ui-icon-circle-minus imgright"  onclick="javascript: desactivarElemento('categorias','<?php echo $category["gamecategory_id"]; ?>'); return false;"></a>
+	</div>
+	</td>
+	<?php if ($i%3 == 0) { echo "</tr><tr>"; } $i++; ?>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	</tr>
+	</table>
+	</div>
+	
+	<div class="bloquecheckboxdesactivados">
+	<table>
+	<tr>
+	<?php $i=1;foreach ($categories as $category): ?>
+	<?php if ($category['active'] != 1):?>
+	<td>
+	<div class="boton"><?php echo $category['category_name']; ?>
+	<a href="#" class="ui-icon ui-icon-circle-plus imgright"  onclick="javascript: activarElemento('categorias','<?php echo $category["gamecategory_id"]; ?>'); return false;"></a>
+	</div>
+	</td>
+	<?php if ($i%3 == 0) { echo "</tr><tr>"; } $i++; ?>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	</tr>
+	</table>
+	</div>
 </div>
 
-<div class="bloquecheckboxdesactivados"></div>
 
 <br>
 <input type="submit" name="enviar" value="Actualizar">
