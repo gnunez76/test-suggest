@@ -95,6 +95,21 @@ class SI_Admin_Model extends CI_Model {
 		
 	}
 	
+	public function getExpansions ($itemId) {
+		
+		$sql = "SELECT sg.game_name, sgg.game_id, sge.active
+				FROM sg_gamename sg
+				INNER JOIN sg_games_gamename sgg ON sgg.gamename_id=sg.gamename_id	AND sgg.gamename_priority=1		
+				INNER JOIN sg_games_gameexpansion sge ON sge.gameexpansion_id=sgg.game_id AND sge.game_id=".$this->db->escape($itemId);
+		
+		if ($query = $this->db->query($sql)) {
+		
+			return $query->result_array();
+		}
+		
+		return false;
+	}
+	
 	public function getItemCreator ($itemId) {
 	
 		$sql = "SELECT a.gamedesigner_id, designer_name, b.active
@@ -216,7 +231,20 @@ class SI_Admin_Model extends CI_Model {
 		
 		$this->db->query($sql);	
 	}
-
+	
+	/*
+	 * Activa o desactiva la expansion
+	*/
+	public function changeActiveExpansion ($itemId, $expansionId, $active) {
+	
+		$sql = "UPDATE sg_games_gameexpansion
+				SET active=".$this->db->escape($active).
+					" WHERE gameexpansion_id=".$this->db->escape($expansionId).
+					" AND  game_id=".$this->db->escape($itemId);
+	
+		$this->db->query($sql);
+	}
+	
 	
 	/*
 	 * Activa o desactiva el nombre del item
@@ -311,4 +339,181 @@ class SI_Admin_Model extends CI_Model {
 		
 		$this->db->query ($sql);
 	}
+	
+	/*
+	 * Añade un nuevo nombre al item
+	 */
+	public function insertNewName ($itemId, $newName) {
+		
+		$sql = "INSERT INTO sg_gamename (game_name)
+				VALUES (".$this->db->escape($newName).")";
+		
+		
+		$this->db->query($sql);
+		
+		$gamenameId = $this->db->insert_id();
+
+		$sql = "INSERT INTO sg_games_gamename (gamename_id, game_id)
+				VALUES (".$this->db->escape($gamenameId).","
+				.$this->db->escape($itemId).")";
+		
+		$this->db->query($sql);
+	}
+	
+
+	/*
+	 * Añade un diseñador al item
+	 */
+	public function addDesignerToItem ($itemId, $designerId) {
+		
+		$sql = "INSERT INTO sg_games_gamedesigner (game_id, gamedesigner_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($designerId).")";
+		
+		$this->db->query($sql);
+	}
+	
+	/*
+	 * Añade un artista al item
+	*/
+	public function addArtistToItem ($itemId, $artistId) {
+	
+		$sql = "INSERT INTO sg_games_gameartist (game_id, gameartist_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($artistId).")";
+	
+		$this->db->query($sql);
+	}
+
+	/*
+	 * Añade un editorial al item
+	*/
+	public function addEditorialToItem ($itemId, $editorialId) {
+	
+		$sql = "INSERT INTO sg_games_gameeditorial (game_id, gameeditorial_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($editorialId).")";
+	
+		$this->db->query($sql);
+	}
+
+	/*
+	 * Añade una mecanica al item
+	*/
+	public function addMechanicToItem ($itemId, $mechanicId) {
+	
+		$sql = "INSERT INTO sg_games_gamemechanic (game_id, gamemechanic_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($mechanicId).")";
+	
+		$this->db->query($sql);
+	}
+	
+	/*
+	 * Añade una categoria al item
+	*/
+	public function addCategoryToItem ($itemId, $categoryId) {
+	
+		$sql = "INSERT INTO sg_games_gamecategory (game_id, gamecategory_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($categoryId).")";
+	
+		$this->db->query($sql);
+	}	
+	
+	
+	/*
+	 * Buscador de predictivo de autors
+	*/
+	public function predictiveSearchAutorResult ($search) {
+	
+		$sql = "SELECT gamedesigner_id, designer_name
+			FROM sg_gamedesigner
+			WHERE UPPER(designer_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();	
+		}
+	
+		return false;
+	}
+	
+	
+	/*
+	 * Buscador de predictivo de ilustradores
+	*/
+	public function predictiveSearchArtistResult ($search) {
+	
+		$sql = "SELECT gameartist_id, artist_name
+			FROM sg_gameartist
+			WHERE UPPER(artist_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}
+	
+
+	/*
+	 * Buscador de predictivo de editoriales
+	*/
+	public function predictiveSearchEditorialResult ($search) {
+	
+		$sql = "SELECT gameeditorial_id, editorial_name
+			FROM sg_gameeditorial
+			WHERE UPPER(editorial_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}
+
+	/*
+	 * Buscador de predictivo de editoriales
+	*/
+	public function predictiveSearchMechanicResult ($search) {
+	
+		$sql = "SELECT gamemechanic_id, mechanic_name
+			FROM sg_gamemechanic
+			WHERE UPPER(mechanic_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}
+
+	
+	/*
+	 * Buscador de predictivo de categorias
+	*/
+	public function predictiveSearchCategoryResult ($search) {
+	
+		$sql = "SELECT gamecategory_id, category_name
+			FROM sg_gamecategory
+			WHERE UPPER(category_name) LIKE '%".strtoupper($search)."%'";
+	
+	
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}
+	
+	
 }

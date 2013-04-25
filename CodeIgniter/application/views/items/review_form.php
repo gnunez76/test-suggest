@@ -133,9 +133,9 @@ function insertAtCaret(areaId,text) {
                         response: function ( event, ui ) {
 							for (j=0; j<ui.content.length; j++) {
 
-							$resultAux = ui.content[j].value.split('|');
-							ui.content[j].value=$resultAux[0];
-							ui.content[j].label=$resultAux[1];
+							var resultAux = ui.content[j].value.split('|');
+							ui.content[j].value=resultAux[0];
+							ui.content[j].label=resultAux[1];
 						
 							}
                             $("#autocompletegame").val("");
@@ -171,9 +171,9 @@ function insertAtCaret(areaId,text) {
                    	response: function ( event, ui ) {
 						for (j=0; j<ui.content.length; j++) {
 			
-							var $resultAux = ui.content[j].value.split('|');
-							ui.content[j].value=$resultAux[0];
-							ui.content[j].label=$resultAux[1];
+							var resultAux = ui.content[j].value.split('|');
+							ui.content[j].value=resultAux[0];
+							ui.content[j].label=resultAux[1];
 								
 						}
 						$("#autocompleteautor").val("");

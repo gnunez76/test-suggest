@@ -1,4 +1,5 @@
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
+<script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		
 <style>
 body {
@@ -217,6 +218,194 @@ function activarElemento (tipo, id) {
 }
 
 
+function anadirNombreItem () {
+
+	var newNameItem = $('#newNameItem').val();
+	if (newNameItem != '') {
+
+		$.post("/si_admin/addNameItem/", { nameItem: newNameItem, itemId: <?php echo $game_id; ?> });
+		$.get('/si_admin/getBlockItemName/'+<?php echo $game_id; ?>, function(data) {
+			$('#bloqueItemName').html(data);
+		}); 
+	}
+	else {
+		alert ('Debe introducir un nombre');
+	}
+	
+}
+
+
+
+
+$(function() {
+
+	$( "#autocompletedesigner" ).autocomplete({
+		source: "/si_admin/getautores/",
+		search: function (event, ui) {
+             	
+			$("#autocompletedesigner").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].gamedesigner_id;
+				ui.content[j].label=ui.content[j].designer_name;							
+			}
+			$("#autocompletedesigner").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/adddesigner/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockAutor/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueAutor').html(data);
+				});
+					
+				$("#autocompletedesigner").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompletedesigner").val('');
+                   
+		}
+	});
+
+});
+
+
+$(function() {
+
+	$( "#autocompleteartist" ).autocomplete({
+		source: "/si_admin/getilustradores/",
+		search: function (event, ui) {
+             	
+			$("#autocompleteartist").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].gameartist_id;
+				ui.content[j].label=ui.content[j].artist_name;							
+			}
+			$("#autocompleteartist").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/addartist/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockIlustrador/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueIlustrador').html(data);
+				});
+									
+				$("#autocompleteartist").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompleteartist").val('');
+                   
+		}
+	});
+
+});
+
+$(function() {
+
+	$( "#autocompleteeditorial" ).autocomplete({
+		source: "/si_admin/geteditoriales/",
+		search: function (event, ui) {
+             	
+			$("#autocompleteeditorial").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].gameeditorial_id;
+				ui.content[j].label=ui.content[j].editorial_name;							
+			}
+			$("#autocompleteeditorial").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/addeditorial/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockEditorial/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueEditorial').html(data);
+				});
+													
+				$("#autocompleteeditorial").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompleteeditorial").val('');
+                   
+		}
+	});
+
+});
+
+
+$(function() {
+
+	$( "#autocompletemecanicas" ).autocomplete({
+		source: "/si_admin/getmecanicas/",
+		search: function (event, ui) {
+             	
+			$("#autocompletemecanicas").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].gamemechanic_id;
+				ui.content[j].label=ui.content[j].mechanic_name;							
+			}
+			$("#autocompletemecanicas").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/addmechanic/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockMecanicas/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueMecanicas').html(data);
+				});
+													
+				$("#autocompletemecanicas").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompletemecanicas").val('');
+                   
+		}
+	});
+
+});
+
+
+$(function() {
+
+	$( "#autocompletecategorias" ).autocomplete({
+		source: "/si_admin/getcategorias/",
+		search: function (event, ui) {
+             	
+			$("#autocompletecategorias").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].gamecategory_id;
+				ui.content[j].label=ui.content[j].category_name;							
+			}
+			$("#autocompletecategorias").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/addcategory/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockCategorias/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueCategorias').html(data);
+				});
+																	
+				$("#autocompletecategorias").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompletecategorias").val('');
+                   
+		}
+	});
+
+});
+
+
 </script>
 
 
@@ -225,9 +414,9 @@ function activarElemento (tipo, id) {
 
 
 <label>Nombre</label>
-<div id="addName">
-	<input type="text" name="newName" value="">
-	<a class="boton" href="#">A&Ntilde;ADIR NOMBRE</a>
+<div>
+	<input type="text" name="newName" id="newNameItem" value="">
+	<a class="boton" href="#" onclick="javascript:anadirNombreItem(); return false;">A&Ntilde;ADIR NOMBRE</a>
 </div>
 <div id="bloqueItemName">
 	<div class="bloquecheckbox">
@@ -264,6 +453,9 @@ function activarElemento (tipo, id) {
 </div>
 
 <label>Dise&ntilde;adores</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade un dise&ntilde;ador..." autocomplete="off" id="autocompletedesigner" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
 <div id="bloqueAutor">
 	<div class="bloquecheckbox">
 	<table>
@@ -301,6 +493,9 @@ function activarElemento (tipo, id) {
 </div>
 
 <label>Ilustradores</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade un ilustrador..." autocomplete="off" id="autocompleteartist" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
 <div id="bloqueIlustrador">
 	<div class="bloquecheckbox">
 	<table>
@@ -338,6 +533,9 @@ function activarElemento (tipo, id) {
 </div>
 
 <label>Editoriales</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade una editorial..." autocomplete="off" id="autocompleteeditorial" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
 <div id="bloqueEditorial">
 	<div class="bloquecheckbox">
 	<table>
@@ -409,6 +607,9 @@ function activarElemento (tipo, id) {
 <input type="hidden" name="itemId" value="<?php echo $game_id; ?>">
 
 <label>Mecanicas</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade una mecanicas..." autocomplete="off" id="autocompletemecanicas" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
 <div id="bloqueMecanicas">
 	<div class="bloquecheckbox">
 	<table>
@@ -446,6 +647,9 @@ function activarElemento (tipo, id) {
 </div>
 
 <label>Categorias</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade una categoria..." autocomplete="off" id="autocompletecategorias" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
 <div id="bloqueCategorias">
 	<div class="bloquecheckbox">
 	<table>
@@ -481,6 +685,48 @@ function activarElemento (tipo, id) {
 	</table>
 	</div>
 </div>
+
+
+<label>Expansiones</label>
+<div>
+	<input type="search" placeholder="A&ntilde;ade una categoria..." autocomplete="off" id="autocompleteexpansiones" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
+<div id="bloqueExpansiones">
+	<div class="bloquecheckbox">
+	<table>
+	<tr>
+	<?php $i=1;foreach ($expansions as $expansion): ?>
+	<?php if ($expansion['active'] == 1):?>
+	<td>
+	<div class="boton"><?php echo substr($expansion['game_name'], 0, 40)."..."; ?>
+	<a href="#" class="ui-icon ui-icon-circle-minus imgright"  onclick="javascript: desactivarElemento('expansiones','<?php echo $expansion["game_id"]; ?>'); return false;"></a>
+	</div>
+	</td>
+	<?php if ($i%3 == 0) { echo "</tr><tr>"; } $i++; ?>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	</tr>
+	</table>
+	</div>
+	
+	<div class="bloquecheckboxdesactivados">
+	<table>
+	<tr>
+	<?php $i=1;foreach ($expansions as $expansion): ?>
+	<?php if ($expansion['active'] != 1):?>
+	<td>
+	<div class="boton"><?php echo substr($expansion['game_name'], 0, 40)."..."; ?>
+	<a href="#" class="ui-icon ui-icon-circle-plus imgright"  onclick="javascript: activarElemento('expansiones','<?php echo $expansion["game_id"]; ?>'); return false;"></a>
+	</div>
+	</td>
+	<?php if ($i%3 == 0) { echo "</tr><tr>"; } $i++; ?>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	</tr>
+	</table>
+	</div>
+</div>
+
 
 
 <br>

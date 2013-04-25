@@ -174,7 +174,8 @@ class SI_Admin extends CI_Controller {
 			$data ["categories"] = $this->si_admin_model->getItemCategory ($itemId);
 			$data ["languages"] = $this->si_admin_model->getItemLanguageDep ($itemId);
 			$data ["allLanDep"] = $this->si_admin_model->getAllLanDep ($itemId);
-			
+			$data ["expansions"] = $this->si_admin_model->getExpansions ($itemId);
+	
 
 			$this->load->view ('admin/items/edititem', $data);
 					
@@ -312,6 +313,40 @@ class SI_Admin extends CI_Controller {
 			$this->load->view ('admin/items/categoriasblock', $data);
 		}
 	}
+
+
+	/*
+	 * Desactivar expansiones
+	*/
+	public function deactivateExpansion ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveExpansion($id, $itemId, 0);
+		}
+	}
+	
+	/*
+	 * Activar expansiones
+	*/
+	public function activateExpansion ($id, $itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->changeActiveExpansion($id, $itemId, 1);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * Desactivar autor
@@ -498,9 +533,165 @@ class SI_Admin extends CI_Controller {
 	}
 
 	
-	
-	
+	/*
+	 * Añade un nombre al item
+	 */
+	public function addNameItem () {
 		
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->insertNewName($_POST['itemId'], $_POST['nameItem']);
+		}
+				
+	}
+	
+	/*
+	 * Devuelve la busqueda predictiva de autores
+	 */
+	public function getAutores () {
+
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchAutorResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}		
+	}
+	
+	
+	/*
+	 * Añade un diseñador al item
+	 */
+	public function addDesigner ($itemId, $designerId) {
+		
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addDesignerToItem ($itemId, $designerId);
+		}
+	}
+	
+
+	
+	/*
+	 * Devuelve la busqueda predictiva de ilustradores
+	*/
+	public function getIlustradores () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchArtistResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
+	
+	/*
+	 * Añade un diseñador al item
+	*/
+	public function addArtist ($itemId, $artistId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addArtistToItem ($itemId, $artistId);
+		}
+	}
+	
+
+	
+	/*
+	 * Devuelve la busqueda predictiva de editoriales
+	*/
+	public function getEditoriales () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchEditorialResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
+	
+	/*
+	 * Añade un editorial al item
+	*/
+	public function addEditorial ($itemId, $editorialId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addEditorialToItem ($itemId, $editorialId);
+		}
+	}
+	
+
+	/*
+	 * Devuelve la busqueda predictiva de mecanicas
+	*/
+	public function getMecanicas () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchMechanicResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
+	
+	/*
+	 * Añade una mecanica al item
+	*/
+	public function addMechanic ($itemId, $mechanicId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addMechanicToItem ($itemId, $mechanicId);
+		}
+	}
+	
+	/*
+	 * Devuelve la busqueda predictiva de categorias
+	*/
+	public function getCategorias () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchCategoryResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
+	
+	/*
+	 * Añade una mecanica al item
+	*/
+	public function addCategory ($itemId, $categoryId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addCategoryToItem ($itemId, $categoryId);
+		}
+	}
+	
 	
 
 }
