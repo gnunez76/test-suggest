@@ -159,6 +159,13 @@ function desactivarElemento (tipo, id) {
 				$('#bloqueCategorias').html(data);
 			});
 			break;
+
+		case 'expansiones':
+			$.get('/si_admin/deactivateExpansion/'+id+'/'+<?php echo $game_id; ?>);
+			$.get('/si_admin/getBlockExpansion/'+<?php echo $game_id; ?>, function(data) {
+				$('#bloqueExpansiones').html(data);
+			});
+			break;
 			
 	}
 
@@ -211,6 +218,14 @@ function activarElemento (tipo, id) {
 				$('#bloqueCategorias').html(data);
 			});
 			break;
+
+		case 'expansiones':
+			$.get('/si_admin/activateExpansion/'+id+'/'+<?php echo $game_id; ?>);
+			$.get('/si_admin/getBlockExpansion/'+<?php echo $game_id; ?>, function(data) {
+				$('#bloqueExpansiones').html(data);
+			});
+			break;
+			
 			
 	}
 
@@ -404,6 +419,40 @@ $(function() {
 	});
 
 });
+
+$(function() {
+
+	$( "#autocompleteexpansiones" ).autocomplete({
+		source: "/si_admin/getexpansiones/",
+		search: function (event, ui) {
+             	
+			$("#autocompleteexpansiones").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].game_id;
+				ui.content[j].label=ui.content[j].game_name;							
+			}
+			$("#autocompleteexpansiones").val("");
+		},
+		select: function( event, ui ) { 
+
+				$.get('/si_admin/addexpansion/'+<?php echo $game_id; ?>+'/'+ui.item.value);
+				$.get('/si_admin/getBlockExpansion/'+<?php echo $game_id; ?>, function(data) {
+					$('#bloqueExpansiones').html(data);
+				});
+																					
+				$("#autocompleteexpansiones").val('');
+		},
+		close: function( event, ui ) { 
+			$("#autocompleteexpansiones").val('');
+                   
+		}
+	});
+
+});
+
 
 
 </script>
@@ -689,7 +738,7 @@ $(function() {
 
 <label>Expansiones</label>
 <div>
-	<input type="search" placeholder="A&ntilde;ade una categoria..." autocomplete="off" id="autocompleteexpansiones" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+	<input type="search" placeholder="A&ntilde;ade una expansi&oacute;n..." autocomplete="off" id="autocompleteexpansiones" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
 </div>
 <div id="bloqueExpansiones">
 	<div class="bloquecheckbox">

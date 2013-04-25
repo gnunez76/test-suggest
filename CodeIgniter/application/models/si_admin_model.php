@@ -235,7 +235,7 @@ class SI_Admin_Model extends CI_Model {
 	/*
 	 * Activa o desactiva la expansion
 	*/
-	public function changeActiveExpansion ($itemId, $expansionId, $active) {
+	public function changeActiveExpansion ($expansionId, $itemId, $active) {
 	
 		$sql = "UPDATE sg_games_gameexpansion
 				SET active=".$this->db->escape($active).
@@ -416,6 +416,17 @@ class SI_Admin_Model extends CI_Model {
 		$this->db->query($sql);
 	}	
 	
+	/*
+	 * Añade una expansion al item
+	*/
+	public function addExpansionToItem ($itemId, $expansionId) {
+	
+		$sql = "INSERT INTO sg_games_gameexpansion (game_id, gameexpansion_id)
+				VALUES (".$this->db->escape($itemId).",".$this->db->escape($expansionId).")";
+	
+		$this->db->query($sql);
+	}	
+	
 	
 	/*
 	 * Buscador de predictivo de autors
@@ -514,6 +525,25 @@ class SI_Admin_Model extends CI_Model {
 	
 		return false;
 	}
+	
+	/*
+	 * Buscador de predictivo de categorias
+	*/
+	public function predictiveSearchItemResult ($search) {
+	
+		$sql = "SELECT sg_games_gamename.game_id, sg_gamename.game_name 
+			FROM sg_gamename
+			INNER JOIN sg_games_gamename ON sg_games_gamename.gamename_id = sg_gamename.gamename_id and gamename_priority='1'
+			WHERE UPPER(sg_gamename.game_name) LIKE '%".strtoupper($search)."%'";
+		
+		$resultado = array();
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}	
 	
 	
 }

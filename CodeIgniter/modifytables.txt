@@ -23,3 +23,9 @@ CREATE  TABLE IF NOT EXISTS `suggest`.`au_admin_users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
+ALTER TABLE `suggest`.`sg_games_gameexpansion` ADD COLUMN `active` TINYINT(1) NOT NULL DEFAULT 1  AFTER `gameexpansion_id` ;
+
+ALTER TABLE `suggest`.`sg_games_gamename` CHANGE COLUMN `gamename_priority` `gamename_priority` TINYINT(1) NULL DEFAULT 0  ;
+
+

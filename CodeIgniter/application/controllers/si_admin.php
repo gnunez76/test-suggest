@@ -314,6 +314,24 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 
+	/*
+	 * Bloque mecanicas
+	*/
+	public function getBlockExpansion ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["expansions"] = $this->si_admin_model->getExpansions ($itemId);
+			$this->load->view ('admin/items/expansionblock', $data);
+		}
+	}
+	
+	
 
 	/*
 	 * Desactivar expansiones
@@ -680,7 +698,7 @@ class SI_Admin extends CI_Controller {
 	
 	
 	/*
-	 * Añade una mecanica al item
+	 * Anade una mecanica al item
 	*/
 	public function addCategory ($itemId, $categoryId) {
 	
@@ -692,6 +710,33 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	/*
+	 * Devuelve la busqueda predictiva de expansiones
+	*/
+	public function getExpansiones () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchItemResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
+	
+	/*
+	 * Anade una expansion al item
+	*/
+	public function addExpansion ($itemId, $expansionId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$this->si_admin_model->addExpansionToItem ($itemId, $expansionId);
+		}
+	}
 	
 
 }
