@@ -150,8 +150,49 @@ class Item_Model extends CI_Model {
 		return $resultado;
 	}
 	
+	/*
+	 * Devuelve las descriptiones
+	 */
+	public function getItemDescriptions ($itemId, $code) {
+		
+		$sql = "SELECT idl.idl_description 
+				FROM idl_item_description_lan idl 
+				INNER JOIN lan_languages lan ON lan.lan_id=idl.lan_id AND lan.lan_code=".$this->db->escape($code). 
+				" WHERE idl.game_id=".$this->db->escape($itemId);
+		
+		if ($query = $this->db->query($sql)) {
+				
+			$row = $query->row_array();
+			return $row;
+		}
+		
+		return false;
+		
+	}
 	
-
+	/*
+	 * Devuelve los titulos
+	*/
+	public function getItemTitles ($itemId, $code) {
+	
+		$sql = "SELECT itl.itl_title
+				FROM itl_item_title_lan itl
+				INNER JOIN lan_languages lan ON lan.lan_id=itl.lan_id AND lan.lan_code=".$this->db->escape($code).
+				" WHERE itl.game_id=".$this->db->escape($itemId);
+	
+		if ($query = $this->db->query($sql)) {
+	
+			$row = $query->row_array();
+			return $row;
+		}
+	
+		return false;
+	
+	}
+	
+	/*
+	 * Devuelve los ilustradores de un juego
+	 */
 	public function getItemArtist ($itemId) {
 
 		$sql = "SELECT artist_name 
@@ -175,6 +216,8 @@ class Item_Model extends CI_Model {
 	 * Buscador de predictivo de items
 	 */
 	public function predictiveSearchResult ($search) {
+		
+		$this->load->helper('language');
 
 		$this->load->helper('url');
 		$sql = "SELECT sg_games_gamename.game_id, sg_gamename.game_name 
@@ -188,7 +231,7 @@ class Item_Model extends CI_Model {
 
 			foreach ($query->result_array() as $item) {
 
-				$resultado [] = base_url().'juego/'.url_title(strtolower($item['game_name'])).'/'.$item["game_id"].'|'.$item['game_name'];
+				$resultado [] = base_url().$this->lang->lang().'/juego/'.url_title(strtolower($item['game_name'])).'/'.$item["game_id"].'|'.$item['game_name'];
 			}
 
 		}
@@ -201,6 +244,8 @@ class Item_Model extends CI_Model {
 	*/
 	public function predictiveSearchAutorResult ($search) {
 	
+		$this->load->helper('language');
+		
 		$this->load->helper('url');
 		$sql = "SELECT gamedesigner_id, designer_name
 			FROM sg_gamedesigner
@@ -212,7 +257,7 @@ class Item_Model extends CI_Model {
 	
 			foreach ($query->result_array() as $item) {
 	
-				$resultado [] = base_url().'autor/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
+				$resultado [] = base_url().$this->lang->lang().'/autor/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
 			}
 	
 		}

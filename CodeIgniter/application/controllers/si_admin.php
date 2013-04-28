@@ -175,7 +175,9 @@ class SI_Admin extends CI_Controller {
 			$data ["languages"] = $this->si_admin_model->getItemLanguageDep ($itemId);
 			$data ["allLanDep"] = $this->si_admin_model->getAllLanDep ($itemId);
 			$data ["expansions"] = $this->si_admin_model->getExpansions ($itemId);
-	
+			$data ["idiomas"] = $this->si_admin_model->getAllLanguages ();
+			$data ["descripciones"] = $this->si_admin_model->getOtherItemDescriptions ($itemId);
+			$data ["titulos"] = $this->si_admin_model->getOtherItemTitles ($itemId);
 
 			$this->load->view ('admin/items/edititem', $data);
 					
@@ -194,13 +196,16 @@ class SI_Admin extends CI_Controller {
 	 * Actualiza el item editado
 	 */
 	public function updateItem () {
+		
 		$this->output->enable_profiler(TRUE);
+		
 		if($this->session->userdata('logged_in'))
 		{
 
 			$this->load->model ('si_admin_model');
 			$this->si_admin_model->updateItem ($_POST);
 			$this->si_admin_model->updateItemLanDep ($_POST);
+			$this->si_admin_model->updateItemDescriptions ($_POST);
 				
 		}
 		else
@@ -331,6 +336,42 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	/*
+	 * Bloque descriptiones en otros idiomas
+	 */
+	public function getBlockDescriptionLan ($itemId) {
+
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+		
+			$this->load->model ('si_admin_model');
+			$data ["descripciones"] = $this->si_admin_model->getOtherItemDescriptions ($itemId);
+			$this->load->view ('admin/items/descriptionlanblock', $data);
+		}
+		
+	}
+	
+	
+	/*
+	 * Bloque titulo en otros idiomas
+	*/
+	public function getBlockTitleLan ($itemId) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->model ('si_admin_model');
+			$data ["titulos"] = $this->si_admin_model->getOtherItemTitles ($itemId);
+			$this->load->view ('admin/items/titlelanblock', $data);
+		}
+	
+	}
 	
 
 	/*
@@ -738,7 +779,38 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	/*
+	 * A–ade una nueva descripcion
+	 */
+	public function addDescription () {
+		
+		if($this->session->userdata('logged_in'))
+		{
+		
+			//var_dump ($_POST);
+			
+			$this->load->model ('si_admin_model');
+			echo $this->si_admin_model->addDescriptionToItem ($_POST['itemId'], $_POST['newDescription'], $_POST['lanNewDescription']);
+			
+		}
+	}
 
+	/*
+	 * A–ade titulos en otros idiomas
+	*/
+	public function addTitleLan () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			//var_dump ($_POST);
+				
+			$this->load->model ('si_admin_model');
+			echo $this->si_admin_model->addTitleLanToItem ($_POST['itemId'], $_POST['newTitle'], $_POST['lanNewTitle']);
+				
+		}
+	}
+	
 }
 
 /* End of file si_admin.php */

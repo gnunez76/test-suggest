@@ -203,7 +203,7 @@ class SI_Admin_Model extends CI_Model {
 	}
 	
 	/*
-	 * Devuelve todos las dependencias del lenguaje
+	 * Devuelve todos las dependencias del lenguaje de un determinado idioma
 	 */
 	public function getAllLanDep () {
 		
@@ -216,7 +216,22 @@ class SI_Admin_Model extends CI_Model {
 		}
 		
 		return false;
+	}
+	
+	/*
+	 * Devuelve los idiomas disponibles 
+	 */
+	public function getAllLanguages () {
 		
+		$sql = "SELECT lan_id, lan_description
+				FROM lan_languages";
+		
+		if ($query = $this->db->query($sql)) {
+		
+			return $query->result_array();
+		}
+		
+		return false;
 	}
 	
 	/*
@@ -338,6 +353,26 @@ class SI_Admin_Model extends CI_Model {
 				" WHERE game_id=".$this->db->escape($data["itemId"]);
 		
 		$this->db->query ($sql);
+	}
+	
+	/*
+	 * Actualiza las descripciones NO-BGG del item
+	 */
+	public function updateItemDescriptions ($data) {
+		
+		if (isset ($data ['description']) && is_array($data ['description'])) {
+			
+			while (list ($lan_id, $description) = each ($data ['description'])) {
+				
+				$sql = "UPDATE idl_item_description_lan
+						SET idl_description=".$this->db->escape($description).
+						" WHERE lan_id=".$this->db->escape($lan_id).
+						" AND game_id=".$this->db->escape($data ['itemId']);
+				
+				$this->db->query ($sql);
+			}
+		}
+		
 	}
 	
 	/*
@@ -545,5 +580,97 @@ class SI_Admin_Model extends CI_Model {
 		return false;
 	}	
 	
+	/*
+	 * A–ade una nueva descripcion y su idioma. Antes comprueba que no exista.
+	 */
+	public function addDescriptionToItem ($itemId, $description, $lanId){
+		
+		$sql = "SELECT idl_id
+				FROM idl_item_description_lan
+				WHERE lan_id=".$this->db->escape($lanId).
+				" AND game_id=".$this->db->escape($itemId);
+		
+		$query = $this->db->query($sql);
+		
+		if($query->num_rows() == 1) {
+			return "KO";
+		}
+		else {
+			
+			$sql = "INSERT INTO idl_item_description_lan (idl_description, lan_id, game_id)
+					VALUES (".$this->db->escape($description).",".$this->db->escape($lanId).",".$this->db->escape($itemId).")";
+			
+			$this->db->query($sql);
+			
+			return "OK";
+		}
+	}
+	
+
+	/*
+	 * A–ade un nuevo titulo y su idioma. Antes comprueba que no exista.
+	*/
+	public function addTitleLanToItem ($itemId, $title, $lanId){
+	
+		$sql = "SELECT itl_id
+				FROM itl_item_title_lan
+				WHERE lan_id=".$this->db->escape($lanId).
+					" AND game_id=".$this->db->escape($itemId);
+	
+		$query = $this->db->query($sql);
+	
+		if($query->num_rows() == 1) {
+			return "KO";
+		}
+		else {
+				
+			$sql = "INSERT INTO itl_item_title_lan (itl_title, lan_id, game_id)
+					VALUES (".$this->db->escape($title).",".$this->db->escape($lanId).",".$this->db->escape($itemId).")";
+				
+			$this->db->query($sql);
+				
+			return "OK";
+		}
+	}
+	
+	
+	
+	
+	/*
+	 * Devuelve otras descripciones de un item
+	 */
+	public function getOtherItemDescriptions ($itemId) {
+		
+		$sql = "SELECT idl_description, lan_description, idl.lan_id 
+				FROM idl_item_description_lan idl
+				INNER JOIN lan_languages lan ON lan.lan_id=idl.lan_id
+				WHERE idl.game_id=".$this->db->escape($itemId);
+		
+		if ($query = $this->db->query($sql)) {
+		
+			return $query->result_array();
+		}
+		
+		return false;
+	}
+	
+
+	/*
+	 * Devuelve otras titulos de un item en otros idiomas
+	*/
+	public function getOtherItemTitles ($itemId) {
+	
+		$sql = "SELECT itl_title, lan_description, itl.lan_id
+				FROM itl_item_title_lan itl
+				INNER JOIN lan_languages lan ON lan.lan_id=itl.lan_id
+				WHERE itl.game_id=".$this->db->escape($itemId);
+	
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	}	
 	
 }

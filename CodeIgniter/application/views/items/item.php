@@ -10,13 +10,6 @@ $(document).ready(function() {
 		$.get('/comments/getallreviews/'+itemId, function(data) {
 			$('#comunityReviews').html(data);
 		});
-
-	/*	
-		itemId =<?php echo "'".$game_id."'"; ?>;
-		$.get('/comments/getitemcomments/'+itemId, function(data) {
-			$('#comments').html(data);
-		});
-	*/	
 		
 });
 
@@ -87,7 +80,7 @@ $(document).ready(function() {
 							</span>
 						</div>						
 						 
-						<div class="labelitemleft">Dise&ntilde;ador: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
+						<div class="labelitemleft"><?php echo lang("item_disenador");?>: </div><div class="textitemleft"><?php echo implode (', ', $autor); ?></div>
 						<div class="labelitemleft">Ilustrador: </div><div class="textitemleft"><?php echo implode (', ', $artist); ?></div>
 						<div class="labelitemleft">N&uacute;mero Jugadores: </div><div class="textitemleft"><?php echo $game_minplayers . " - " . $game_maxplayers; ?></div>
 						<div class="labelitemleft">Edad recomendada: </div><div class="textitemleft"><?php echo $game_age; ?></div>

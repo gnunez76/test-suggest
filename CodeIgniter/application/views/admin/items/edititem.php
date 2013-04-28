@@ -12,12 +12,21 @@ body {
 label {
 
 	display: block;
-	font-size: 14px;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: 600px;
+	letter-spacing: 1px;
+	padding-top: 20px;
 }
 
 input {
 
 	margin: 10px;
+}
+
+a {
+	color: #000000;
+	display: inline-block;
 }
 
 textarea {
@@ -454,6 +463,62 @@ $(function() {
 });
 
 
+function addNewDescription () {
+
+	var text = $("#newDescription").val();
+	var lan = $('#lanNewDescription').val();
+	var descLan = $('#lanNewDescription option:selected').html();
+	
+	$.post("/si_admin/adddescription/", { newDescription: text, lanNewDescription: lan, itemId: <?php echo $game_id; ?> },
+			function (data) {
+				if (data == 'KO') {
+					alert ("ATENCION: Ya existe una descripcion en "+descLan+". Editala si deseas cambiarla.");
+				}
+				else {
+					$.get('/si_admin/getBlockDescriptionLan/'+<?php echo $game_id; ?>, function(data) {
+						$('#itemDescLan').html(data);
+					});
+
+					$('#descForm').css('display', 'none');
+				}
+			});
+
+	
+}
+
+function openDescForm () {
+	$('#descForm').css('display', 'block');
+}
+
+
+function addNewTitle () {
+
+	var text = $("#newTitle").val();
+	var lan = $('#lanNewTitle').val();
+	var titleLan = $('#lanNewTitle option:selected').html();
+	
+	
+	$.post("/si_admin/addtitlelan/", { newTitle: text, lanNewTitle: lan, itemId: <?php echo $game_id; ?> },
+			function (data) {
+				if (data == 'KO') {
+					alert ("ATENCION: Ya existe un titulo en "+titleLan+". Editalo si deseas cambiarlo.");
+				}
+				else {
+					$.get('/si_admin/getBlockTitleLan/'+<?php echo $game_id; ?>, function(data) {
+						$('#itemTitleLan').html(data);
+					});
+
+					$('#titleForm').css('display', 'none');
+				}
+			});
+
+}
+
+
+
+function openTitleForm () {
+	$('#titleForm').css('display', 'block');
+}
 
 </script>
 
@@ -500,6 +565,33 @@ $(function() {
 	</table>
 	</div>
 </div>
+
+<div style="margin-top: 10px; margin-left: 10px;">
+	<a class="boton" href="#" onclick="javascript:openTitleForm(); return false;">NUEVO TITULO EN OTRO IDIOMA</a>
+</div>
+<div id="titleForm" style="display: none; margin-top: 10px; bor<der: 1px solid #000000; background-color: #CCCCCC; width: 820px;">
+	<div>
+	<span style="margin-left: 10px;">Idioma: </span> 
+	<select name="lanNewDescription" id="lanNewTitle">
+		<?php foreach ($idiomas as $idioma): ?>
+			<option value="<?php echo $idioma['lan_id']?>"><?php echo $idioma['lan_description'] ?></option>
+		<?php endforeach; ?>
+	</select>
+	</div>
+	<input type="text" name="newDescription" id="newTitle" style="width: 400px;">
+	<div style="margin-top: 5px; margin-left: 10px; padding-bottom: 5px;">
+		<a class="boton" href="#" onclick="javascript:addNewTitle(); return false;">A&Ntilde;ADIR TITULO</a>
+	</div>
+</div>
+
+<div id="itemTitleLan">
+<?php foreach ($titulos as $titulo): ?>
+<label>Titulo <?php echo $titulo ['lan_description']?></label>
+<input type="text" name="newTitleLan[<?php echo $titulo['lan_id']; ?>]" value="<?php echo $titulo['itl_title']; ?>" style="width: 400px;">
+<?php endforeach; ?>
+</div>
+
+
 
 <label>Dise&ntilde;adores</label>
 <div>
@@ -629,9 +721,7 @@ $(function() {
 	<?php else: ?>
   		<option value="<?php echo $lan['gamelanguagedep_id']; ?>"><?php echo $lan['language_name']; ?></option>
   	<?php endif; ?>
-  <?php endforeach; ?>
- 
- 
+  <?php endforeach; ?> 
 </select> 
 
 
@@ -649,11 +739,35 @@ $(function() {
 
 <label>Duracion</label>
 <input name="duration" type="text" value="<?php echo $game_duration; ?>">
-
   
 <label>Descripcion BGG</label>
+<div style="margin-top: 10px; margin-left: 10px;">
+	<a class="boton" href="#" onclick="javascript:openDescForm(); return false;">NUEVA DESCRIPCI&Oacute;N</a>
+</div>
+<div id="descForm" style="display: none; margin-top: 10px; bor<der: 1px solid #000000; background-color: #CCCCCC; width: 820px;">
+	<div>
+	<span style="margin-left: 10px;">Idioma: </span> 
+	<select name="lanNewDescription" id="lanNewDescription">
+		<?php foreach ($idiomas as $idioma): ?>
+			<option value="<?php echo $idioma['lan_id']?>"><?php echo $idioma['lan_description'] ?></option>
+		<?php endforeach; ?>
+	</select>
+	</div>
+	<textarea name="newDescription" id="newDescription" cols="100" rows="10"></textarea>
+	<div style="margin-top: 5px; margin-left: 10px; padding-bottom: 5px;">
+		<a class="boton" href="#" onclick="javascript:addNewDescription(); return false;">A&Ntilde;ADIR DESCRIPCI&Oacute;N</a>
+	</div>
+</div>
+
 <textarea name="bgg_description" cols="100" rows="10"><?php echo $game_description; ?></textarea>
 <input type="hidden" name="itemId" value="<?php echo $game_id; ?>">
+
+<div id="itemDescLan">
+<?php foreach ($descripciones as $descripcion): ?>
+<label>Descripcion <?php echo $descripcion ['lan_description']?></label>
+<textarea name="description[<?php echo $descripcion['lan_id']; ?>]" cols="100" rows="10"><?php echo $descripcion['idl_description']; ?></textarea>
+<?php endforeach; ?>
+</div>
 
 <label>Mecanicas</label>
 <div>
@@ -783,3 +897,4 @@ $(function() {
 
 
 </form>
+

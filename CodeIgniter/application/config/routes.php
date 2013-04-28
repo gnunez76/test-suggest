@@ -38,6 +38,10 @@
 |
 */
 
+$route['default_controller'] = 'suggestit';
+
+
+
 
 /*
 $route['bgg_user_interface/(:any)/(:any)'] = 'bgg_user_interface/index/$1/$2';
@@ -56,7 +60,12 @@ $route['juego/getuserrating/(:any)'] = 'item/getuserrating/$1';
 $route['juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$1/$2';
 $route['juego/autor'] = 'item/autor';
 $route['juego/buscador'] = 'item/buscador';
-$route['juego/(:any)/(:any)'] = 'item/index/$2';
+$route['(en|es|ca)/juego/(:any)/(:any)'] = 'item/index/$3';
+$route['(en|es|ca)/juego/(:any)'] = 'item/index/$2';
+
+
+$route['^(en|es|ca)/(.+)$'] = "$2";
+$route['^(en|es|ca)$'] = $route['default_controller'];
 
 /* No parece necesario 
 $route['comments/getItemComments/(:any)'] = 'comments/getitemcomments/$1';
@@ -66,7 +75,7 @@ $route['comments/insertItemComment'] = 'comments/insertItemComment';
 $route['bgg_connect/(:any)/(:any)'] = 'bgg_connect/index/$1/$2';
 $route['bgg_connect'] = 'bgg_connect';
 
-$route['default_controller'] = 'suggestit';
+
 
 
 /* End of file routes.php */

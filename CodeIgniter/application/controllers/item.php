@@ -9,6 +9,8 @@ class Item extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->helper('url');
+		$this->load->helper('language');
+		$this->lang->load('suggest');
 	}
 	
 	public function info () 
@@ -20,6 +22,7 @@ class Item extends CI_Controller {
 	{
 		
 		$this->output->enable_profiler(TRUE);
+//		echo anchor($this->lang->switch_uri('en'),'Visualizar esta p‡gina en inglŽs');
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
 		$this->benchmark->mark('Get_Item_start');
@@ -33,21 +36,27 @@ class Item extends CI_Controller {
 		$data ["category"] = $this->item_model->getItemCategory ($itemId);
 		$data ["language"] = $this->item_model->getItemLanguageDep ($itemId);
 		
+		if ($lanTitles = $this->item_model->getItemTitles ($itemId, $this->lang->lang())) {
+			$data ['game_name'] = $lanTitles['itl_title'];
+		}
+		
+		if ($lanDescription = $this->item_model->getItemDescriptions ($itemId, $this->lang->lang())) {
+			$data ['game_description'] = $lanDescription['idl_description'];
+		}
+				
 		$this->load->model ('user_suggest_model');
 		$data ["reviews"] = $this->user_suggest_model->getAllReviewsItem ($itemId);
-
-//		var_dump ($data);die;
 
 		if (isset($data['game_name'])) {
 			log_message ('debug', 'Hay datos');
 			$currentUrl = current_url();
-			$realUrl = base_url().'juego/'.url_title(strtolower($data['game_name'])).'/'.$itemId;
+			$realUrl = base_url().$this->lang->lang().'/juego/'.url_title(strtolower($data['game_name'])).'/'.$itemId;
 
 			if ($currentUrl != $realUrl) {
 				header ('HTTP/1.1 301 Moved Permanently');
   				header ('Location: '.$realUrl);
 			}
-
+			
 			$this->load->view('templates/header', $data);
 			$this->load->view('items/item', $data);
 			$this->load->view('templates/footer');

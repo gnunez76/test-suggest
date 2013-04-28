@@ -5,3 +5,11 @@
  </head>
  <body>
  <div>Bienvenido <?php echo $username; ?> - <a href="/si_admin/logout">Logout</a></div>
+ <div>
+ <table>
+ <tr>
+ 	<td>Listado</td>
+ 	
+ </tr>
+ </table>
+ </div>

@@ -28,4 +28,40 @@ ALTER TABLE `suggest`.`sg_games_gameexpansion` ADD COLUMN `active` TINYINT(1) NO
 
 ALTER TABLE `suggest`.`sg_games_gamename` CHANGE COLUMN `gamename_priority` `gamename_priority` TINYINT(1) NULL DEFAULT 0  ;
 
+CREATE  TABLE IF NOT EXISTS `suggest`.`lan_languajes` (
+  `lan_id` TINYINT(2) NOT NULL AUTO_INCREMENT ,
+  `lan_description` VARCHAR(40) NULL DEFAULT NULL ,
+  PRIMARY KEY (`lan_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
+CREATE  TABLE IF NOT EXISTS `suggest`.`idl_item_description_lan` (
+  `idl_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `idl_description` TEXT NULL DEFAULT NULL ,
+  `lan_id` TINYINT(2) NOT NULL ,
+  `game_id` INT(11) NOT NULL ,
+  PRIMARY KEY (`idl_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `suggest`.`itl_item_title_lan` (
+  `itl_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `itl_title` VARCHAR(100) NULL DEFAULT NULL ,
+  `land_id` TINYINT(2) NOT NULL COMMENT '	' ,
+  `game_id` INT(11) NOT NULL ,
+  PRIMARY KEY (`itl_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE  TABLE IF NOT EXISTS `suggest`.`lan_languages` (
+  `lan_id` TINYINT(2) NOT NULL AUTO_INCREMENT ,
+  `lan_description` VARCHAR(40) NULL DEFAULT NULL ,
+  PRIMARY KEY (`lan_id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+DROP TABLE IF EXISTS `suggest`.`lan_languajes` ;

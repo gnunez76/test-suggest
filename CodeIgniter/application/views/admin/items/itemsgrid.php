@@ -8,9 +8,10 @@
   <caption>Items</caption>
   <thead>
   	<tr>
-  		<th colspan="4"><?php echo $pagination; ?></th>
+  		<th colspan="5"><?php echo $pagination; ?></th>
   	</tr>
     <tr>
+    	<th scope="col">ID.</th>
 		<th scope="col">Imagen</th>
 		<th scope="col">Item</th>
 		<th scope="col">A&ntilde;o</th>
@@ -21,7 +22,7 @@
 
   <tfoot>
     <tr>
-		<th colspan="4"><?php echo $pagination; ?></th>
+		<th colspan="5"><?php echo $pagination; ?></th>
 	</tr>
   </tfoot>
   
@@ -30,6 +31,7 @@
   
   
     <tr>
+	  <td><?php echo $item['game_id']; ?></td>
       <td><img src="<?php echo $item['game_thumbnail']; ?>" width="80"></td>
       <td><?php echo $item['game_name']; ?></td>
       <td><?php echo $item['game_yearpub']; ?></td>
