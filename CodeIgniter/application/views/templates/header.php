@@ -26,7 +26,7 @@
        $(function() {
 
                 $( "#autocomplete" ).autocomplete({
-                        source: "/juego/buscador/",
+                        source: "<?php echo site_url('juego/buscador/')?>",
 //                        search: function (event, ui) {
 //                                $("#autocomplete").html("cargando... ");
 //                        },

@@ -5,7 +5,7 @@ $(document).ready(function() {
 		callback: function(value, link) {
 		            	
 			aValue = value.split('|');
-			$.get('/juego/rateitem/'+<?php echo $itemId; ?>+'/'+aValue[0]);
+			$.get('<?php echo site_url('juego/rateitem/'.$itemId); ?>/'+aValue[0]);
 		
 		}
 	});

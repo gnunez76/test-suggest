@@ -32,7 +32,7 @@ $(document).ready(function() {
 		callback: function(value, link) {
 		            	
 			aValue = value.split('|');
-			$.get('/juego/rateitem/'+<?php echo $itemId; ?>+'/'+aValue[0]);
+			$.get('<?php echo site_url('juego/rateitem/'.$itemId); ?>/'+aValue[0]);
 		
 		}
 	});
@@ -105,7 +105,7 @@ function insertAtCaret(areaId,text) {
 				$("#modalReview").html ('<h3 style="text-align:center;">Su rese&ntilde;a ha sido guardada</h3><input class="closebtn" name="close" type="button" value="Cerrar" onclick="modalReview(\'none\',\'modal\',\'ventana\'); return false;" >');
 
 				$("#comunityReviews").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-				$.get('/comments/getallreviews/<?php echo $itemId?>', function(data) {
+				$.get('<?php echo site_url('comments/getallreviews/'.$itemId); ?>', function(data) {
 					$('#comunityReviews').html(data);
 				});
 				
@@ -125,7 +125,7 @@ function insertAtCaret(areaId,text) {
        $(function() {
 
                 $( "#autocompletegame" ).autocomplete({
-                        source: "/juego/buscador/",
+                        source: "<?php echo site_url('juego/buscador/'); ?>",
                         search: function (event, ui) {
                             
                             $("#autocompletegame").val("Buscando... ");
@@ -163,7 +163,7 @@ function insertAtCaret(areaId,text) {
        $(function() {
 
            $( "#autocompleteautor" ).autocomplete({
-                   	source: "/juego/autor/",
+                   	source: "<?php echo site_url('juego/autor/'); ?>",
                     search: function (event, ui) {
                     	
                            $("#autocompleteautor").val("Buscando... ");
@@ -244,7 +244,7 @@ function insertAtCaret(areaId,text) {
 </div>
 
 
-<form method="post" action="/comments/insertitemcomment/<?php echo $itemId?>" id="reviewForm">
+<form method="post" action="<?php echo site_url('comments/insertitemcomment/'.$itemId); ?>" id="reviewForm">
 
 
         
@@ -329,7 +329,7 @@ $(document).ready(function() {
 <script>
 $(function () {
     $('#fileupload').fileupload({
-        url: '/users_interface/uploadfilestoserver/'+<?php echo $itemId; ?>,
+        url: '<?php echo site_url('users_interface/uploadfilestoserver/'.$itemId); ?>',
         dataType: 'json',
 
         done: function (e, data) {
@@ -428,7 +428,7 @@ $(function () {
 	?>
 	</div>
 	<input class="closebtn" name="close" type="button" value="Cerrar" onclick="toogle('none','relautite'); return false;" >
-	<a href="#close" title="Cerrar" onclick="modalReview('none','modal','ventana'); return false;" >Close</a>
+	<a href="#close" title="Cerrar" onclick="toogle('none','relautite'); return false;" >Close</a>
 </div>
 
 <label>Notas privadas (solo ser&aacute;n visibles por t&iacute;)</label>

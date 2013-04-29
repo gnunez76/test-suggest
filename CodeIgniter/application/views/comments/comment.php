@@ -127,7 +127,7 @@ $(document).ready(function() {
 </script>  
 
 
-        <form method="post" action="/comments/insertitemcomment/" id="reviewForm">
+        <form method="post" action="<?php site_url('comments/insertitemcomment/'); ?>" id="reviewForm">
         
             <label>T&iacute;tulo*</label>
             <input name="titulo" placeholder="Título de tu review" required="true" />

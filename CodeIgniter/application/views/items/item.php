@@ -2,12 +2,12 @@
 $(document).ready(function() {
 		var itemId =<?php echo "'".$game_id."'"; ?>;
 		$("#userRated").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-		$.get('/juego/getuserrating/'+itemId, function(data) {
+		$.get('<?php echo site_url('juego/getuserrating/'.$game_id); ?>', function(data) {
 			$('#userRated').html(data);
 		});
 
 		$("#comunityReviews").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-		$.get('/comments/getallreviews/'+itemId, function(data) {
+		$.get('<?php echo site_url('comments/getallreviews/'.$game_id); ?>', function(data) {
 			$('#comunityReviews').html(data);
 		});
 		
@@ -23,7 +23,7 @@ $(document).ready(function() {
 		if (display == 'block') {
 
 			$("#modalReview").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>"); //muestro el loader de ajax			
-			$.get('/users_interface/setreview/<?php echo $game_id?>', function(data) {	
+			$.get('<?php echo site_url('users_interface/setreview/'.$game_id); ?>', function(data) {	
 				$("#modalReview").html (data);
 			});
 
@@ -43,14 +43,14 @@ $(document).ready(function() {
 
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo stripslashes($game_name);?>">
+				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo stripslashes($game_name);?>">
 				 <div id="userRated"></div>	
 				</div>
 				
 				<div class="datoscol">
 					
 					<section class="infoItem">
-						<h1><?php echo stripslashes($game_name); ?></h1>
+						<h1><?php #echo stripslashes($game_name); ?></h1>
 						<div class="itemrates">
 							<?php 
 								$ratio = 0; 

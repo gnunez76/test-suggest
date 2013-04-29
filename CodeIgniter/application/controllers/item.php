@@ -22,7 +22,7 @@ class Item extends CI_Controller {
 	{
 		
 		$this->output->enable_profiler(TRUE);
-//		echo anchor($this->lang->switch_uri('en'),'Visualizar esta p‡gina en ingls');
+//		echo anchor($this->lang->switch_uri('en'),'Visualizar esta pï¿½gina en inglï¿½s');
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
 		$this->benchmark->mark('Get_Item_start');

@@ -1,6 +1,6 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-// Originaly CodeIgniter i18n library by JŽr™me Jaglale
+// Originaly CodeIgniter i18n library by Jï¿½rï¿½me Jaglale
 // http://maestric.com/en/doc/php/codeigniter_i18n
 // modification by Yeb Reitsma
 
@@ -30,11 +30,12 @@ class MY_Lang extends CI_Lang {
   // special URIs (not localized)
   private $special = array (
     "si_admin",
-  	"juego",
+ // 	"juego",
   	"comments",
   	"hauth",
   	"index.php",
-  	"users_interface"
+  	"autor",
+//  	"users_interface"
   );
     
   // where to redirect if no language in URI

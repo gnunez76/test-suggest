@@ -1,4 +1,6 @@
 <!-- comentarios a la review -->
+<?php $this->load->helper('url'); ?>
+
 <script type="text/javascript">  
 
 	// esperamos que el DOM cargue
@@ -24,7 +26,7 @@
 	/* Refresca comentarios */
 	
 			$("#commentsreview_<?php echo $commentId; ?>").html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-			$.get('/comments/getReviewsComments/<?php echo $itemId; ?>/<?php echo $commentId; ?>', function(data) {
+			$.get('<?php echo site_url('comments/getReviewsComments/'.$itemId.'/'.$commentId); ?>', function(data) {
 				$("#commentsreview_<?php echo $commentId; ?>").html(data);
 			});			
 			
@@ -55,7 +57,7 @@
 	<?php endforeach; ?>
 	<?php endif; ?>
 	<div id="ajax_loader_<?php echo $commentId; ?>">
-		<form method="post" action="/comments/insertreviewcomment/<?php echo $itemId; ?>" id="commentForm_<?php echo $commentId; ?>">                    
+		<form method="post" action="<?php echo site_url('comments/insertreviewcomment/'.$itemId); ?>" id="commentForm_<?php echo $commentId; ?>">                    
             <textarea name="texto" placeholder="Comenta la rese&ntilde;a" required="true"></textarea>
 			<input type="hidden" name="parentid" value="<?php echo $commentId; ?>">    
 			<input id="submit" name="submit" type="submit" value="Comentar">

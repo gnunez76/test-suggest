@@ -56,10 +56,18 @@ $route['hauth'] = 'hauth';
 */
 
 
+$route['(en|es|ca)/juego/getuserrating/(:any)'] = 'item/getuserrating/$2';
+$route['(en|es|ca)/juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$2/$3';
+$route['(en|es|ca)/juego/autor'] = 'item/autor';
+$route['(en|es|ca)/juego/buscador'] = 'item/buscador';
+
+/*
 $route['juego/getuserrating/(:any)'] = 'item/getuserrating/$1';
 $route['juego/rateitem/(:any)/(:any)'] = 'item/rateitem/$1/$2';
 $route['juego/autor'] = 'item/autor';
 $route['juego/buscador'] = 'item/buscador';
+*/
+
 $route['(en|es|ca)/juego/(:any)/(:any)'] = 'item/index/$3';
 $route['(en|es|ca)/juego/(:any)'] = 'item/index/$2';
 

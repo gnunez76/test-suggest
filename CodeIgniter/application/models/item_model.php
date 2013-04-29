@@ -231,7 +231,7 @@ class Item_Model extends CI_Model {
 
 			foreach ($query->result_array() as $item) {
 
-				$resultado [] = base_url().$this->lang->lang().'/juego/'.url_title(strtolower($item['game_name'])).'/'.$item["game_id"].'|'.$item['game_name'];
+				$resultado [] = site_url('juego/'.url_title(strtolower($item['game_name'])).'/'.$item["game_id"]).'|'.$item['game_name'];
 			}
 
 		}
@@ -257,7 +257,7 @@ class Item_Model extends CI_Model {
 	
 			foreach ($query->result_array() as $item) {
 	
-				$resultado [] = base_url().$this->lang->lang().'/autor/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"].'|'.$item['designer_name'];
+				$resultado [] = site_url('autor/'.url_title(strtolower($item['designer_name'])).'/'.$item["gamedesigner_id"]).'|'.$item['designer_name'];
 			}
 	
 		}
