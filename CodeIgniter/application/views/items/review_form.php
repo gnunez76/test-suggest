@@ -338,7 +338,7 @@ $(function () {
                 //alert (file.name);
                 
                 if (file.error == undefined) {
-                    var tagImg = '<img src=&quot'+file.thumbnail_url+'&quot/>';
+                    var tagImg = '<img src=&quot'+file.url+'&quot>';
                     //alert (tagImg);
                     // onclick="insertAtCaret(\'userreviewtext\','+tagImg+'); return false;"
                     
