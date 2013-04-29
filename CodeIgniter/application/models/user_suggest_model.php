@@ -782,14 +782,29 @@ class User_Suggest_Model extends CI_Model {
 	public function setControlLikeReview ($userId, $commentId) {
 		
 		try {
-			$sql="INSERT INTO ucv_users_comments_votes (usr_identifier, comment_id)
+			
+			$sql = "SELECT usr_identifier
+					FROM ucv_users_comments_votes 
+					WHERE usr_identifier=".$this->db->escape($userId).
+					" AND comment_id=".$this->db->escape($commentId);
+			
+			if ($query = $this->db->query ($sql)) {
+
+				if ($query->num_rows() > 0) {
+					return false;
+				}
+				
+				$sql="INSERT INTO ucv_users_comments_votes (usr_identifier, comment_id)
 				VALUES (".$this->db->escape($userId).",". $this->db->escape($commentId).");";
-		
-			log_message('debug', 'models.User_Suggest_Model.getLikeUserReview query: '.$sql);
-		
-			if ($query = $this->db->query($sql)) {
-				return true;
+				
+				log_message('debug', 'models.User_Suggest_Model.getLikeUserReview query: '.$sql);
+				
+				if ($query = $this->db->query($sql)) {
+					return true;
+				}
+				
 			}
+			
 		
 			return false;
 		}

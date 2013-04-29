@@ -6,8 +6,7 @@ class Comments extends CI_Controller {
 	{
 
 		parent::__construct();
-//		$this->load->model('item_model');
-//		$this->load->helper('url');
+		$this->load->helper('url');
 	}
 
 	public function getItemComments ($itemId = null) {
@@ -170,8 +169,14 @@ class Comments extends CI_Controller {
 		
 			$this->load->model ('user_suggest_model');
 			log_message('debug', 'controllers.Item.ReviewItem: El usuario '.$user_profile->identifier.' crea una review sobre el juego');
-			$this->user_suggest_model->setControlLikeReview ($user_profile->identifier, $commentId);
-			$this->user_suggest_model->setLikeReview ($user_profile->identifier, $commentId);
+			if ($this->user_suggest_model->setControlLikeReview ($user_profile->identifier, $commentId)) {
+				$this->user_suggest_model->setLikeReview ($user_profile->identifier, $commentId);
+				
+				echo "OK";
+			}
+			else {
+				echo "KO";
+			}
 			
 				
 		}

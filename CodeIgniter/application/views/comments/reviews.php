@@ -8,7 +8,7 @@ $(document).ready(function() {
 function loadComments (commentId) {
 
 	$("#commentsreview_"+commentId).html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-	$.get('/comments/getReviewsComments/<?php echo $itemId; ?>/'+commentId, function(data) {
+	$.get('<?php echo site_url('comments/getReviewsComments/'.$itemId); ?>/'+commentId, function(data) {
 		$("#commentsreview_"+commentId).html(data);
 		return false;
 	});		
@@ -72,7 +72,7 @@ function loadComments (commentId) {
 					$(document).ready(function() {
 							var commentId=<?php echo "'".$review['comment_id']."'"; ?>;
 							$("#blike"+commentId).html ("<img src='/assets/images/ajax-loader.gif' alt='cargando'>");
-							$.get('/comments/getlikebutton/'+commentId, function(data) {
+							$.get('<?php echo site_url('comments/getlikebutton'); ?>/'+commentId, function(data) {
 								$("#blike"+commentId).html(data);
 							});		
 					});
