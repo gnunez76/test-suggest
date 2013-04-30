@@ -1,3 +1,8 @@
+<?php
+
+	$this->load->helper('url');
+	$this->load->helper('cookie');
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -171,12 +176,6 @@ for (var nBucle=0; nBucle<ckArr.length; nBucle++)
 	
 	<body>
 	
-	
-<?php
-
-	$this->load->helper('url');
-	$this->load->helper('cookie');
-?>
 
 
 	
