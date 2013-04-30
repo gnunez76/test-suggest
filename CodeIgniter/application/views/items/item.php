@@ -43,14 +43,14 @@ $(document).ready(function() {
 
 			<article class="item clearfix">
 				<div class="imagecol">
-				 <img src="<?php echo $game_thumbnail; ?>" alt="<?php echo stripslashes($game_name);?>">
+				 <img src="<?php #echo $game_thumbnail; ?>" alt="<?php echo stripslashes($game_name);?>">
 				 <div id="userRated"></div>	
 				</div>
 				
 				<div class="datoscol">
 					
 					<section class="infoItem">
-						<h1><?php echo stripslashes($game_name); ?></h1>
+						<h1><?php #echo stripslashes($game_name); ?></h1>
 						<div class="itemrates">
 							<?php 
 								$ratio = 0; 

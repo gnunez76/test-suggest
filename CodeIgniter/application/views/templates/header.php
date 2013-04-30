@@ -78,7 +78,7 @@ function leerMas (tagVisible, tagOculto, tagMore) {
 </script>
 				
 <script type="text/javascript">  
-
+/*
 	// esperamos que el DOM cargue
 	$(document).ready(function() { 
 		// definimos las opciones del plugin AJAX FORM
@@ -105,7 +105,7 @@ function leerMas (tagVisible, tagOculto, tagMore) {
 		};
 	
 	}); 
- 
+*/
 </script>  
         
 		
