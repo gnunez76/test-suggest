@@ -126,7 +126,7 @@ class Comments extends CI_Controller {
 	
 	
 	public function getLikeButton ($commentId) {
-		$this->output->enable_profiler(false);
+//		$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		$data ['commentId'] = $commentId;
 		$this->load->helper('cookie');
@@ -193,7 +193,7 @@ class Comments extends CI_Controller {
 	 */
 	public function getAllReviews ($itemId) {
 		
-		$this->output->enable_profiler(false);
+//		$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		$data ['itemId'] = $itemId;
 		
@@ -205,7 +205,7 @@ class Comments extends CI_Controller {
 	
 	public function getReviewsComments ($itemId, $commentId) {
 		
-		$this->output->enable_profiler(FALSE);
+//		$this->output->enable_profiler(PROFILER_ENABLE);
 		$data ['itemId'] = $itemId;
 		$data ['commentId'] = $commentId;
 		

@@ -11,7 +11,7 @@ class BGG_Connect extends CI_Controller {
 	public function index($idIni = null, $idFin = null)
 	{
 
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 		$data = $this->bgg_connect_model->proccessData ($idIni, $idFin);
 		
 		
@@ -20,7 +20,7 @@ class BGG_Connect extends CI_Controller {
 	
 	public function clean () {
 		
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 		$this->bgg_connect_model->cleanTable ('No necessary in-game text', 1);
 		$this->bgg_connect_model->cleanTable ('Some necessary text - easily memorized or small crib sheet', 2);
 		$this->bgg_connect_model->cleanTable ('Moderate in-game text - needs crib sheet or paste ups', 3);

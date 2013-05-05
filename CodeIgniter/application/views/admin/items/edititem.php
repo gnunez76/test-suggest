@@ -107,6 +107,53 @@ select, option {
 	float: right;
 }
 
+
+
+/* Boton examinar */
+
+.file-wrapper {
+cursor: pointer;
+display: inline-block;
+overflow: hidden;
+position: relative;
+
+
+}
+
+.file-wrapper:hover {
+opacity: 0.8;
+}
+
+
+.file-wrapper input {
+cursor: pointer;
+font-size: 100px;
+height: 100%;
+filter: alpha(opacity=1);
+-moz-opacity: 0.01;
+opacity: 0.01;
+position: absolute;
+right: 0;
+top: 0;
+}
+.file-wrapper .button {
+background: #AAAAAA;
+/*
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+*/
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-size: 11px;
+font-weight: bold;
+margin-right: 5px;
+padding: 10px;
+text-transform: uppercase;
+}
+
+
 </style>
 
 <link href="/assets/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
@@ -572,13 +619,13 @@ function openTitleForm () {
 <div id="titleForm" style="display: none; margin-top: 10px; bor<der: 1px solid #000000; background-color: #CCCCCC; width: 820px;">
 	<div>
 	<span style="margin-left: 10px;">Idioma: </span> 
-	<select name="lanNewDescription" id="lanNewTitle">
+	<select name="lanNewTitle" id="lanNewTitle">
 		<?php foreach ($idiomas as $idioma): ?>
 			<option value="<?php echo $idioma['lan_id']?>"><?php echo $idioma['lan_description'] ?></option>
 		<?php endforeach; ?>
 	</select>
 	</div>
-	<input type="text" name="newDescription" id="newTitle" style="width: 400px;">
+	<input type="text" name="newTitle" id="newTitle" style="width: 400px;">
 	<div style="margin-top: 5px; margin-left: 10px; padding-bottom: 5px;">
 		<a class="boton" href="#" onclick="javascript:addNewTitle(); return false;">A&Ntilde;ADIR TITULO</a>
 	</div>
@@ -768,6 +815,113 @@ function openTitleForm () {
 <textarea name="description[<?php echo $descripcion['lan_id']; ?>]" cols="100" rows="10"><?php echo $descripcion['idl_description']; ?></textarea>
 <?php endforeach; ?>
 </div>
+
+<script type="text/javascript">
+function viewImage (width, height) {
+	$( "#dialog-modal" ).dialog({
+		width: width,
+		height: height,
+		modal: true
+	});
+}
+</script>
+
+<label>Imagenes</label>
+<div id="imgfail"></div>
+<div id="imgsuccess" class="imgsuccess">
+
+	<div id="dialog-modal" style="display:none;">
+	<img src="<?php echo $game_image; ?>">
+	<?php 
+	
+		if (!ereg('http', $game_image)) {
+			$game_image = site_url($game_image);
+		}
+		
+		$imageSize = getimagesize($game_image);  
+		
+		
+	?>
+	</div>
+	<span style="padding: 10px;"><a href="#" onclick="javascript:viewImage(<?php echo $imageSize[0]+50; ?>, <?php echo $imageSize[1]+50; ?>); return false;"><img src="<?php echo $game_thumbnail; ?>"></a></span>
+	
+</div>
+
+<div class="moduloimagesformreview">	
+<!-- ########################################## -->
+<script>
+var VIGET = VIGET || {};
+VIGET.fileInputs = function() {
+    var $this = $(this),
+    $val = $this.val(),
+    valArray = $val.split('\\'),
+    newVal = valArray[valArray.length-1],
+    $button = $this.siblings('.button'),
+    $fakeFile = $this.siblings('.file-holder');
+};
+     
+$(document).ready(function() {
+    $('.file-wrapper input[type=file]')
+    .bind('change focus click', VIGET.fileInputs);
+});
+</script>
+
+
+<span class="file-wrapper">
+<input id="fileupload" type="file" name="files[]">
+<span class="button">A&ntilde;adir im&aacute;genes...</span>
+</span>
+
+
+<script src="/assets/js/fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/assets/js/fileupload/jquery.iframe-transport.js"></script>
+<script src="/assets/js/fileupload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        url: '<?php echo site_url('si_admin/uploadfilestoserver/'.$game_id); ?>',
+        dataType: 'json',
+
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                //alert (file.error);
+                //alert (file.name);
+                
+                if (file.error == undefined) {
+                    var tagImg = '<img src=&quot'+file.url+'&quot>';
+                    //alert (tagImg);
+                    // onclick="insertAtCaret(\'userreviewtext\','+tagImg+'); return false;"
+                    
+                    $.get('/si_admin/getBlockImages/'+<?php echo $game_id; ?>, function(data) {
+        				$('#imgsuccess').html(data);
+        			});
+                }
+                else {
+                	$('#imgfail').append(file.name+' - '+file.error+'<br>');
+                }                
+            });
+        },
+        
+	    progressall: function (e, data) {
+	        var progress = parseInt(data.loaded / data.total * 100, 10);
+
+	        $(function() {
+	        	$( "#progressbar" ).progressbar({
+	        	value: progress
+	        	});
+	        });
+	    }
+    });
+    
+});
+</script>
+
+<!-- ########################################## -->
+
+</div>
+<div id="progressbar" style="margin-top:10px; width:600px;"></div>
+
+
 
 <label>Mecanicas</label>
 <div>

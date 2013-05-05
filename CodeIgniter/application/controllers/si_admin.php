@@ -80,7 +80,7 @@ class SI_Admin extends CI_Controller {
 	function home()
 	{
 		
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		
 		if($this->session->userdata('logged_in'))
@@ -107,7 +107,7 @@ class SI_Admin extends CI_Controller {
 	public function items ($page=0) {
 
 		
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		
 		if($this->session->userdata('logged_in'))
@@ -152,7 +152,7 @@ class SI_Admin extends CI_Controller {
 	public function editarItem ($itemId) {
 	
 	
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 	
 	
 		if($this->session->userdata('logged_in'))
@@ -197,8 +197,6 @@ class SI_Admin extends CI_Controller {
 	 */
 	public function updateItem () {
 		
-		$this->output->enable_profiler(TRUE);
-		
 		if($this->session->userdata('logged_in'))
 		{
 
@@ -206,6 +204,7 @@ class SI_Admin extends CI_Controller {
 			$this->si_admin_model->updateItem ($_POST);
 			$this->si_admin_model->updateItemLanDep ($_POST);
 			$this->si_admin_model->updateItemDescriptions ($_POST);
+			$this->si_admin_model->updateItemTitles ($_POST);
 				
 		}
 		else
@@ -372,6 +371,25 @@ class SI_Admin extends CI_Controller {
 		}
 	
 	}
+	
+	/*
+	 * Bloque de imagenes del item
+	*/
+	public function getBlockImages ($itemId) {
+		
+		if($this->session->userdata('logged_in'))
+		{
+		
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+		
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->getItem ($itemId);
+			$this->load->view ('admin/items/imageblock', $data);
+		}
+	
+	}
+	
 	
 
 	/*
@@ -765,6 +783,20 @@ class SI_Admin extends CI_Controller {
 		}
 	}
 	
+	/*
+	 * Devuelve la busqueda predictiva de items
+	*/
+	public function getItems () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+	
+			$this->load->model ('si_admin_model');
+			$data = $this->si_admin_model->predictiveSearchItemResult($_GET['term']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
+	}
+	
 	
 	/*
 	 * Anade una expansion al item
@@ -810,6 +842,641 @@ class SI_Admin extends CI_Controller {
 				
 		}
 	}
+	
+	
+	/*
+	 * Upload de imagenes al servidor
+	 */
+	public function uploadfilestoserver ($itemId) {
+	
+		$this->load->library ('UploadHandlerLib');
+		if($this->session->userdata('logged_in')) {
+
+			$configUpload = array(
+					'script_url' => $this->uploadhandlerlib->get_full_url().'/',
+					//            'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).'/files/',
+					'upload_dir' => CIPATH.'assets/images/games/',
+					'upload_url' => $this->uploadhandlerlib->get_full_url().'/files/',
+					'upload_url' => '/assets/images/games/',
+					'user_dirs' => false,
+					'mkdir_mode' => 0755,
+					'param_name' => 'files',
+					// Set the following option to 'POST', if your server does not support
+					// DELETE requests. This is a parameter sent to the client:
+					'delete_type' => 'DELETE',
+					'access_control_allow_origin' => '*',
+					'access_control_allow_credentials' => false,
+					'access_control_allow_methods' => array(
+							'OPTIONS',
+							'HEAD',
+							'GET',
+							'POST',
+							'PUT',
+							'PATCH',
+							'DELETE'
+					),
+					'access_control_allow_headers' => array(
+							'Content-Type',
+							'Content-Range',
+							'Content-Disposition'
+					),
+					// Enable to provide file downloads via GET requests to the PHP script:
+					'download_via_php' => false,
+					// Defines which files can be displayed inline when downloaded:
+					'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
+					// Defines which files (based on their names) are accepted for upload:
+					'accept_file_types' => '/.+$/i',
+					// The php.ini settings upload_max_filesize and post_max_size
+					// take precedence over the following max_file_size setting:
+					'max_file_size' => 500000,
+					'min_file_size' => 1,
+					// The maximum number of files for the upload directory:
+					'max_number_of_files' => null,
+					// Image resolution restrictions:
+					'max_width' => 1024,
+					'max_height' => 762,
+					'min_width' => 1,
+					'min_height' => 1,
+					// Set the following option to false to enable resumable uploads:
+					'discard_aborted_uploads' => true,
+					// Set to true to rotate images based on EXIF meta data, if available:
+					'orient_image' => false,
+					'image_versions' => array(
+						// Uncomment the following version to restrict the size of
+						// uploaded images:
+						/*
+						 '' => array(
+						 		'max_width' => 1920,
+						 		'max_height' => 1200,
+						 		'jpeg_quality' => 95
+						 ),
+						*/
+						// Uncomment the following to create medium sized images:
+						/*
+						'medium' => array(
+						'max_width' => 800,
+						'max_height' => 600,
+						'jpeg_quality' => 80
+						),
+						*/
+						'thumbnail' => array(
+						// Uncomment the following to force the max
+						// dimensions and e.g. create square thumbnails:
+						//'crop' => true,
+						'max_width' => 200,
+						'max_height' => 200
+						)
+					)
+				);			
+			
+			$this->load->library('HybridAuthLib');
+
+			$this->uploadhandlerlib->setOptions ($configUpload);
+			$this->uploadhandlerlib->setItemId ($itemId);
+			$this->uploadhandlerlib->setAdminUpload();
+				
+			$this->load->database();
+			$this->uploadhandlerlib->setDb ($this->db);
+				
+			$this->uploadhandlerlib->iniciar();
+		}	
+	}
+	
+	/*
+	 * Resto de editores mas simples realizados con Grocery CRUD
+	 */
+	
+	/*
+	 * Editor mecanicas
+	 */
+	public function gridMechanics () {
+
+		if($this->session->userdata('logged_in'))
+		{
+			
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			
+			$this->load->library('grocery_CRUD');
+			
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+				
+			
+			$crud->set_table('sg_gamemechanic');
+			$crud->columns('mechanic_name');
+			$crud->fields('mechanic_name');
+			$crud->display_as('mechanic_name','Mec&aacute;nica');
+			
+			$output = $crud->render();
+			
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor categorias
+	*/
+	public function gridCategories () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gamecategory');
+			$crud->columns('category_name');
+			$crud->fields('category_name');
+			$crud->display_as('category_name','Categor&iacute;a');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor editorial
+	*/
+	public function gridEditorial () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gameeditorial');
+			$crud->columns('editorial_name');
+			$crud->fields('editorial_name');
+			$crud->display_as('editorial_name','Editorial');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/editorialeditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	
+	/*
+	 * Editor mecanicas
+	*/
+	public function gridLanguagedep () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gamelanguagedep');
+			$crud->columns('language_name');
+			$crud->fields('language_name');
+			$crud->display_as('language_name','Dependencia del lenguaje');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor ilustradores
+	*/
+	public function gridArtists () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gameartist');
+			$crud->columns('artist_name');
+			$crud->fields('artist_name');
+			$crud->display_as('artist_name','Ilustrador');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/artisteditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor Dise–adores
+	*/
+	public function gridDesigners () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+			$this->output->enable_profiler(PROFILER_ENABLE);
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gamedesigner');
+			$crud->columns('designer_name');
+			$crud->fields('designer_name');
+			$crud->display_as('designer_name','Dise&ntilde;ador');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/designereditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+
+	/*
+	 * Editor nombre juego
+	*/
+	public function gridNames () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+				
+			$crud->set_table('sg_gamename');
+			$crud->columns('game_name');
+			$crud->fields('game_name');
+			$crud->display_as('game_name','T&iacute;tulo');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor usuarios
+	*/
+	public function gridUsers () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+				
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+				
+			$this->load->library('grocery_CRUD');
+				
+			$crud = new grocery_CRUD();
+			//$crud->unset_delete();
+	
+				
+			$crud->set_table('usr_users');
+			$crud->columns('usr_identifier', 'usr_name', 'usr_email');
+			$crud->display_as('usr_identifier','Id.');
+			$crud->display_as('usr_name','Nombre');
+			$crud->display_as('usr_email','E-Mail');
+				
+			$output = $crud->render();
+				
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+	
+	/*
+	 * Editor SuperUsuarios
+	*/
+	public function gridSuperUser () {
+	
+		if($this->session->userdata('logged_in'))
+		{
+			$this->output->enable_profiler(PROFILER_ENABLE);
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->library('grocery_CRUD');
+	
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+	
+	
+			$crud->set_table('au_admin_users');			
+			$crud->columns('au_username','au_realname','au_active');
+			$crud->fields('au_username','au_realname','au_password','au_active');
+			$crud->change_field_type('au_password','password');
+			$crud->callback_before_insert(array($this,'encrypt_password_callback'));
+			$crud->callback_before_update(array($this,'encrypt_password_callback'));
+			$crud->display_as('au_username', 'Nick');
+			$crud->display_as('au_realname', 'Nombre');
+			$crud->display_as('au_password', 'Password');
+			$crud->display_as('au_active', 'Activo');
+			
+			/*
+			$crud->fields('designer_name');
+			$crud->display_as('designer_name','Dise&ntilde;ador');
+	*/
+			$output = $crud->render();
+	
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	}
+
+	/*
+	 * Metodo de encriptaci—n para superuser
+	 */
+	public function encrypt_password_callback ($post_array, $primary_key = null) {
+		
+		$post_array['au_password'] = md5($post_array['au_password']);
+		return $post_array;
+	} 
+	
+	
+	/*
+	 * GRID reviews
+	 */
+	public function gridReviews ($itemId=null) {
+
+		if($this->session->userdata('logged_in'))
+		{
+			$this->output->enable_profiler(PROFILER_ENABLE);
+		
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+		
+			$this->load->library('grocery_CRUD');
+		
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+			$crud->unset_add();
+		
+		
+			$crud->set_table('si_comments');				
+			$crud->where('comment_type_id', 1);
+			$crud->where('game_id', $itemId);
+			
+			$crud->columns('comment_id', 'game_id', 'comment_title', 'comments');
+			$crud->fields('game_id', 'comment_title', 'comment_text', 'comment_notes', 'comment_votes');
+
+
+			
+			
+			$crud->display_as('comment_id', 'ID');
+			$crud->display_as('game_id', 'Juego');
+			$crud->display_as('comment_title', 'T&iacute;tulo');
+			$crud->display_as('comment_text', 'Rese&ntilde;a');
+			$crud->display_as('comment_votes', 'Votos');
+			$crud->display_as('comment_notes', 'Notas privadas');
+			$crud->display_as('comments', 'Comentarios');
+			
+			
+			$crud->callback_column('game_id',array($this,'item_column_name_callback'));
+			$crud->callback_field('game_id',array($this,'item_name_callback'));
+
+			$crud->callback_column('comments',array($this,'item_column_comments_callback'));
+				
+			
+			/*
+			 $crud->fields('designer_name');
+			$crud->display_as('designer_name','Dise&ntilde;ador');
+			*/
+			$output = $crud->render();
+		
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+		
+		
+	}
+
+	
+	/*
+	 * GRID reviews
+	*/
+	public function gridCommentsReviews ($reviewId=null) {
+	
+		if($this->session->userdata('logged_in'))
+		{
+			$this->output->enable_profiler(PROFILER_ENABLE);
+	
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+	
+			$this->load->library('grocery_CRUD');
+	
+			$crud = new grocery_CRUD();
+			$crud->unset_delete();
+			$crud->unset_add();
+	
+	
+			$crud->set_table('si_comments');
+			$crud->where('comment_type_id', 2);
+			$crud->where('comment_parent_id', $reviewId);
+				
+			$crud->columns('comment_id', 'comment_parent_id', 'comment_text');
+			$crud->fields('comment_parent_id', 'comment_text' );
+	
+	
+			$crud->display_as('comment_id', 'ID');
+			$crud->display_as('comment_parent_id', 'Review');
+			$crud->display_as('comment_text', 'Comentario');
+				
+
+
+			$crud->callback_column('comment_parent_id',array($this,'item_column_commentParent_callback'));
+			$crud->callback_field('comment_parent_id',array($this,'item_commentParent_callback'));
+/*	
+			$crud->callback_column('comments',array($this,'item_column_comments_callback'));
+*/
+			
+			$output = $crud->render();
+	
+			$this->load->view('admin/header_admin', $data);
+			$this->load->view('admin/items/mechaniceditor.php',$output);
+			$this->load->view('admin/footer_admin', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/si_admin/', 'refresh');
+		}
+	
+	
+	}
+		
+	/*
+	 * Metodo devuelve el item name
+	*/
+	public function item_name_callback ($value, $primaryKey = null) {
+		
+		$this->load->model ('si_admin_model');
+		$data = $this->si_admin_model->getGameNames ($value);
+		
+		return $data[0]['game_name'];	
+	}
+
+	/*
+	 * Metodo devuelve el item name
+	*/
+	public function item_column_name_callback ($value, $row) {
+	
+		$this->load->model ('si_admin_model');
+		$data = $this->si_admin_model->getGameNames ($value);
+
+		return $data[0]['game_name'];
+	}
+	
+
+	/*
+	 * Metodo devuelve el numero de comentarios de una review
+	*/
+	public function item_comments_callback ($value, $primaryKey = null) {
+	
+		$this->load->model ('si_admin_model');
+		$data = $this->si_admin_model->getGameNames ($value);
+	
+		return $data[0]['game_name'];
+	}
+	
+	/*
+	 * Metodo devuelve el numero de comentarios de una review
+	*/
+	public function item_column_comments_callback ($value, $row) {
+	
+	
+		$this->load->model ('si_admin_model');
+		
+		$data = $this->si_admin_model->getReviewComments($row->comment_id);
+	
+		//return $data[0]['total'];
+		return '<a href="/si_admin/gridCommentsReviews/'.$row->comment_id.'/" target="_blank">Ver los '.$data[0]['total']." comentarios</a>";
+			
+	}
+
+	
+	/*
+	 * Metodo devuelve el titulo de la review
+	*/
+	public function item_commentParent_callback ($value, $primaryKey = null) {
+	
+		$this->load->model ('si_admin_model');
+		$data = $this->si_admin_model->getReviewTitle ($value);
+	
+		return $data[0]['titulo'];
+	}
+	
+	/*
+	 * Metodo devuelve el titulo de la review
+	*/
+	public function item_column_commentParent_callback ($value, $row) {
+	
+		$this->load->model ('si_admin_model');
+		$data = $this->si_admin_model->getReviewTitle ($value);
+		
+		return '<a href="/si_admin/gridReviews/'.$row->game_id.'/edit/'.$value.'/" target="_blank">Editar review '.$data[0]['titulo']."</a>";
+	}
+	
+
+	
 	
 }
 

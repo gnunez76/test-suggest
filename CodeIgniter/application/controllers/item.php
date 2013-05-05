@@ -21,7 +21,7 @@ class Item extends CI_Controller {
 	public function index ($itemId, $titleItem = null)
 	{
 		
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 //		echo anchor($this->lang->switch_uri('en'),'Visualizar esta p�gina en ingl�s');
 		log_message ('debug', 'Mostrando ItemID: '. $itemId);
 
@@ -143,7 +143,7 @@ class Item extends CI_Controller {
 	
 	public function getUserRating ($itemId) {
 
-		$this->output->enable_profiler(false);
+//		$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		$this->load->helper('cookie');
 		

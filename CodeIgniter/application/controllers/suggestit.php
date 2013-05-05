@@ -5,7 +5,7 @@ class SuggestIt extends CI_Controller {
 	public function index()
 	{
 
-$this->output->enable_profiler(TRUE);
+$this->output->enable_profiler(PROFILER_ENABLE);
 $this->benchmark->mark('home_suggest_it_start');
 
 				// Whoops, we don't have a page for that!

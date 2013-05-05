@@ -11,7 +11,7 @@ class BGG_User_Interface extends CI_Controller {
 	public function index($userName = null, $type = null)
 	{
 
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(PROFILER_ENABLE);
 		$data = $this->bgg_user_model->getUserList ($userName, $type);
 		
 		var_dump ($data);

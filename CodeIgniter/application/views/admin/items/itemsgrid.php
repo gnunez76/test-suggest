@@ -1,11 +1,52 @@
 <link href="/assets/css/admin/style.css" rel="stylesheet">
 
+<script src="/assets/js/jquery-1.9.1.min.js"></script>
+<link href="/assets/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+<script src="/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+
+
 <?php 
 	$this->load->helper('url'); 
 ?>
 
+<script type="text/javascript">
+$(function() {
+
+	$( "#autocompleteitem" ).autocomplete({
+		source: "/si_admin/getitems/",
+		search: function (event, ui) {
+             	
+			$("#autocompleteitem").val("Buscando... ");
+		},
+		response: function ( event, ui ) {
+			for (j=0; j<ui.content.length; j++) {
+
+				ui.content[j].value=ui.content[j].game_id;
+				ui.content[j].label=ui.content[j].game_name;							
+			}
+			$("#autocompleteitem").val("");
+		},
+		select: function( event, ui ) { 
+
+			document.location.href='/si_admin/editarItem/'+ui.item.value;
+			$("#autocompleteitem").val('Redireccionando');
+		},
+		close: function( event, ui ) { 
+			$("#autocompleteitem").val('');
+                   
+		}
+	});
+
+});
+</script>
+
+<div style="margin-top: 20px; margin-left: 30px;">
+	<input type="search" placeholder="Busca un juego..." autocomplete="off" id="autocompleteitem" name="q" dir="ltr" spellcheck="false" style="width: 300px; display: block;">
+</div>
+
+
 <table summary="items" id="hor-minimalist-b">
-  <caption>Items</caption>
+  <caption></caption>
   <thead>
   	<tr>
   		<th colspan="5"><?php echo $pagination; ?></th>

@@ -15,6 +15,7 @@ class UploadHandler
 	public $itemId;
 	public $userId;
 	public $db;
+	public $isAdmin=false;
 	
     protected $options;
     // PHP File Upload error message codes:
@@ -127,6 +128,14 @@ class UploadHandler
         }
         */
     }
+    
+    public function setAdminUpload () {
+    	$this->isAdmin = true;
+    }
+    
+    public function setOptions ($options) {
+    	$this->options = $options;
+    }
 
     public function setDb ($db) {
     	$this->db = $db;
@@ -166,7 +175,7 @@ class UploadHandler
         }
     }
 
-    protected function get_full_url() {
+    public function get_full_url() {
         $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
         return
             ($https ? 'https://' : 'http://').
@@ -596,6 +605,28 @@ class UploadHandler
         }
     }
     
+    protected function insertItemImagesDB ($file) {
+    
+    	 
+    	try {
+		
+    		$sql = "UPDATE sg_games
+    				SET game_image=".$this->db->escape($file->url).", 
+    				game_thumbnail=".$this->db->escape($file->thumbnail_url)."
+    				WHERE game_id=".$this->db->escape($this->itemId);
+    		
+    		$this->db->query ($sql);
+    	}
+    	catch (Exception $e) {
+    		log_message('error', 'model.User_Suggest_Model.setUser: Error al actualizar las imagenes del item');
+    		log_message('error', $e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage());
+    		trigger_error($e->getFile() . " - " . $e->getLine() . " - " . $e->getMessage(), E_USER_ERROR);
+    	}
+    	 
+    }
+    
+    
+    
     protected function insertImagesDB ($file) {
 
     	
@@ -666,7 +697,12 @@ class UploadHandler
                 }
             }
             $this->set_file_delete_properties($file);
-            $this->insertImagesDB ($file);
+            if ($this->isAdmin) {
+            	$this->insertItemImagesDB ($file);
+            }
+            else {
+            	$this->insertImagesDB ($file);
+            }
         }
         return $file;
     }

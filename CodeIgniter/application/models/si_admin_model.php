@@ -235,6 +235,44 @@ class SI_Admin_Model extends CI_Model {
 	}
 	
 	/*
+	 * Devuelve el numero de comentarios de una review 
+	 * 
+	 */
+	public function getReviewComments ($reviewId) {
+		
+		$sql = "SELECT count(comment_id) as total
+				FROM si_comments
+				WHERE comment_parent_id=".$this->db->escape ($reviewId);
+
+		if ($query = $this->db->query($sql)) {
+		
+			return $query->result_array();
+		}
+		
+		return false;
+		
+	}
+	
+	/*
+	 * Devuelve el numero de comentarios de una review
+	*
+	*/
+	public function getReviewTitle ($reviewId) {
+	
+		$sql = "SELECT comment_title as titulo
+				FROM si_comments
+				WHERE comment_id=".$this->db->escape ($reviewId);
+	
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	
+	}
+	
+	/*
 	 * Activa o desactiva el autor
 	 */
 	public function changeActiveAutor ($autorId, $itemId, $active) {
@@ -374,6 +412,27 @@ class SI_Admin_Model extends CI_Model {
 		}
 		
 	}
+	
+	/*
+	 * Actualiza los titulos NO-BGG del item
+	*/
+	public function updateItemTitles ($data) {
+	
+		if (isset ($data ['newTitleLan']) && is_array($data ['newTitleLan'])) {
+				
+			while (list ($lan_id, $title) = each ($data ['newTitleLan'])) {
+	
+				$sql = "UPDATE itl_item_title_lan
+						SET itl_title=".$this->db->escape($title).
+							" WHERE lan_id=".$this->db->escape($lan_id).
+							" AND game_id=".$this->db->escape($data ['itemId']);
+	
+				$this->db->query ($sql);
+			}
+		}
+	
+	}
+	
 	
 	/*
 	 * Añade un nuevo nombre al item

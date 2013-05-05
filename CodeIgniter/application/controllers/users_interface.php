@@ -15,7 +15,7 @@ class Users_Interface extends CI_Controller {
 	 */
 	public function setReview ($itemId) {
 		
-		$this->output->enable_profiler(FALSE);
+		//$this->output->enable_profiler(PROFILER_ENABLE);
 		
 		
 		$this->load->helper('cookie');

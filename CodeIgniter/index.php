@@ -34,11 +34,13 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'development':
 			error_reporting(E_ALL);
+			define ('PROFILER_ENABLE', true);
 		break;
 	
 		case 'testing':
 		case 'production':
 			error_reporting(0);
+			define ('PROFILER_ENABLE', false);
 		break;
 
 		default:

@@ -268,30 +268,16 @@ function insertAtCaret(areaId,text) {
 <div id="imgfail"></div>
 <div id="imgsuccess" class="imgsuccess">
 
-
- 
-
-
 <?php if (isset($reviewImages) && is_array($reviewImages)): ?>
-	
 	<script>
 		$(function () {
 				$('#imgsuccess').css('display', 'block');
 		});
 	</script>
-
-	<?php  foreach ($reviewImages as $images): ?>
-	
-	
-		
-                    
+	<?php  foreach ($reviewImages as $images): ?>            
 		<span style="padding: 10px;"><a href="#" onclick="javascript:insertAtCaret('userreviewtext','<img src=&quot<?php echo $images ['image_original']?>&quot>'); return false;"><img src="<?php echo $images['image_thumbnail']; ?>"></a></span>
-		
-
 	<?php endforeach; ?>
 <?php endif; ?>
-
-
 
 </div>
 <div class="moduloimagesformreview">
