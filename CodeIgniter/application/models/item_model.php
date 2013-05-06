@@ -59,7 +59,8 @@ class Item_Model extends CI_Model {
 
 		$sql = "SELECT designer_name 
 			FROM sg_gamedesigner a, sg_games_gamedesigner b
-			WHERE a.gamedesigner_id=b.gamedesigner_id AND b.game_id='".$itemId."'";
+			WHERE a.gamedesigner_id=b.gamedesigner_id AND b.game_id='".$itemId."'
+			AND b.active=1";
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {	
 
@@ -76,7 +77,8 @@ class Item_Model extends CI_Model {
 
 		$sql = "SELECT editorial_name 
 			FROM sg_gameeditorial a, sg_games_gameeditorial b
-			WHERE a.gameeditorial_id=b.gameeditorial_id AND b.game_id='".$itemId."'";
+			WHERE a.gameeditorial_id=b.gameeditorial_id AND b.game_id='".$itemId."'
+			AND b.active=1";
 
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {	
@@ -98,7 +100,9 @@ class Item_Model extends CI_Model {
 	
 		$sql = "SELECT mechanic_name
 			FROM sg_gamemechanic a, sg_games_gamemechanic b
-			WHERE a.gamemechanic_id=b.gamemechanic_id AND b.game_id='".$itemId."'";
+			WHERE a.gamemechanic_id=b.gamemechanic_id AND b.game_id='".$itemId."'
+			AND b.active=1";
+		
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {
 			
@@ -118,7 +122,9 @@ class Item_Model extends CI_Model {
 	
 		$sql = "SELECT category_name
 			FROM sg_gamecategory a, sg_games_gamecategory b
-			WHERE a.gamecategory_id=b.gamecategory_id AND b.game_id='".$itemId."'";
+			WHERE a.gamecategory_id=b.gamecategory_id AND b.game_id='".$itemId."'
+			AND b.active=1";
+		
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {
 				
@@ -140,6 +146,7 @@ class Item_Model extends CI_Model {
 		$sql = "SELECT language_name
 			FROM sg_gamelanguagedep a, sg_games_gamelanguagedep b
 			WHERE a.gamelanguagedep_id=b.gamelanguagedep_id AND b.game_id='".$itemId."'";
+		
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {
 			
@@ -197,7 +204,8 @@ class Item_Model extends CI_Model {
 
 		$sql = "SELECT artist_name 
 			FROM sg_gameartist a, sg_games_gameartist b
-			WHERE a.gameartist_id=b.gameartist_id AND b.game_id='".$itemId."'";
+			WHERE a.gameartist_id=b.gameartist_id AND b.game_id='".$itemId."'
+			AND b.active=1";
 
 		$resultado = array();
 		if ($query = $this->db->query($sql)) {	

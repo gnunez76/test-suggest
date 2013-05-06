@@ -252,6 +252,26 @@ class SI_Admin_Model extends CI_Model {
 		return false;
 		
 	}
+
+	/*
+	 * Devuelve el numero de reviews de un item
+	*
+	*/
+	public function getNoReviews ($gameId) {
+	
+		$sql = "SELECT count(comment_id) as total
+				FROM si_comments
+				WHERE game_id=".$this->db->escape ($gameId).
+				"AND comment_type_id=1";
+	
+		if ($query = $this->db->query($sql)) {
+	
+			return $query->result_array();
+		}
+	
+		return false;
+	
+	}
 	
 	/*
 	 * Devuelve el numero de comentarios de una review
@@ -640,7 +660,7 @@ class SI_Admin_Model extends CI_Model {
 	}	
 	
 	/*
-	 * A–ade una nueva descripcion y su idioma. Antes comprueba que no exista.
+	 * Aï¿½ade una nueva descripcion y su idioma. Antes comprueba que no exista.
 	 */
 	public function addDescriptionToItem ($itemId, $description, $lanId){
 		
@@ -667,7 +687,7 @@ class SI_Admin_Model extends CI_Model {
 	
 
 	/*
-	 * A–ade un nuevo titulo y su idioma. Antes comprueba que no exista.
+	 * Aï¿½ade un nuevo titulo y su idioma. Antes comprueba que no exista.
 	*/
 	public function addTitleLanToItem ($itemId, $title, $lanId){
 	

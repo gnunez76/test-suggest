@@ -178,6 +178,7 @@ class SI_Admin extends CI_Controller {
 			$data ["idiomas"] = $this->si_admin_model->getAllLanguages ();
 			$data ["descripciones"] = $this->si_admin_model->getOtherItemDescriptions ($itemId);
 			$data ["titulos"] = $this->si_admin_model->getOtherItemTitles ($itemId);
+			$data ["reviews"] = $this->si_admin_model->getNoReviews ($itemId);
 
 			$this->load->view ('admin/items/edititem', $data);
 					
@@ -812,7 +813,7 @@ class SI_Admin extends CI_Controller {
 	}
 	
 	/*
-	 * A–ade una nueva descripcion
+	 * Aï¿½ade una nueva descripcion
 	 */
 	public function addDescription () {
 		
@@ -828,7 +829,7 @@ class SI_Admin extends CI_Controller {
 	}
 
 	/*
-	 * A–ade titulos en otros idiomas
+	 * Aï¿½ade titulos en otros idiomas
 	*/
 	public function addTitleLan () {
 	
@@ -1123,7 +1124,7 @@ class SI_Admin extends CI_Controller {
 	}
 	
 	/*
-	 * Editor Dise–adores
+	 * Editor Diseï¿½adores
 	*/
 	public function gridDesigners () {
 	
@@ -1276,7 +1277,7 @@ class SI_Admin extends CI_Controller {
 	}
 
 	/*
-	 * Metodo de encriptaci—n para superuser
+	 * Metodo de encriptaciï¿½n para superuser
 	 */
 	public function encrypt_password_callback ($post_array, $primary_key = null) {
 		

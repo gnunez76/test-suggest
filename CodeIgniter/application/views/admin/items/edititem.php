@@ -1044,6 +1044,11 @@ $(function () {
 	</div>
 </div>
 
+<label>REVIEWS</label>
+<div>
+	<a href="/si_admin/gridReviews/<?php echo $game_id; ?>" target="_blank" style="margin-top:10px; font-size: 12px;">Ver/Editar <?php echo $reviews[0]["total"]; ?> reviews.</a>
+</div>
+
 
 
 <br>
